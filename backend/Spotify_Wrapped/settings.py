@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'wrapped.apps.WrappedConfig',
+    'rest_framework',
+    'wrapped',
 ]
 
 MIDDLEWARE = [
@@ -117,7 +118,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-LOGIN_URL = "/food_finder/login"
+AUTH_USER_MODEL = "wrapped.CustomUser"
 
 
 # Static files (CSS, JavaScript, Images)
@@ -133,3 +134,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Important keys for accessing Spotify API
 SPOTIFY_CLIENT_ID = os.getenv('SPOTIFY_CLIENT_ID')
 SPOTIFY_CLIENT_SECRET = os.getenv('SPOTIFY_CLIENT_SECRET')
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
