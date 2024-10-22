@@ -55,3 +55,6 @@ yarn-error.log*
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
+
+.env
+env
