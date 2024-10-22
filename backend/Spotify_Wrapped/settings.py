@@ -41,9 +41,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
     'rest_framework',
+    'rest_framework.authtoken',
     'wrapped',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.spotify.SpotifyOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -132,11 +139,33 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Important keys for accessing Spotify API
-SPOTIFY_CLIENT_ID = os.getenv('SPOTIFY_CLIENT_ID')
-SPOTIFY_CLIENT_SECRET = os.getenv('SPOTIFY_CLIENT_SECRET')
+SOCIAL_AUTH_SPOTIFY_KEY = os.getenv('SPOTIFY_CLIENT_ID')
+SOCIAL_AUTH_SPOTIFY_SECRET = os.getenv('SPOTIFY_CLIENT_SECRET')
+
+SOCIAL_AUTH_PIPELINE = (
+  'social_core.pipeline.social_auth.social_details',
+  'social_core.pipeline.social_auth.social_uid',
+  'social_core.pipeline.social_auth.auth_allowed',
+  'social_core.pipeline.social_auth.social_user',
+  'social_core.pipeline.user.get_username',
+  'social_core.pipeline.social_auth.associate_by_email',
+  'social_core.pipeline.user.create_user',
+  'social_core.pipeline.social_auth.associate_user',
+  'social_core.pipeline.social_auth.load_extra_data',
+  'social_core.pipeline.user.user_details',
+)
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication'
+    ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.AllowAny', #allow any request to access api, will change later
     ]
 }
+
+CORS_ORIGIN_WHITELIST = [
+     'http://localhost:3000'
+]

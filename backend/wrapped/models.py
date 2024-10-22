@@ -3,6 +3,9 @@ from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from wrapped.managers import CustomUserManager
+
+
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=50)
@@ -16,6 +19,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
 
 
 
