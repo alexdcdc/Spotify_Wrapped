@@ -1,5 +1,8 @@
-from django.conf import settings
+import base64
 
+from django.conf import settings
+import os
+import requests
 from rest_framework import serializers
 from rest_framework import status
 from rest_framework.authtoken.models import Token
@@ -61,3 +64,50 @@ def authentication_test(request):
 @api_view(['GET'])
 def health(request):
     return Response(status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def spotify_top_artists(request):
+    client_id = os.getenv('SPOTIFY_CLIENT_ID')
+    client_secret = os.getenv('SPOTIFY_CLIENT_SECRET')
+
+    if not client_id or not client_secret:
+        return Response(
+            {'error': 'Spotify client ID and secret must be set in environment variables.'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+    # Get access token
+    auth_response = requests.post(
+        'https://accounts.spotify.com/api/token',
+        data={
+            'grant_type': 'client_credentials'
+        },
+        headers={
+            'Authorization': f'Basic {base64.b64encode(f"{client_id}:{client_secret}".encode()).decode()}'
+        }
+    )
+
+    if auth_response.status_code != 200:
+        return Response({'error': 'Failed to authenticate with Spotify API.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    access_token = auth_response.json().get('access_token')
+
+    # Get top artists
+    headers = {
+        'Authorization': f'Bearer {access_token}'
+    }
+    top_artists_response = requests.get(
+        'https://api.spotify.com/v1/me/top/artists?limit=5',
+        headers=headers
+    )
+
+    if top_artists_response.status_code != 200:
+        return Response({'error': 'Failed to fetch top artists from Spotify API.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    top_artists = top_artists_response.json().get('items', [])
+    artists = [{'name': artist['name'], 'popularity': artist['popularity']} for artist in top_artists]
+
+    return Response(artists, status=status.HTTP_200_OK)
+
+
