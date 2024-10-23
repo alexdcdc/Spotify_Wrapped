@@ -37,6 +37,11 @@ cd frontend
 ```
 npm install
 ```
+3. Add a .env file, with the following information:
+```
+REACT_APP_CLIENT_ID="<insert client id here>"
+REACT_APP_CLIENT_SECRET="<insert client secret here>"
+```
 From here you should be able to start the app in development mode with
 ```
 npm start
