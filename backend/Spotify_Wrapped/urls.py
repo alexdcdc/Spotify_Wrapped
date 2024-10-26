@@ -22,7 +22,8 @@ from rest_framework import routers, serializers, viewsets
 
 
 urlpatterns = [
-    re_path('api/register-by-access-token/' + r'social/(?P<backend>[^/]+)/$', register_by_access_token),
+    re_path('api/authenticate', register_by_access_token),
     path('api/authentication-test/', authentication_test),
-    path('api/health', health)
+    path('api/health', health),
+    path('admin', admin.site.urls),
 ]
