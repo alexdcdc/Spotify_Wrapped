@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 import requests
 
@@ -23,21 +23,22 @@ def spotify_authenticate(token, refresh_token, expires_in):
         user_id = response.json()["id"]
         user, created = CustomUser.objects.get_or_create(email=user_email)
 
-        if not user.auth_data:
-            user.auth_data = SpotifyAuthData()
 
-        auth_data = user.auth_data
-        auth_data.access_token = token
-        auth_data.refresh_token = refresh_token
-        auth_data.expires_in = expires_in
-        auth_data.save()
+        if created:
+            user.auth_data = SpotifyAuthData(access_token=token,
+                                             refresh_token=refresh_token,
+                                             expires_in=expires_in)
+            user.spotify_profile = SpotifyProfile(spotify_id=user_id)
 
-        if not user.spotify_profile:
-            user.spotify_profile = SpotifyProfile()
+        else:
+            user.auth_data.access_token = token
+            user.auth_data.refresh_token = refresh_token
+            user.auth_data.expires_in = expires_in
 
-        spotify_profile = user.spotify_profile
-        spotify_profile.spotify_id = user_id
-        spotify_profile.save()
+            user.spotify_profile.spotify_id = user_id
+
+        user.auth_data.save()
+        user.spotify_profile.save()
 
         user.save()
         return user
@@ -49,13 +50,15 @@ def spotify_authenticate(token, refresh_token, expires_in):
 @permission_classes([AllowAny])
 def register_by_access_token(request):
     token = request.data.get('access_token')
-    user = spotify_authenticate(token, "foobar", 3600)
+    refresh_token = request.data.get('refresh_token')
+    expires_in = request.data.get('expires_in')
+    user = spotify_authenticate(token, refresh_token, expires_in)
 
     if user:
         token, _ = Token.objects.get_or_create(user=user)
         return Response(
             {
-                'token': token.key
+                'auth_token': token.key
             },
             status=status.HTTP_200_OK,
             )
@@ -63,7 +66,7 @@ def register_by_access_token(request):
         return Response(
             {
                 'errors': {
-                    'token': 'Invalid token'
+                    'auth_token': 'Invalid token'
                     }
             },
             status=status.HTTP_400_BAD_REQUEST,
@@ -71,6 +74,7 @@ def register_by_access_token(request):
 
 
 @api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
 def authentication_test(request):
     print(request.user)
     return Response(
@@ -81,5 +85,6 @@ def authentication_test(request):
     )
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def health(request):
     return Response(status=status.HTTP_200_OK)

@@ -18,8 +18,8 @@ class CustomUser(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-    auth_data = models.OneToOneField(SpotifyAuthData, on_delete=models.CASCADE, null=True)
-    spotify_profile = models.OneToOneField(SpotifyProfile, on_delete=models.CASCADE, null=True)
+    auth_data = models.OneToOneField(SpotifyAuthData, on_delete=models.CASCADE, null=True, related_name="user")
+    spotify_profile = models.OneToOneField(SpotifyProfile, on_delete=models.CASCADE, null=True, related_name="user")
 
     objects = CustomUserManager()
     def __str__(self):
