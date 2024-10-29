@@ -1,4 +1,5 @@
 import {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 
 const redirectUri = process.env.REACT_APP_REDIRECT_URI;
 const clientId = process.env.REACT_APP_CLIENT_ID;
@@ -26,7 +27,9 @@ async function getApiToken(accessToken, refreshToken, expiresIn) {
 
     const response = await body.json();
     const token = response.auth_token;
+    const is_name_set = response.is_name_set;
 
+    console.log(response)
     console.log("Token acquired: " + token)
     localStorage.setItem("token", token);
 }
@@ -67,11 +70,15 @@ const getToken = async (code) => {
 }
 
 function Callback() {
+    const navigate = useNavigate();
+
     useEffect(() => {
       const urlParams = new URLSearchParams(window.location.search);
       let code = urlParams.get('code');
       if (code) {
-          getToken(code);
+          getToken(code).then(() => {
+              navigate("/dashboard");
+          });
       }
     }, []);
 

@@ -58,7 +58,8 @@ def register_by_access_token(request):
         token, _ = Token.objects.get_or_create(user=user)
         return Response(
             {
-                'auth_token': token.key
+                'auth_token': token.key,
+                'is_name_set': user.is_name_set
             },
             status=status.HTTP_200_OK,
             )
