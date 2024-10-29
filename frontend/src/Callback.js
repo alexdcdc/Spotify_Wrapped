@@ -1,22 +1,22 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 const redirectUri = process.env.REACT_APP_REDIRECT_URI;
 const clientId = process.env.REACT_APP_CLIENT_ID;
 
-async function getApiToken(accessToken, refreshToken, expiresIn) {
+async function setAuthToken(accessToken, refreshToken, expiresIn) {
     const url = "http://localhost:8000/api/authenticate"
 
     const payload = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-          'access_token': accessToken,
-          'refresh_token': refreshToken,
-          'expires_in': expiresIn
-      }),
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            'access_token': accessToken,
+            'refresh_token': refreshToken,
+            'expires_in': expiresIn
+        }),
     }
 
     const body = await fetch(url, payload);
@@ -27,30 +27,30 @@ async function getApiToken(accessToken, refreshToken, expiresIn) {
 
     const response = await body.json();
     const token = response.auth_token;
-    const is_name_set = response.is_name_set;
 
     console.log(response)
     console.log("Token acquired: " + token)
     localStorage.setItem("token", token);
+
 }
 
-const getToken = async (code) => {
+const authenticate = async (code) => {
     const url = "https://accounts.spotify.com/api/token";
     // stored in the previous step
     let codeVerifier = localStorage.getItem('code_verifier');
 
     const payload = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        client_id: clientId,
-        grant_type: 'authorization_code',
-        code,
-        redirect_uri: redirectUri,
-        code_verifier: codeVerifier,
-      }),
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            client_id: clientId,
+            grant_type: 'authorization_code',
+            code,
+            redirect_uri: redirectUri,
+            code_verifier: codeVerifier,
+        }),
     }
 
     const body = await fetch(url, payload);
@@ -66,23 +66,30 @@ const getToken = async (code) => {
     const refreshToken = response.refresh_token;
     const expiresIn = response.expires_in;
 
-    await getApiToken(accessToken, refreshToken, expiresIn);
+    await setAuthToken(accessToken, refreshToken, expiresIn);
 }
 
 function Callback() {
     const navigate = useNavigate();
+    const [status, setStatus] = useState("Please wait...")
 
     useEffect(() => {
-      const urlParams = new URLSearchParams(window.location.search);
-      let code = urlParams.get('code');
-      if (code) {
-          getToken(code).then(() => {
-              navigate("/dashboard");
-          });
-      }
+        const urlParams = new URLSearchParams(window.location.search);
+        let code = urlParams.get('code');
+        if (code) {
+            authenticate(code).then(
+                () => {
+                    navigate("/dashboard");
+                },
+                () => {
+                    setStatus("An error occurred while trying to log in.")
+                });
+        }
     }, []);
 
-    return (<div>Please wait...</div>);
+    return (
+        <div>{status}</div>
+    );
 }
 
 export default Callback;
