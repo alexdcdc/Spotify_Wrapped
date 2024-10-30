@@ -4,6 +4,7 @@ import Login from "./Login"
 import Layout from "./Layout"
 import Dashboard from "./Dashboard";
 import Callback from "./Callback"
+import Register from "./Register"
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                     <Route index element={<Login/>}/>
                     <Route path="dashboard" element={<Dashboard/>}/>
                     <Route path="callback" element={<Callback/>}/>
+                    <Route path="register" element={<Register/>}/>
                 </Route>
             </Routes>
         </div>

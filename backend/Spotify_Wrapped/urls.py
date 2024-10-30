@@ -17,12 +17,13 @@ Including another URLconf
 #hello world!
 from django.contrib import admin
 from django.urls import path, include, re_path
-from wrapped.views import register_by_access_token, authentication_test, health
+from wrapped.views import register_by_access_token, authentication_test, health, get_user
 from rest_framework import routers, serializers, viewsets
 
 
 urlpatterns = [
-    re_path('api/authenticate', register_by_access_token),
+    path('api/authenticate', register_by_access_token),
+    path('api/user', get_user),
     path('api/authentication-test/', authentication_test),
     path('api/health', health),
     path('admin', admin.site.urls),

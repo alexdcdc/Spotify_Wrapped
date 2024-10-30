@@ -69,6 +69,24 @@ const authenticate = async (code) => {
     await setAuthToken(accessToken, refreshToken, expiresIn);
 }
 
+const getRegisteredStatus = async () => {
+    const payload = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Token ' + localStorage.getItem('token'),
+        },
+    };
+    const response = await fetch("http://localhost:8000/api/user", payload);
+    if (!response.ok) {
+        return Promise.reject("Unable to fetch user data");
+    }
+
+    const user = await response.json();
+
+    return user.is_registered;
+}
+
 function Callback() {
     const navigate = useNavigate();
     const [status, setStatus] = useState("Please wait...")
@@ -78,8 +96,9 @@ function Callback() {
         let code = urlParams.get('code');
         if (code) {
             authenticate(code).then(
-                () => {
-                    navigate("/dashboard");
+                async () => {
+                    const isRegistered = await getRegisteredStatus();
+                    navigate(isRegistered ? "/dashboard" : "/register");
                 },
                 () => {
                     setStatus("An error occurred while trying to log in.")
