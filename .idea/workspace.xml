@@ -4,29 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d34e3a6-3cdd-405b-aac6-8aad8f1d8f8d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/Spotify_Wrapped/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/wrapped/migrations/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Spotify_Wrapped.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Spotify_Wrapped.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Spotify_Wrapped/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Spotify_Wrapped/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Spotify_Wrapped/asgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Spotify_Wrapped/asgi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Spotify_Wrapped/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Spotify_Wrapped/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Spotify_Wrapped/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Spotify_Wrapped/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Spotify_Wrapped/wsgi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/manage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wrapped/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wrapped/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wrapped/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wrapped/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wrapped/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wrapped/managers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wrapped/managers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wrapped/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wrapped/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wrapped/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wrapped/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wrapped/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wrapped/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wrapped/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wrapped/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wrapped/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wrapped/views.py" afterDir="false" />
+    <list default="true" id="4d34e3a6-3cdd-405b-aac6-8aad8f1d8f8d" name="Changes" comment="add custom user model + user manager">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,11 +25,19 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="master" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2nlzJl2H0tiXs6KPTeSGZtFQO8D" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -60,8 +47,8 @@
     "Django Server.Spotify_Wrapped.executor": "Run",
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "auth",
-    "last_opened_file_path": "C:/Users/alexd/PycharmProjects/Spotify_Wrapped/frontend",
+    "git-widget-placeholder": "#1 on auth",
+    "last_opened_file_path": "C:/Users/alexd/PycharmProjects/Spotify_Wrapped/backend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -74,6 +61,7 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\alexd\PycharmProjects\Spotify_Wrapped\backend" />
+      <recent name="C:\Users\alexd\PycharmProjects\Spotify_Wrapped\frontend" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -99,5 +87,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add custom user model + user manager" />
+    <option name="LAST_COMMIT_MESSAGE" value="add custom user model + user manager" />
   </component>
 </project>

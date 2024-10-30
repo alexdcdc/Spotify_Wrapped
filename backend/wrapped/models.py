@@ -1,26 +1,35 @@
-from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
-from django.utils.translation import gettext_lazy as _
-
 from wrapped.managers import CustomUserManager
 
-
-class CustomUser(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(unique=True)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-
+class SpotifyAuthData(models.Model):
     access_token = models.TextField()
     refresh_token = models.TextField()
+    expires_in = models.IntegerField()
 
-    is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
+class SpotifyProfile(models.Model):
+    spotify_id = models.TextField(primary_key=True)
 
-    USERNAME_FIELD = "email"
+class CustomUser(AbstractUser):
+    username = models.TextField(default="")
+    email = models.EmailField(unique=True, primary_key=True)
+    first_name = models.TextField(default="")
+    last_name = models.TextField(default="")
+
+    is_registered = models.BooleanField(default=False)
+
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    auth_data = models.OneToOneField(SpotifyAuthData, on_delete=models.CASCADE, null=True, related_name="user")
+    spotify_profile = models.OneToOneField(SpotifyProfile, on_delete=models.CASCADE, null=True, related_name="user")
+
+
+
     objects = CustomUserManager()
+    def __str__(self):
+        return self.email
 
 
 
