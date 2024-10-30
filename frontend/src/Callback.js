@@ -5,6 +5,7 @@ const redirectUri = process.env.REACT_APP_REDIRECT_URI;
 const clientId = process.env.REACT_APP_CLIENT_ID;
 
 async function setAuthToken(accessToken, refreshToken, expiresIn) {
+    console.log(accessToken);
     const url = "http://localhost:8000/api/authenticate"
 
     const payload = {
