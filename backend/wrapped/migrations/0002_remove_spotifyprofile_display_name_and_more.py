@@ -6,32 +6,32 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wrapped', '0001_initial'),
+        ("wrapped", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='spotifyprofile',
-            name='display_name',
+            model_name="spotifyprofile",
+            name="display_name",
         ),
         migrations.AddField(
-            model_name='customuser',
-            name='is_registered',
+            model_name="customuser",
+            name="is_registered",
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='customuser',
-            name='username',
-            field=models.TextField(default=''),
+            model_name="customuser",
+            name="username",
+            field=models.TextField(default=""),
         ),
         migrations.AlterField(
-            model_name='customuser',
-            name='first_name',
-            field=models.TextField(default=''),
+            model_name="customuser",
+            name="first_name",
+            field=models.TextField(default=""),
         ),
         migrations.AlterField(
-            model_name='customuser',
-            name='last_name',
-            field=models.TextField(default=''),
+            model_name="customuser",
+            name="last_name",
+            field=models.TextField(default=""),
         ),
     ]
