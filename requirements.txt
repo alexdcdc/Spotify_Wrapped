@@ -1,0 +1,19 @@
+pip
+pytest
+pytest-django
+argon2-cffi 16.1.0+
+bcrypt
+docutils
+enum34
+geoip2
+jinja2 
+numpy
+Pillow
+PyYAML
+pytz
+setuptools
+memcached
+mock 
+gettext 
+selenium
+sqlparse
