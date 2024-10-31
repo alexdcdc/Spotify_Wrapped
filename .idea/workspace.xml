@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d34e3a6-3cdd-405b-aac6-8aad8f1d8f8d" name="Changes" comment="">
+    <list default="true" id="4d34e3a6-3cdd-405b-aac6-8aad8f1d8f8d" name="Changes" comment="authentication update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Spotify_Wrapped/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Spotify_Wrapped/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/wrapped/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wrapped/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/Callback.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Callback.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/SpotifyButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/SpotifyButton.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +54,6 @@
     "Django Server.Spotify_Wrapped.executor": "Run",
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.codeium.enabled": "true",
     "git-widget-placeholder": "wrapped",
     "last_opened_file_path": "C:/Users/Arnav Gupta/PycharmProjects/Spotify_Wrapped/frontend",
     "node.js.detected.package.eslint": "true",
@@ -94,10 +94,24 @@
       <workItem from="1729607329875" duration="130000" />
       <workItem from="1729607470933" duration="472000" />
       <workItem from="1729607962223" duration="1661000" />
+      <workItem from="1730381395163" duration="7097000" />
     </task>
+    <task id="LOCAL-00001" summary="authentication update">
+      <option name="closed" value="true" />
+      <created>1730320270507</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1730320270508</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="authentication update" />
+    <option name="LAST_COMMIT_MESSAGE" value="authentication update" />
   </component>
 </project>

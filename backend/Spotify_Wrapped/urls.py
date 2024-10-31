@@ -20,6 +20,7 @@ from django.urls import path, include, re_path
 from wrapped.views import register_by_access_token, authentication_test, health, get_user
 from rest_framework import routers, serializers, viewsets
 
+from wrapped.views import recently_played_tracks
 
 urlpatterns = [
     path('api/authenticate', register_by_access_token),
@@ -27,4 +28,5 @@ urlpatterns = [
     path('api/authentication-test/', authentication_test),
     path('api/health', health),
     path('admin', admin.site.urls),
+    path('api/wrapped-tracks', recently_played_tracks),
 ]
