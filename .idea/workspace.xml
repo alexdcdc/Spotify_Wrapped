@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d34e3a6-3cdd-405b-aac6-8aad8f1d8f8d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/SpotifyOverview.js" afterDir="false" />
+    <list default="true" id="4d34e3a6-3cdd-405b-aac6-8aad8f1d8f8d" name="Changes" comment="merge remote">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/Spotify_Wrapped/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Spotify_Wrapped/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/wrapped/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wrapped/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/lib/SpotifyOverview.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/SpotifyOverview.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SpotifyOverview.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +65,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.codeium.enabled": "true",
     "git-widget-placeholder": "wrapped",
-    "last_opened_file_path": "C:/Users/Arnav Gupta/PycharmProjects/Spotify_Wrapped/frontend",
+    "last_opened_file_path": "C:/Users/allen/OneDrive/Desktop/2340/Spotify_Wrapped/frontend/src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -81,6 +77,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\allen\OneDrive\Desktop\2340\Spotify_Wrapped\frontend\src" />
       <recent name="C:\Users\Arnav Gupta\PycharmProjects\Spotify_Wrapped\frontend" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -127,10 +124,18 @@
       <workItem from="1730258342362" duration="125000" />
       <workItem from="1730302141315" duration="1992000" />
       <workItem from="1730316330248" duration="3591000" />
+      <workItem from="1730473835397" duration="977000" />
+      <workItem from="1730479927189" duration="783000" />
+      <workItem from="1730496607750" duration="2890000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="stuff" />
+    <MESSAGE value="merge remote" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge remote" />
   </component>
 </project>
