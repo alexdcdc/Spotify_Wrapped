@@ -1,6 +1,9 @@
+import uuid
+
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
+from django.db.models import PositiveIntegerField, PositiveSmallIntegerField
 from wrapped.managers import CustomUserManager
 
 class SpotifyAuthData(models.Model):
@@ -30,6 +33,56 @@ class CustomUser(AbstractUser):
     objects = CustomUserManager()
     def __str__(self):
         return self.email
+
+class Wrapped(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
+class AbstractPanel(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    wrapped = models.ForeignKey(Wrapped, on_delete=models.CASCADE)
+    order = models.PositiveSmallIntegerField()
+    class Meta:
+        abstract = True
+
+class Song(models.Model):
+    spotify_id = models.TextField(primary_key=True)
+    title = models.TextField()
+    artists = models.ManyToManyField(Artist)
+    album = models.ForeignKey(Album)
+
+class Artist(models.Model):
+    spotify_id = models.TextField(primary_key=True)
+    albums = models.ManyToManyField(Album)
+    name = models.TextField()
+    songs = models.ManyToManyField(Song)
+
+class Album(models.Model):
+    spotify_id = models.TextField(primary_key=True)
+    name = models.TextField()
+    artists = models.ManyToManyField(Artist)
+
+'''
+To be completed after wrapped user story
+class PanelOne(AbstractPanel):
+
+class PanelTwo(AbstractPanel):
+
+class PanelThree(AbstractPanel):
+
+class PanelFour(AbstractPanel):
+
+class PanelFive(AbstractPanel):
+
+class PanelSix(AbstractPanel):
+
+class PanelSeven(AbstractPanel):
+
+class PanelEight(AbstractPanel):
+'''
+
+
+
+
 
 
 

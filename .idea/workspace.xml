@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d34e3a6-3cdd-405b-aac6-8aad8f1d8f8d" name="Changes" comment="merge remote">
+    <list default="true" id="4d34e3a6-3cdd-405b-aac6-8aad8f1d8f8d" name="Changes" comment="top tracks view">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/Spotify_Wrapped/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Spotify_Wrapped/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/wrapped/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wrapped/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/SpotifyButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/SpotifyButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/SpotifyOverview.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SpotifyOverview.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/wrapped/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wrapped/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,27 +53,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Django Server.Spotify_Wrapped.executor": "Run",
-    "Node.js.App.js.executor": "Run",
-    "Node.js.SpotifyButton.js.executor": "Run",
-    "Node.js.SpotifyOverview.js.executor": "Run",
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "wrapped",
-    "last_opened_file_path": "C:/Users/allen/OneDrive/Desktop/2340/Spotify_Wrapped/frontend/src",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\PyCharm 2024.2.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Django Server.Spotify_Wrapped.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.App.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.SpotifyButton.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.SpotifyOverview.js.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;wrapped&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/allen/OneDrive/Desktop/2340/Spotify_Wrapped/frontend/src&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\PyCharm 2024.2.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\allen\OneDrive\Desktop\2340\Spotify_Wrapped\frontend\src" />
@@ -132,8 +129,18 @@
       <workItem from="1730500951879" duration="445000" />
       <workItem from="1730504810568" duration="2348000" />
       <workItem from="1730508517496" duration="2245000" />
-      <workItem from="1730571710820" duration="3130000" />
+      <workItem from="1730571710820" duration="3403000" />
+      <workItem from="1730576340709" duration="1469000" />
     </task>
+    <task id="LOCAL-00001" summary="top tracks view">
+      <option name="closed" value="true" />
+      <created>1730575035685</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1730575035685</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,6 +160,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="stuff" />
     <MESSAGE value="merge remote" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge remote" />
+    <MESSAGE value="top tracks view" />
+    <option name="LAST_COMMIT_MESSAGE" value="top tracks view" />
   </component>
 </project>
