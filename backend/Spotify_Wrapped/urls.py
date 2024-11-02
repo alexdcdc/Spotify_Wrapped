@@ -17,7 +17,7 @@ Including another URLconf
 #hello world!
 from django.contrib import admin
 from django.urls import path, include, re_path
-from wrapped.views import register_by_access_token, authentication_test, health, get_user, spotify_stats
+from wrapped.views import register_by_access_token, authentication_test, health, get_user, spotify_top_tracks
 from rest_framework import routers, serializers, viewsets
 
 
@@ -26,6 +26,6 @@ urlpatterns = [
     path('api/user', get_user),
     path('api/authentication-test/', authentication_test),
     path('api/health', health),
-    path('api/spotify-stats/', spotify_stats, name='spotify_stats'),
+    path('api/top-tracks', spotify_top_tracks),
     path('admin', admin.site.urls),
 ]
