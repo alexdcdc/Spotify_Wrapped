@@ -44,24 +44,14 @@ function SpotifyWrapped() {
 
     return (
         <div className="spotify-wrapper">
-            <h1>Your Spotify Wrapped</h1>
+            <h1>The music that defined your decade.</h1>
             {error ? (
                 <p className="error">{error}</p>
             ) : spotifyData ? (
-                <div className="tracks-container">
-                    <h2>Top Tracks:</h2>
-                    <div className="tracks-columns">
-                        <div className="track-column">
-                            {spotifyData.items.slice(0, 5).map((track, index) => (
-                                <TrackItem track={track} index={index} key={track.id} />
-                            ))}
-                        </div>
-                        <div className="track-column">
-                            {spotifyData.items.slice(5, 10).map((track, index) => (
-                                <TrackItem track={track} index={index + 5} key={track.id} />
-                            ))}
-                        </div>
-                    </div>
+                <div className="yearly-tracks">
+                    {spotifyData.items.slice(0, 5).map((track, index) => (
+                        <YearlyTrackItem track={track} year={2015 + index} key={track.id} />
+                    ))}
                 </div>
             ) : (
                 <p>Loading your Spotify Wrapped data...</p>
@@ -70,29 +60,24 @@ function SpotifyWrapped() {
     );
 }
 
-function TrackItem({ track, index }) {
+function YearlyTrackItem({ track, year }) {
     const trackName = track.name;
-    const albumName = track.album.name;
+    const artistName = track.artists[0].name;
+    const trackUrl = track.external_urls.spotify; // Spotify link for the track
+    const artistUrl = track.artists[0].external_urls.spotify; // Spotify link for the artist
     const albumImage = track.album.images[0]?.url;
-    const trackUrl = track.external_urls.spotify;
-    const artistNames = track.artists.map(artist => (
-        <a key={artist.id} href={artist.external_urls.spotify} target="_blank" rel="noopener noreferrer" className="artist-link">
-            {artist.name}
-        </a>
-    ));
 
     return (
-        <div className="track-item">
-            <a href={trackUrl} target="_blank" rel="noopener noreferrer" className="track-link">
-                <div className="track-info">
-                    <span className="track-number">{index + 1}</span>
-                    <strong>{trackName}</strong>
-                    <span className="track-album"> from <em>{albumName}</em></span>
-                    <span className="track-artists"> by {artistNames.reduce((prev, curr) => [prev, ', ', curr])}</span>
-                </div>
-                {albumImage && (
-                    <img src={albumImage} alt={`${albumName} cover`} className="album-cover" />
-                )}
+        <div className="yearly-track-item">
+            <img src={albumImage} alt={`${trackName} cover`} className="album-cover" />
+            <p className="year-label">{year}</p>
+            <p className="track-label">Top Song</p>
+            <a href={trackUrl} target="_blank" rel="noopener noreferrer" className="track-name">
+                {trackName}
+            </a>
+            <p className="track-label">Top Artist</p>
+            <a href={artistUrl} target="_blank" rel="noopener noreferrer" className="artist-name">
+                {artistName}
             </a>
         </div>
     );

@@ -1,113 +1,92 @@
-body {
-    background-color: #000;
+/* Set the body background to blue and make it take up the entire screen */
+body, html {
+    background-color: #1db954; /* Blue-green background */
     color: #ffffff;
     margin: 0;
     font-family: 'Helvetica Neue', Arial, sans-serif;
+    height: 100%;
 }
 
 .spotify-wrapper {
-    background-color: #000;
-    color: #ffffff;
+    background-color: #000000;
+    color: #000000;
     padding: 20px;
-    max-width: 1000px;
-    margin: 0 auto;
-    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 h1 {
     font-size: 2rem;
     font-weight: bold;
-    color: #1DB954;
-    margin-bottom: 20px;
-    text-align: center;
+    color: #000000;
+    margin-bottom: 40px;
 }
 
 .error {
     color: red;
-    text-align: center;
 }
 
-.tracks-container h2 {
-    font-size: 1.5rem;
-    color: #ffffff;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.tracks-columns {
+.yearly-tracks {
     display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
     gap: 20px;
-    justify-content: center;
-}
-
-.track-column {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 45%;
-}
-
-.track-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px;
-    background-color: #1c1c1c; /* Dark gray background */
-    border-radius: 8px;
-    transition: background 0.3s ease;
-}
-
-.track-item:hover {
-    background-color: #282828;
-}
-
-.track-info {
-    display: flex;
-    flex-direction: column;
-    max-width: 70%;
-}
-
-.track-number {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #ffffff;
-    margin-right: 10px;
-}
-
-.track-link {
-    text-decoration: none;
-    color: #ffffff;
-    display: flex;
+    max-width: 80%;
     width: 100%;
-    justify-content: space-between;
+    margin: 0 auto;
 }
 
-.track-link strong {
-    font-size: 1.1rem;
-}
-
-.track-album,
-.track-artists {
-    font-size: 0.9rem;
-    color: #b3b3b3;
-}
-
-.artist-link {
-    color: #1DB954;
-    text-decoration: none;
-}
-
-.artist-link:hover {
-    text-decoration: underline;
+.yearly-track-item {
+    background-color: #1c1c1c;
+    color: #ffffff;
+    padding: 15px;
+    width: 180px;
+    text-align: center;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .album-cover {
-    width: 50px;
-    height: 50px;
-    border-radius: 4px;
-    object-fit: cover;
-    margin-left: 15px;
-    flex-shrink: 0;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
 }
+
+.year-label {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 10px 0;
+}
+
+.track-label {
+    font-size: 0.9rem;
+    color: #b3b3b3;
+    margin: 4px 0;
+}
+
+.track-name,
+.artist-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.track-name:hover,
+.artist-name:hover {
+    color: #1db954;
+}
+
+
 
 
