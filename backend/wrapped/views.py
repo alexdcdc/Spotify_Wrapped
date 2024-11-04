@@ -113,6 +113,8 @@ def get_user(request):
 
 
 
+
+
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def authentication_test(request):
@@ -129,7 +131,6 @@ def authentication_test(request):
 @permission_classes([AllowAny])
 def health(request):
     return Response(status=status.HTTP_200_OK)
-
 
 @api_view(['GET'])
 def spotify_top_artists(request):
@@ -150,128 +151,31 @@ def spotify_top_artists(request):
 
     return Response(artists, status=status.HTTP_200_OK)
 
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def spotify_top_tracks(request):
+    user = request.user
+    token = user.auth_data.access_token
+    url = "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=10"
+    headers = {"Authorization": "Bearer " + token}
 
-import requests
-from django.http import JsonResponse
-
-
-def spotify_stats(request):
-    auth_token = "YOUR_ACCESS_TOKEN"  # Retrieve the actual user's access token here
-
-    total_hours = total_hours_listened(auth_token)
-    total_songs = total_songs_listened(auth_token)
-    active_months = most_active_months(auth_token)
-    top_genres = top_genres_data(auth_token)
-    top_artists = top_artists_data(auth_token)
-
-    stats = {
-        "total_hours": total_hours,
-        "total_songs": total_songs,
-        "active_months": active_months,
-        "top_genres": top_genres,
-        "top_artists": top_artists
-    }
-
-    return JsonResponse(stats)
+    response = requests.get(url, headers=headers)
+    if response.status_code != 200:
+        print(response)
+        return Response({'error': 'Failed to fetch top tracks from Spotify API.'}, status=status.HTTP_400_BAD_REQUEST)
+    body = response.json()
+    return Response(body, status=status.HTTP_200_OK)
 
 
-def total_hours_listened(auth_token):
-    total_duration_ms = 0
-    url = "https://api.spotify.com/v1/me/player/recently-played"
-    headers = {
-        "Authorization": f"Bearer {auth_token}"
-    }
-
-    while url:
-        response = requests.get(url, headers=headers, params={"limit": 50})
-        data = response.json()
-
-        for item in data.get("items", []):
-            total_duration_ms += item["track"]["duration_ms"]
-
-        url = data.get("next")
-
-    total_hours = total_duration_ms / (1000 * 60 * 60)
-    return total_hours
 
 
-def total_songs_listened(auth_token):
-    total_songs = 0
-    url = "https://api.spotify.com/v1/me/player/recently-played"
-    headers = {
-        "Authorization": f"Bearer {auth_token}"
-    }
-
-    while url:
-        response = requests.get(url, headers=headers, params={"limit": 50})
-        data = response.json()
-
-        total_songs += len(data.get("items", []))
-
-        url = data.get("next")
-
-    return total_songs
 
 
-def most_active_months(auth_token):
-    active_months = {}
-    url = "https://api.spotify.com/v1/me/player/recently-played"
-    headers = {
-        "Authorization": f"Bearer {auth_token}"
-    }
-
-    while url:
-        response = requests.get(url, headers=headers, params={"limit": 50})
-        data = response.json()
-
-        for item in data.get("items", []):
-            played_at = item["played_at"]  # Get the played at timestamp
-            month = played_at[:7]  # Extract the YYYY-MM part
-            active_months[month] = active_months.get(month, 0) + 1
-
-        url = data.get("next")
-
-    # Sort the months by their activity counts
-    sorted_months = sorted(active_months.items(), key=lambda x: x[1], reverse=True)
-    return sorted_months
 
 
-def top_genres_data(auth_token):
-    top_genres = {}
-    url = "https://api.spotify.com/v1/me/top/artists"
-    headers = {
-        "Authorization": f"Bearer {auth_token}"
-    }
-
-    response = requests.get(url, headers=headers, params={"limit": 50})
-    data = response.json()
-
-    for item in data.get("items", []):
-        genres = item.get("genres", [])
-        for genre in genres:
-            top_genres[genre] = top_genres.get(genre, 0) + 1
-
-    # Sort genres by their count
-    sorted_genres = sorted(top_genres.items(), key=lambda x: x[1], reverse=True)
-    return [{"name": genre, "count": count} for genre, count in sorted_genres]
 
 
-def top_artists_data(auth_token):
-    top_artists = []
-    url = "https://api.spotify.com/v1/me/top/artists"
-    headers = {
-        "Authorization": f"Bearer {auth_token}"
-    }
 
-    response = requests.get(url, headers=headers, params={"limit": 50})
-    data = response.json()
-
-    for item in data.get("items", []):
-        artist_name = item["name"]
-        artist_listen_count = item["popularity"]  # Popularity as a proxy for listen count
-        top_artists.append({"name": artist_name, "listen_count": artist_listen_count})
-
-    return top_artists
 
 
 @api_view(['GET'])
