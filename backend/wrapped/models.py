@@ -44,22 +44,26 @@ class AbstractPanel(models.Model):
     class Meta:
         abstract = True
 
-class Song(models.Model):
-    spotify_id = models.TextField(primary_key=True)
-    title = models.TextField()
-    artists = models.ManyToManyField(Artist)
-    album = models.ForeignKey(Album)
 
 class Artist(models.Model):
     spotify_id = models.TextField(primary_key=True)
-    albums = models.ManyToManyField(Album)
+    albums = models.ManyToManyField('Album')
     name = models.TextField()
-    songs = models.ManyToManyField(Song)
+    songs = models.ManyToManyField('Song')
+
 
 class Album(models.Model):
     spotify_id = models.TextField(primary_key=True)
     name = models.TextField()
-    artists = models.ManyToManyField(Artist)
+    artists = models.ManyToManyField('Artist')
+
+
+class Song(models.Model):
+    spotify_id = models.TextField(primary_key=True)
+    title = models.TextField()
+    artists = models.ManyToManyField('Artist')
+    album = models.ForeignKey('Album', on_delete=models.CASCADE)  # Specify on_delete behavior
+
 
 '''
 To be completed after wrapped user story
