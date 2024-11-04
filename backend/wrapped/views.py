@@ -9,6 +9,8 @@ from wrapped.models import CustomUser, SpotifyAuthData, SpotifyProfile
 from wrapped.serializers import UserSerializer
 import os
 import base64
+import datetime
+import time
 
 
 
@@ -132,32 +134,7 @@ def health(request):
 
 @api_view(['GET'])
 def spotify_top_artists(request):
-    client_id = os.getenv('SPOTIFY_CLIENT_ID')
-    client_secret = os.getenv('SPOTIFY_CLIENT_SECRET')
-
-    if not client_id or not client_secret:
-        return Response(
-            {'error': 'Spotify client ID and secret must be set in environment variables.'},
-            status=status.HTTP_500_INTERNAL_SERVER_ERROR
-        )
-
-    # Get access token
-    auth_response = requests.post(
-        'https://accounts.spotify.com/api/token',
-        data={
-            'grant_type': 'client_credentials'
-        },
-        headers={
-            'Authorization': f'Basic {base64.b64encode(f"{client_id}:{client_secret}".encode()).decode()}'
-        }
-    )
-
-    if auth_response.status_code != 200:
-        return Response({'error': 'Failed to authenticate with Spotify API.'}, status=status.HTTP_400_BAD_REQUEST)
-
-    access_token = auth_response.json().get('access_token')
-
-    # Get top artists
+    access_token = request.user.auth_data.access_token
     headers = {
         'Authorization': f'Bearer {access_token}'
     }
@@ -199,5 +176,79 @@ def spotify_top_tracks(request):
 
 
 
+
+
+@api_view(['GET'])
+def top_tracks(request):
+    access_token = request.user.auth_data.access_token
+
+    # Get top tracks
+    headers = {
+        'Authorization': f'Bearer {access_token}'
+    }
+    top_tracks_response = requests.get(
+        'https://api.spotify.com/v1/me/top/tracks?limit=5',
+        headers=headers
+    )
+
+    if top_tracks_response.status_code != 200:
+        return Response({'error': 'Failed to fetch top tracks from Spotify API.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    top_tracks = top_tracks_response.json().get('items', [])
+    tracks = [{'name': track['name'], 'popularity': track['popularity']} for track in top_tracks]
+
+    return Response(tracks, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def recently_played_tracks(request):
+
+    access_token = request.user.auth_data.access_token
+    headers = {
+        'Authorization': f'Bearer {access_token}'
+    }
+
+
+    four_weeks_ago = datetime.datetime.now() - datetime.timedelta(weeks=4)
+    after_timestamp = int(time.mktime(four_weeks_ago.timetuple()) * 1000)
+
+    all_tracks = []
+
+
+    params = {
+        'limit': 50,
+        'after': after_timestamp
+    }
+    while True:
+        response = requests.get(
+            'https://api.spotify.com/v1/me/player/recently-played',
+            headers=headers,
+            params=params
+        )
+
+        print(response.status_code)
+
+        if response.status_code != 200:
+            return Response({'error': 'Failed to fetch recently played tracks from Spotify API.'},
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        data = response.json().get('items', [])
+        all_tracks.extend([
+            {
+                'name': item['track']['name'],
+                'played_at': item['played_at'],
+                'artists': [artist['name'] for artist in item['track']['artists']]
+            }
+            for item in data
+        ])
+
+
+        if 'cursors' in response.json() and response.json()["cursors"]:
+            params['after'] = response.json()['cursors']['after']
+            print("here")
+        else:
+            break
+
+    return Response(all_tracks, status=status.HTTP_200_OK)
 
 
