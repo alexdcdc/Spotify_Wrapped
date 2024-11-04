@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import './SpotifyWrapped.css'; // Import the CSS file
 
 function SpotifyWrapped() {
     const [spotifyData, setSpotifyData] = useState(null);
@@ -27,7 +28,7 @@ function SpotifyWrapped() {
                 throw new Error(errorMessage);
             }
             const data = await response.json();
-            console.log("Fetched Spotify Wrapped data:", data); // Log the data to inspect its structure
+            console.log("Fetched Spotify Wrapped data:", data);
             setSpotifyData(data);
         } catch (error) {
             console.error("Failed to fetch Spotify Wrapped data:", error);
@@ -42,35 +43,38 @@ function SpotifyWrapped() {
     if (!token) return <p>Please sign in to view your Spotify Wrapped data.</p>;
 
     return (
-        <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+        <div className="spotify-wrapper">
             <h1>Your Spotify Wrapped</h1>
             {error ? (
-                <p style={{ color: 'red' }}>{error}</p>
+                <p className="error">{error}</p>
             ) : spotifyData ? (
-                <div>
+                <div className="tracks-container">
                     <h2>Top Tracks:</h2>
                     {spotifyData.items && spotifyData.items.length > 0 ? (
-                        <ul>
+                        <div className="track-list">
                             {spotifyData.items.map((track, index) => {
-                                // Extracting only the necessary information
                                 const trackName = track.name;
                                 const albumName = track.album.name;
-                                const trackUrl = track.external_urls.spotify; // Spotify link for the track
+                                const trackUrl = track.external_urls.spotify;
                                 const artistNames = track.artists.map(artist => (
-                                    <a key={artist.id} href={artist.external_urls.spotify} target="_blank" rel="noopener noreferrer">
+                                    <a key={artist.id} href={artist.external_urls.spotify} target="_blank" rel="noopener noreferrer" className="artist-link">
                                         {artist.name}
                                     </a>
                                 ));
 
                                 return (
-                                    <li key={index}>
-                                        <a href={trackUrl} target="_blank" rel="noopener noreferrer">
-                                            <strong>{trackName}</strong>
-                                        </a> from the album <em>{albumName}</em> by {artistNames.reduce((prev, curr) => [prev, ', ', curr])}
-                                    </li>
+                                    <div key={index} className="track-item">
+                                        <a href={trackUrl} target="_blank" rel="noopener noreferrer" className="track-link">
+                                            <div className="track-info">
+                                                <strong>{trackName}</strong>
+                                                <span className="track-album"> from <em>{albumName}</em></span>
+                                                <span className="track-artists"> by {artistNames.reduce((prev, curr) => [prev, ', ', curr])}</span>
+                                            </div>
+                                        </a>
+                                    </div>
                                 );
                             })}
-                        </ul>
+                        </div>
                     ) : (
                         <p>No top tracks available.</p>
                     )}

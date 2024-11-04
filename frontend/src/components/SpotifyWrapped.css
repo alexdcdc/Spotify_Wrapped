@@ -1,0 +1,87 @@
+body {
+    background-color: #121212; /* Dark background */
+    color: #ffffff; /* White text */
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+}
+
+.spotify-wrapper {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #1e1e1e; /* Darker card background */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.tracks-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.track-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid layout */
+    gap: 20px; /* Spacing between tracks */
+}
+
+.track-item {
+    background-color: #282828; /* Track item background */
+    border-radius: 8px;
+    padding: 15px;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.track-item:hover {
+    background-color: #404040; /* Slightly lighter on hover */
+}
+
+.track-link {
+    color: #1db954; /* Spotify green */
+    text-decoration: none;
+    flex-grow: 1;
+}
+
+.track-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.track-album {
+    font-size: 0.9rem;
+    color: #b3b3b3; /* Light gray for album name */
+}
+
+.track-artists {
+    font-size: 0.9rem;
+    color: #b3b3b3; /* Light gray for artists */
+}
+
+.artist-link {
+    color: #1db954; /* Spotify green */
+    text-decoration: none;
+}
+
+.artist-link:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+.error {
+    color: #e57373; /* Red color for errors */
+    margin-top: 20px;
+}
+
