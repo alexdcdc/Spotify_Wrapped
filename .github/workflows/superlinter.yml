@@ -3,7 +3,7 @@ name: Super-Linter
 on:
   push:
     paths:
-      - 'backend/wrapped'  # Trigger the workflow only when files in the src directory are modified
+      - 'backend/wrapped'  
       - 'frontend/src'
 
 jobs:
@@ -23,4 +23,3 @@ jobs:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_ALL_CODEBASE: false
-          FILTER_REGEX_INCLUDE: .*src/.*  # Lint only files in the src directory
