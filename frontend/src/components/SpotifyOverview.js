@@ -48,40 +48,32 @@ function SpotifyWrapped() {
                 <p style={{ color: 'red' }}>{error}</p>
             ) : spotifyData ? (
                 <div>
-                    <h2>Top Song: {spotifyData.top_song || 'N/A'}</h2>
-                    <h2>Top Artist: {spotifyData.top_artist || 'N/A'}</h2>
-                    <p>Listening Hours: {spotifyData.listening_hours || 'N/A'}</p>
+                    <h2>Top Tracks:</h2>
+                    {spotifyData.items && spotifyData.items.length > 0 ? (
+                        <ul>
+                            {spotifyData.items.map((track, index) => {
+                                // Extracting only the necessary information
+                                const trackName = track.name;
+                                const albumName = track.album.name;
+                                const trackUrl = track.external_urls.spotify; // Spotify link for the track
+                                const artistNames = track.artists.map(artist => (
+                                    <a key={artist.id} href={artist.external_urls.spotify} target="_blank" rel="noopener noreferrer">
+                                        {artist.name}
+                                    </a>
+                                ));
 
-                    {/* Display top tracks if available */}
-                    {spotifyData.top_tracks && spotifyData.top_tracks.length > 0 && (
-                        <div>
-                            <h3>Your Top Tracks:</h3>
-                            <ul>
-                                {spotifyData.top_tracks.map((track, index) => (
+                                return (
                                     <li key={index}>
-                                        {track.name} by {track.artist} - {track.play_count} plays
+                                        <a href={trackUrl} target="_blank" rel="noopener noreferrer">
+                                            <strong>{trackName}</strong>
+                                        </a> from the album <em>{albumName}</em> by {artistNames.reduce((prev, curr) => [prev, ', ', curr])}
                                     </li>
-                                ))}
-                            </ul>
-                        </div>
+                                );
+                            })}
+                        </ul>
+                    ) : (
+                        <p>No top tracks available.</p>
                     )}
-
-                    {/* Display top artists if available */}
-                    {spotifyData.top_artists && spotifyData.top_artists.length > 0 && (
-                        <div>
-                            <h3>Your Top Artists:</h3>
-                            <ul>
-                                {spotifyData.top_artists.map((artist, index) => (
-                                    <li key={index}>{artist.name}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-
-                    {/* Full data for debugging */}
-                    <pre style={{ marginTop: '20px', backgroundColor: '#f4f4f4', padding: '10px' }}>
-                        {JSON.stringify(spotifyData, null, 2)}
-                    </pre>
                 </div>
             ) : (
                 <p>Loading your Spotify Wrapped data...</p>
