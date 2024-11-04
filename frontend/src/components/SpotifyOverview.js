@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import './SpotifyWrapped.css'; // Import the CSS file
+import './SpotifyWrapped.css';
 
 function SpotifyWrapped() {
     const [spotifyData, setSpotifyData] = useState(null);
@@ -50,34 +50,18 @@ function SpotifyWrapped() {
             ) : spotifyData ? (
                 <div className="tracks-container">
                     <h2>Top Tracks:</h2>
-                    {spotifyData.items && spotifyData.items.length > 0 ? (
-                        <div className="track-list">
-                            {spotifyData.items.map((track, index) => {
-                                const trackName = track.name;
-                                const albumName = track.album.name;
-                                const trackUrl = track.external_urls.spotify;
-                                const artistNames = track.artists.map(artist => (
-                                    <a key={artist.id} href={artist.external_urls.spotify} target="_blank" rel="noopener noreferrer" className="artist-link">
-                                        {artist.name}
-                                    </a>
-                                ));
-
-                                return (
-                                    <div key={index} className="track-item">
-                                        <a href={trackUrl} target="_blank" rel="noopener noreferrer" className="track-link">
-                                            <div className="track-info">
-                                                <strong>{trackName}</strong>
-                                                <span className="track-album"> from <em>{albumName}</em></span>
-                                                <span className="track-artists"> by {artistNames.reduce((prev, curr) => [prev, ', ', curr])}</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                );
-                            })}
+                    <div className="tracks-columns">
+                        <div className="track-column">
+                            {spotifyData.items.slice(0, 5).map((track, index) => (
+                                <TrackItem track={track} index={index} key={track.id} />
+                            ))}
                         </div>
-                    ) : (
-                        <p>No top tracks available.</p>
-                    )}
+                        <div className="track-column">
+                            {spotifyData.items.slice(5, 10).map((track, index) => (
+                                <TrackItem track={track} index={index + 5} key={track.id} />
+                            ))}
+                        </div>
+                    </div>
                 </div>
             ) : (
                 <p>Loading your Spotify Wrapped data...</p>
@@ -86,5 +70,35 @@ function SpotifyWrapped() {
     );
 }
 
+function TrackItem({ track, index }) {
+    const trackName = track.name;
+    const albumName = track.album.name;
+    const albumImage = track.album.images[0]?.url;
+    const trackUrl = track.external_urls.spotify;
+    const artistNames = track.artists.map(artist => (
+        <a key={artist.id} href={artist.external_urls.spotify} target="_blank" rel="noopener noreferrer" className="artist-link">
+            {artist.name}
+        </a>
+    ));
+
+    return (
+        <div className="track-item">
+            <a href={trackUrl} target="_blank" rel="noopener noreferrer" className="track-link">
+                <div className="track-info">
+                    <span className="track-number">{index + 1}</span>
+                    <strong>{trackName}</strong>
+                    <span className="track-album"> from <em>{albumName}</em></span>
+                    <span className="track-artists"> by {artistNames.reduce((prev, curr) => [prev, ', ', curr])}</span>
+                </div>
+                {albumImage && (
+                    <img src={albumImage} alt={`${albumName} cover`} className="album-cover" />
+                )}
+            </a>
+        </div>
+    );
+}
+
 export default SpotifyWrapped;
+
+
 

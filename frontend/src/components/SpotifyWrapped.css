@@ -1,87 +1,113 @@
 body {
-    background-color: #121212; /* Dark background */
-    color: #ffffff; /* White text */
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #000;
+    color: #ffffff;
     margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
 .spotify-wrapper {
-    max-width: 900px;
-    margin: 40px auto;
+    background-color: #000;
+    color: #ffffff;
     padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
     border-radius: 8px;
-    background-color: #1e1e1e; /* Darker card background */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-}
-
-h2 {
     font-size: 2rem;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    font-weight: bold;
+    color: #1DB954;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-.tracks-container {
+.error {
+    color: red;
+    text-align: center;
+}
+
+.tracks-container h2 {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.tracks-columns {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.track-column {
     display: flex;
     flex-direction: column;
-}
-
-.track-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid layout */
-    gap: 20px; /* Spacing between tracks */
+    gap: 15px;
+    width: 45%;
 }
 
 .track-item {
-    background-color: #282828; /* Track item background */
-    border-radius: 8px;
-    padding: 15px;
-    transition: background-color 0.2s;
     display: flex;
     align-items: center;
-    cursor: pointer;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #1c1c1c; /* Dark gray background */
+    border-radius: 8px;
+    transition: background 0.3s ease;
 }
 
 .track-item:hover {
-    background-color: #404040; /* Slightly lighter on hover */
-}
-
-.track-link {
-    color: #1db954; /* Spotify green */
-    text-decoration: none;
-    flex-grow: 1;
+    background-color: #282828;
 }
 
 .track-info {
     display: flex;
     flex-direction: column;
+    max-width: 70%;
 }
 
-.track-album {
-    font-size: 0.9rem;
-    color: #b3b3b3; /* Light gray for album name */
+.track-number {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-right: 10px;
 }
 
+.track-link {
+    text-decoration: none;
+    color: #ffffff;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.track-link strong {
+    font-size: 1.1rem;
+}
+
+.track-album,
 .track-artists {
     font-size: 0.9rem;
-    color: #b3b3b3; /* Light gray for artists */
+    color: #b3b3b3;
 }
 
 .artist-link {
-    color: #1db954; /* Spotify green */
+    color: #1DB954;
     text-decoration: none;
 }
 
 .artist-link:hover {
-    text-decoration: underline; /* Underline on hover */
+    text-decoration: underline;
 }
 
-.error {
-    color: #e57373; /* Red color for errors */
-    margin-top: 20px;
+.album-cover {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    object-fit: cover;
+    margin-left: 15px;
+    flex-shrink: 0;
 }
+
 
