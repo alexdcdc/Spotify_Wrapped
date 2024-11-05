@@ -42,7 +42,7 @@ function SpotifyWrapped() {
 
     return (
         <div className="spotify-wrapper">
-            <h1>The music that defined your decade.</h1>
+            <h1>The music that defined your month.</h1>
             {error ? (
                 <p className="error">{error}</p>
             ) : spotifyData ? (
