@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react'
+import {get} from './lib/requests'
+
 function Dashboard () {
   const [firstName, setFirstName] = useState('')
 
   const getUserData = async () => {
     const url = 'http://localhost:8000/api/user'
-    const payload = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: 'Token ' + localStorage.getItem('token')
-      }
-    }
-    const response = await fetch(url, payload)
+
+    const response = await get(url, {}, true)
+
     if (!response.ok) {
       return Promise.reject(new Error('Unable to get user data'))
     }

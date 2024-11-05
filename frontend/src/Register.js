@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import {post} from "./lib/requests"
 
 function Register () {
   const [firstName, setFirstName] = useState('')
@@ -10,21 +11,14 @@ function Register () {
   const postUserInfo = async (e) => {
     e.preventDefault()
     const url = 'http://localhost:8000/api/user'
-
-    const payload = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: 'Token ' + localStorage.getItem('token')
-      },
-      body: new URLSearchParams({
+    const requestBody = {
         first_name: firstName,
         last_name: lastName,
         username
-      })
-    }
+      }
 
-    const response = await fetch(url, payload)
+    const response = await post(url, requestBody, true)
+
     if (response.ok) {
       navigate('/dashboard')
     } else {

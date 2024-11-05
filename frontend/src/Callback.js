@@ -1,33 +1,27 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { post, get, postUrlEncoded } from './lib/requests'
 
 const redirectUri = process.env.REACT_APP_REDIRECT_URI
 const clientId = process.env.REACT_APP_CLIENT_ID
 
 async function setAuthToken (accessToken, refreshToken, expiresIn) {
   const url = 'http://localhost:8000/api/authenticate'
-
-  const payload = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: new URLSearchParams({
+  const requestBody = {
       access_token: accessToken,
       refresh_token: refreshToken,
       expires_in: expiresIn
-    })
-  }
+    }
 
-  const body = await fetch(url, payload)
-  if (!body.ok) {
+  const response = await post(url, requestBody)
+
+  if (!response.ok) {
     return Promise.reject(new Error('Unable to authenticate user'))
   }
 
-  const response = await body.json()
-  const token = response.auth_token
+  const body = await response.json()
+  const token = body.auth_token
 
-  console.log(response)
   console.log('Token acquired: ' + token)
   localStorage.setItem('token', token)
 }
@@ -36,22 +30,15 @@ const authenticate = async (code) => {
   const url = 'https://accounts.spotify.com/api/token'
   // stored in the previous step
   const codeVerifier = localStorage.getItem('code_verifier')
-
-  const payload = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: new URLSearchParams({
+  const requestBody = {
       client_id: clientId,
       grant_type: 'authorization_code',
       code,
       redirect_uri: redirectUri,
       code_verifier: codeVerifier
-    })
-  }
+    }
 
-  const body = await fetch(url, payload)
+  const body = await postUrlEncoded(url, requestBody)
 
   if (!body.ok) {
     return Promise.reject(new Error('Unable to fetch token from Spotify API'))
@@ -67,14 +54,9 @@ const authenticate = async (code) => {
 }
 
 const getRegisteredStatus = async () => {
-  const payload = {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      Authorization: 'Token ' + localStorage.getItem('token')
-    }
-  }
-  const response = await fetch('http://localhost:8000/api/user', payload)
+  const url = 'http://localhost:8000/api/user'
+  const response = await get(url,{},true)
+
   if (!response.ok) {
     return Promise.reject(new Error('Unable to fetch user data'))
   }
