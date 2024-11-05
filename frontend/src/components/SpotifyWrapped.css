@@ -2,7 +2,7 @@ body, html {
     background-color: #1db954;
     color: #ffffff;
     margin: 0;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Montserrat', sans-serif; /* Using Montserrat */
     height: 100%;
 }
 
@@ -78,7 +78,6 @@ h1 {
     z-index: 1;
 }
 
-
 .track-details {
     margin: 120px 0 -80px; /* Adjusted margin for better spacing */
 }
@@ -102,6 +101,7 @@ h1 {
 .artist-name:hover {
     color: #1db954;
 }
+
 
 
 

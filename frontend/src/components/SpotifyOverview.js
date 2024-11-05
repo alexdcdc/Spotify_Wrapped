@@ -6,6 +6,17 @@ function SpotifyWrapped() {
     const [error, setError] = useState(null);
     const token = localStorage.getItem('token');
 
+    // Dynamically load Montserrat font
+    useEffect(() => {
+        const link = document.createElement('link');
+        link.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap';
+        link.rel = 'stylesheet';
+        document.head.appendChild(link);
+
+        // Apply font style to the body
+        document.body.style.fontFamily = "'Montserrat', sans-serif";
+    }, []);
+
     const getSpotifyData = async () => {
         if (!token) {
             setError("User is not authenticated.");
@@ -24,7 +35,7 @@ function SpotifyWrapped() {
         try {
             const response = await fetch(url, payload);
             if (!response.ok) {
-                const errorMessage = `Error ${response.status}: ${response.statusText}`; // Fixed syntax error
+                const errorMessage = `Error ${response.status}: ${response.statusText}`;
                 throw new Error(errorMessage);
             }
             const data = await response.json();
@@ -47,19 +58,23 @@ function SpotifyWrapped() {
                 <p className="error">{error}</p>
             ) : spotifyData ? (
                 <div className="yearly-tracks">
-                    {spotifyData.items.slice(0, 5).map((_, index) => {
-                        // Ensure there are two tracks to display per year
-                        const track1 = spotifyData.items[index * 2];
-                        const track2 = spotifyData.items[index * 2 + 1];
-                        return (
-                            <YearlyTrackItem
-                                track1={track1}
-                                track2={track2}
-                                year={2015 + index}
-                                key={track1?.id || track2?.id || index} // Ensure a unique key is present
-                            />
-                        );
-                    })}
+                    {spotifyData.items.length > 0 ? (
+                        spotifyData.items.slice(0, 5).map((_, index) => {
+                            const track1 = spotifyData.items[index * 2];
+                            const track2 = spotifyData.items[index * 2 + 1];
+                            return (
+                                <YearlyTrackItem
+                                    track1={track1}
+                                    track2={track2}
+                                    year={2015 + index}
+                                    startIndex={index * 2} // Pass the starting index for numbering
+                                    key={`${track1?.id || track2?.id || index}-${index}`} // Unique key
+                                />
+                            );
+                        })
+                    ) : (
+                        <p>No tracks available.</p>
+                    )}
                 </div>
             ) : (
                 <p>Loading your Spotify Wrapped data...</p>
@@ -68,7 +83,7 @@ function SpotifyWrapped() {
     );
 }
 
-function YearlyTrackItem({ track1, track2, year }) {
+function YearlyTrackItem({ track1, track2, year, startIndex }) {
     if (!track1 || !track2) return null; // Ensure both tracks are available
 
     const track1Name = track1.name;
@@ -91,21 +106,21 @@ function YearlyTrackItem({ track1, track2, year }) {
             </div>
             <p className="year-label">{year}</p>
             <div className="track-details">
-                <p className="track-label">Top Song</p>
+                <p className="track-label">{startIndex + 1}</p>
                 <a href={track1Url} target="_blank" rel="noopener noreferrer" className="track-name">
                     {track1Name}
                 </a>
-                <p className="track-label">Top Artist</p>
+                <p className="track-label"></p>
                 <a href={artist1Url} target="_blank" rel="noopener noreferrer" className="artist-name">
                     {artist1Name}
                 </a>
             </div>
             <div className="track-details">
-                <p className="track-label">Second Song</p>
+                <p className="track-label">{startIndex + 2}</p>
                 <a href={track2Url} target="_blank" rel="noopener noreferrer" className="track-name">
                     {track2Name}
                 </a>
-                <p className="track-label">Second Artist</p>
+                <p className="track-label"></p>
                 <a href={artist2Url} target="_blank" rel="noopener noreferrer" className="artist-name">
                     {artist2Name}
                 </a>
