@@ -1,3 +1,4 @@
+/* Base styling */
 body, html {
     background-color: #1db954;
     color: #ffffff;
@@ -6,6 +7,7 @@ body, html {
     height: 100%;
 }
 
+/* Wrapper for Spotify content */
 .spotify-wrapper {
     background-color: #000000;
     padding: 20px;
@@ -17,19 +19,28 @@ body, html {
     box-sizing: border-box;
 }
 
+/* Independent styling for h1 */
 h1 {
+    position: relative; /* Allows independent positioning */
+    top: 20px; /* Default top position; adjust as needed */
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
+    right: 334px;
     color: #ffffff;
     margin: 20px 0 50px; /* Adjusted margin for better spacing */
+    transition: top 0.3s; /* Smooth transition for movement */
 }
 
+/* Classes for moving h1 independently */
+
+/* Error styling */
 .error {
     color: red;
     margin: 10px 0; /* Added margin for better spacing */
 }
 
+/* Yearly tracks section */
 .yearly-tracks {
     display: flex;
     justify-content: space-around;
@@ -40,6 +51,7 @@ h1 {
     margin: 0 auto;
 }
 
+/* Individual yearly track items */
 .yearly-track-item {
     background-color: transparent;
     color: #ffffff;
@@ -51,6 +63,7 @@ h1 {
     position: relative;
 }
 
+/* Album cover container */
 .album-cover-container {
     position: relative;
     width: 150px; /* Smaller album covers */
@@ -58,6 +71,7 @@ h1 {
     margin: 0 auto 15px;
 }
 
+/* Album cover images */
 .album-cover {
     width: 100%;
     height: auto;
@@ -66,6 +80,7 @@ h1 {
     transition: transform 0.3s;
 }
 
+/* First album cover styling */
 .album-cover:first-child {
     top: 0;
     left: 0;
@@ -73,45 +88,55 @@ h1 {
     transform: translate(-5px, -5px); /* Slight offset for subtle overlap */
 }
 
+/* Last album cover styling */
 .album-cover:last-child {
     top: 125px;
     right: -30px;
     z-index: 1;
 }
 
+/* Track details styling */
 .track-details {
     margin: 120px 0 -80px; /* Adjusted margin for better spacing */
 }
 
+/* Track label styling */
 .track-label {
-    font-size: 1.1rem;
+    font-size: 2.0rem;
     font-weight: bolder;
     color: #b3b3b3;
     margin: 4px 0;
 }
 
-
+/* Artist name styling */
 .artist-name {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     font-weight: normal;
     color: #ffffff;
     text-decoration: none;
     transition: color 0.3s;
 }
 
+/* Track name styling */
 .track-name {
     font-size: 1.1rem;
     font-weight: bold;
-    color: #ffffff;
+    color: #1db954;
     text-decoration: none;
     transition: color 0.3s;
 }
 
+/* Hover effects for track and artist names */
 
-.track-name:hover,
 .artist-name:hover {
     color: #1db954;
 }
+
+.track-name:hover{
+    color: #ffffff;
+}
+
+
 
 
 
