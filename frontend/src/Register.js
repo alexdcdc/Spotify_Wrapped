@@ -20,6 +20,7 @@ function Register () {
     const response = await post(url, requestBody, true)
 
     if (response.ok) {
+      localStorage.setItem("isRegistered", true)
       navigate('/dashboard')
     } else {
       return Promise.reject(new Error('An error occurred while trying to submit user information'))

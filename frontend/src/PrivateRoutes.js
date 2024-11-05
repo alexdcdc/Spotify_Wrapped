@@ -1,10 +1,10 @@
 import {Navigate, Outlet} from 'react-router-dom'
-import {get} from 'react-router-dom'
 
 function PrivateRoutes() {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token')
+  const isRegistered = (localStorage.getItem('isRegistered') === 'true')
   return (
-    token ? <Outlet/> : <Navigate to='/'/>
+    token ? (isRegistered ? <Outlet/> : <Navigate to='/register'/>) : <Navigate to='/'/>
   )
 }
 export default PrivateRoutes

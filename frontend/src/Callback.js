@@ -77,6 +77,7 @@ function Callback () {
       authenticate(code).then(
         async () => {
           const isRegistered = await getRegisteredStatus()
+          localStorage.setItem("isRegistered", isRegistered)
           navigate(isRegistered ? '/dashboard' : '/register')
         },
         () => {
