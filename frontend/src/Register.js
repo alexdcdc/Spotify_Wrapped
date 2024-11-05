@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import {post} from "./lib/requests"
+import {get, post} from "./lib/requests"
 
 function Register () {
   const [firstName, setFirstName] = useState('')
