@@ -3,13 +3,14 @@ body, html {
     background-color: #1db954;
     color: #ffffff;
     margin: 0;
-    font-family: 'Montserrat', sans-serif; /* Using Montserrat */
+    font-family: 'Montserrat', sans-serif;
     height: 100%;
 }
 
 /* Wrapper for Spotify content */
 .spotify-wrapper {
-    background-color: #000000;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(158deg, rgba(0, 0, 0, 1) 10%, rgba(173, 52, 113, 1) 100%, rgba(255, 77, 167, 1) 100%);
     padding: 20px;
     text-align: center;
     display: flex;
@@ -19,23 +20,41 @@ body, html {
     box-sizing: border-box;
 }
 
+/* Fade-in animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Independent styling for h1 */
 h1 {
-    position: relative; /* Allows independent positioning */
-    top: 20px; /* Default top position; adjust as needed */
+    position: relative;
+    top: 20px;
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
     right: 334px;
-    color: #ffffff;
-    margin: 20px 0 50px; /* Adjusted margin for better spacing */
-    transition: top 0.3s; /* Smooth transition for movement */
+    color: #ff4dce;
+    margin: 20px 0 -80px;
+    transition: top 0.3s;
+    opacity: 0; /* Initially hidden */
+    animation: fadeIn 1s ease forwards; /* Apply fade-in */
+    animation-delay: 0.2s;
 }
 
 /* Error styling */
 .error {
     color: red;
-    margin: 10px 0; /* Added margin for better spacing */
+    margin: 10px 0;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 0.4s;
 }
 
 /* Yearly tracks section */
@@ -46,29 +65,46 @@ h1 {
     gap: 40px;
     max-width: 90%;
     width: 100%;
-    margin: 0 auto;
+    margin:  auto;
 }
 
 /* Individual yearly track items */
 .yearly-track-item {
     background-color: transparent;
-    color: #ffffff;
     padding: 15px;
     width: 200px;
     text-align: center;
     border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    opacity: 0; /* Initially hidden */
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 0.6s;
+}
+
+.yearly-track-item:nth-child(1) { animation-delay: 0.6s; }
+.yearly-track-item:nth-child(2) { animation-delay: 0.8s; }
+.yearly-track-item:nth-child(3) { animation-delay: 1s; }
+.yearly-track-item:nth-child(4) { animation-delay: 1.2s; }
+.yearly-track-item:nth-child(5) { animation-delay: 1.4s; }
+
+
+/* Add more delays if you have more items */
+
+/* Add this class for text and album covers inside yearly-track-item */
+.yearly-track-item * {
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+
 }
 
 /* Album cover container */
 .album-cover-container {
     position: relative;
-    width: 150px; /* Smaller album covers */
+    width: 150px;
     height: 140px;
     margin: 0 auto 15px;
 }
@@ -87,7 +123,7 @@ h1 {
     top: 0;
     left: 0;
     z-index: 2;
-    transform: translate(-5px, -5px); /* Slight offset for subtle overlap */
+    transform: translate(-5px, -5px);
 }
 
 /* Last album cover styling */
@@ -99,18 +135,18 @@ h1 {
 
 /* Track details styling */
 .track-details {
-    height: 60px; /* Ensures consistent alignment for all track details */
-    margin: 120px 0 -10px; /* Adjusted margin for better spacing */
+    margin: 140px 00px -100px; /* Adjusted margin to move track details further down */
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 /* Track label styling */
 .track-label {
     font-size: 2.0rem;
     font-weight: bolder;
-    color: #b3b3b3;
+    color: #ff4dce;
     margin: 4px 0;
 }
 

@@ -76,14 +76,12 @@ function SpotifyWrapped() {
                         <p>No tracks available.</p>
                     )}
                 </div>
-            ) : (
-                <p>Loading your Spotify Wrapped data...</p>
-            )}
+            ) : null} {/* Removed the "Loading..." message */}
         </div>
     );
 }
 
-function YearlyTrackItem({ track1, track2, year, startIndex }) {
+function YearlyTrackItem({ track1, track2, startIndex }) {
     if (!track1 || !track2) return null; // Ensure both tracks are available
 
     const track1Name = track1.name;
@@ -104,13 +102,11 @@ function YearlyTrackItem({ track1, track2, year, startIndex }) {
                 <img src={albumImage1} alt={`${track1Name} cover`} className="album-cover" />
                 <img src={albumImage2} alt={`${track2Name} cover`} className="album-cover" />
             </div>
-            <p className="year-label">{year}</p>
             <div className="track-details">
                 <p className="track-label">{startIndex + 1}</p>
                 <a href={track1Url} target="_blank" rel="noopener noreferrer" className="track-name">
                     {track1Name}
                 </a>
-                <p className="track-label"></p>
                 <a href={artist1Url} target="_blank" rel="noopener noreferrer" className="artist-name">
                     {artist1Name}
                 </a>
@@ -120,7 +116,6 @@ function YearlyTrackItem({ track1, track2, year, startIndex }) {
                 <a href={track2Url} target="_blank" rel="noopener noreferrer" className="track-name">
                     {track2Name}
                 </a>
-                <p className="track-label"></p>
                 <a href={artist2Url} target="_blank" rel="noopener noreferrer" className="artist-name">
                     {artist2Name}
                 </a>
@@ -129,4 +124,6 @@ function YearlyTrackItem({ track1, track2, year, startIndex }) {
     );
 }
 
+
 export default SpotifyWrapped;
+
