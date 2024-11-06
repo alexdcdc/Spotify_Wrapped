@@ -105,6 +105,7 @@ def get_user(request):
 @api_view(["GET", "POST"])
 @permission_classes([IsAuthenticated])
 def authentication_test(request):
+    print("hello world")
     print(request.user)
     return Response(
         {"message": "User successfully authenticated"},
