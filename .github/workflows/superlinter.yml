@@ -1,6 +1,14 @@
 name: Super-Linter
 
-on: push
+on:
+  pull_request:
+    paths:
+      - 'backend/wrapped'  
+      - 'frontend/src'
+  push:
+    paths:
+      - 'backend/wrapped'  
+      - 'frontend/src'
 
 jobs:
   super-lint:
@@ -9,9 +17,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Run Super-Linter
         uses: github/super-linter@v4
         env:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_ALL_CODEBASE: false
