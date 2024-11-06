@@ -9,7 +9,7 @@ import PrivateRoutes from './PrivateRoutes'
 
 //main app
 function App () {
-  console.log("hihi!")
+  console.log("hihiii!")
   return (
     <div>
       <p>hello world!</p>
