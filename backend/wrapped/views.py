@@ -1,10 +1,9 @@
+import requests
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-import requests
-
 from wrapped.models import CustomUser, SpotifyAuthData, SpotifyProfile
 from wrapped.serializers import UserSerializer
 
@@ -102,9 +101,15 @@ def get_user(request):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
+def test_func():
+    print("hihi i am testing something")
+    return 0
+
+
 @api_view(["GET", "POST"])
 @permission_classes([IsAuthenticated])
 def authentication_test(request):
+    print("hello world")
     print(request.user)
     return Response(
         {"message": "User successfully authenticated"},
