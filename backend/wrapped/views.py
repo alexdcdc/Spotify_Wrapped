@@ -101,7 +101,9 @@ def get_user(request):
     else:
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
-
+def test_func():
+    print("hihi i am testing something")
+    return 0
 @api_view(["GET", "POST"])
 @permission_classes([IsAuthenticated])
 def authentication_test(request):
