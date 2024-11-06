@@ -6,6 +6,7 @@ import Dashboard from "./Dashboard";
 import Callback from "./Callback"
 import Register from "./Register"
 import SpotifyOverview from "./components/SpotifyOverview";
+import PanelTwo from "./components/panelTwo";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                     <Route index element={<Login/>}/>
                     <Route path="dashboard" element={<Dashboard/>}/>
                     <Route path="dashboard/overview" element={<SpotifyOverview />} /> {/* New route for SpotifyOverview */}
+                    <Route path="dashboard/panel-two" element={<PanelTwo/>}/>
                     <Route path="callback" element={<Callback/>}/>
                     <Route path="register" element={<Register/>}/>
                 </Route>
