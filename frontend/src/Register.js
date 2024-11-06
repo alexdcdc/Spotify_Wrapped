@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import {Navigate, useNavigate} from 'react-router-dom'
-import {get, post} from "./lib/requests"
+import { Navigate, useNavigate } from 'react-router-dom'
+import { post } from './lib/requests'
 
 function Register () {
   const [firstName, setFirstName] = useState('')
@@ -12,15 +12,15 @@ function Register () {
     e.preventDefault()
     const url = 'http://localhost:8000/api/user'
     const requestBody = {
-        first_name: firstName,
-        last_name: lastName,
-        username
-      }
+      first_name: firstName,
+      last_name: lastName,
+      username
+    }
 
     const response = await post(url, requestBody, true)
 
     if (response.ok) {
-      sessionStorage.setItem("isRegistered", true)
+      sessionStorage.setItem('isRegistered', true)
       navigate('/dashboard')
     } else {
       return Promise.reject(new Error('An error occurred while trying to submit user information'))
@@ -28,11 +28,11 @@ function Register () {
   }
 
   if (!sessionStorage.getItem('token')) {
-    return (<Navigate to='/'/>)
+    return (<Navigate to='/' />)
   }
 
   if (sessionStorage.getItem('isRegistered')) {
-    return (<Navigate to='/dashboard'/>)
+    return (<Navigate to='/dashboard' />)
   }
 
   return (

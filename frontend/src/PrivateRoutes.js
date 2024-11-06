@@ -1,10 +1,10 @@
-import {Navigate, Outlet} from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
 
-function PrivateRoutes() {
+function PrivateRoutes () {
   const token = sessionStorage.getItem('token')
   const isRegistered = sessionStorage.getItem('isRegistered')
   return (
-    token ? (isRegistered ? <Outlet/> : <Navigate to='/register'/>) : <Navigate to='/'/>
+    token ? (isRegistered ? <Outlet /> : <Navigate to='/register' />) : <Navigate to='/' />
   )
 }
 export default PrivateRoutes

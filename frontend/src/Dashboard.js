@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import {get} from './lib/requests'
+import { get } from './lib/requests'
 
 function Dashboard () {
   const [firstName, setFirstName] = useState('')

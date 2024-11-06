@@ -7,9 +7,9 @@ import Callback from './Callback'
 import Register from './Register'
 import PrivateRoutes from './PrivateRoutes'
 
-//main app
+// main app
 function App () {
-  console.log("hihiii!")
+  console.log('hihiii!')
   return (
     <div>
       <p>hello world!</p>
@@ -18,8 +18,8 @@ function App () {
           <Route index element={<Login />} />
           <Route path='callback' element={<Callback />} />
           <Route path='register' element={<Register />} />
-          <Route element={<PrivateRoutes/>}>
-            <Route path='dashboard' element={<Dashboard/>}/>
+          <Route element={<PrivateRoutes />}>
+            <Route path='dashboard' element={<Dashboard />} />
           </Route>
         </Route>
       </Routes>

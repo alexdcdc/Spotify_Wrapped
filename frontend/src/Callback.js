@@ -8,10 +8,10 @@ const clientId = process.env.REACT_APP_CLIENT_ID
 async function setAuthToken (accessToken, refreshToken, expiresIn) {
   const url = 'http://localhost:8000/api/authenticate'
   const requestBody = {
-      access_token: accessToken,
-      refresh_token: refreshToken,
-      expires_in: expiresIn
-    }
+    access_token: accessToken,
+    refresh_token: refreshToken,
+    expires_in: expiresIn
+  }
 
   const response = await post(url, requestBody)
 
@@ -31,12 +31,12 @@ const authenticate = async (code) => {
   // stored in the previous step
   const codeVerifier = sessionStorage.getItem('code_verifier')
   const requestBody = {
-      client_id: clientId,
-      grant_type: 'authorization_code',
-      code,
-      redirect_uri: redirectUri,
-      code_verifier: codeVerifier
-    }
+    client_id: clientId,
+    grant_type: 'authorization_code',
+    code,
+    redirect_uri: redirectUri,
+    code_verifier: codeVerifier
+  }
 
   const body = await postUrlEncoded(url, requestBody)
 
@@ -55,7 +55,7 @@ const authenticate = async (code) => {
 
 const getRegisteredStatus = async () => {
   const url = 'http://localhost:8000/api/user'
-  const response = await get(url,{},true)
+  const response = await get(url, {}, true)
 
   if (!response.ok) {
     return Promise.reject(new Error('Unable to fetch user data'))
@@ -77,7 +77,7 @@ function Callback () {
       authenticate(code).then(
         async () => {
           const isRegistered = await getRegisteredStatus()
-          sessionStorage.setItem("isRegistered", isRegistered)
+          sessionStorage.setItem('isRegistered', isRegistered)
           navigate(isRegistered ? '/dashboard' : '/register')
         },
         () => {
