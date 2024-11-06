@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import {Navigate, useNavigate} from 'react-router-dom'
 import {get, post} from "./lib/requests"
 
 function Register () {
@@ -25,6 +25,14 @@ function Register () {
     } else {
       return Promise.reject(new Error('An error occurred while trying to submit user information'))
     }
+  }
+
+  if (!sessionStorage.getItem('token')) {
+    return (<Navigate to='/'/>)
+  }
+
+  if (sessionStorage.getItem('isRegistered')) {
+    return (<Navigate to='/dashboard'/>)
   }
 
   return (
