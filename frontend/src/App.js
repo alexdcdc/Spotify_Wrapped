@@ -7,6 +7,7 @@ import Callback from './Callback'
 import Register from './Register'
 import PrivateRoutes from './PrivateRoutes'
 
+//main app
 function App () {
   return (
     <div>
