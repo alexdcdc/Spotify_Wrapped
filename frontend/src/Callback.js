@@ -23,13 +23,13 @@ async function setAuthToken (accessToken, refreshToken, expiresIn) {
   const token = body.auth_token
 
   console.log('Token acquired: ' + token)
-  localStorage.setItem('token', token)
+  sessionStorage.setItem('token', token)
 }
 
 const authenticate = async (code) => {
   const url = 'https://accounts.spotify.com/api/token'
   // stored in the previous step
-  const codeVerifier = localStorage.getItem('code_verifier')
+  const codeVerifier = sessionStorage.getItem('code_verifier')
   const requestBody = {
       client_id: clientId,
       grant_type: 'authorization_code',
@@ -77,7 +77,7 @@ function Callback () {
       authenticate(code).then(
         async () => {
           const isRegistered = await getRegisteredStatus()
-          localStorage.setItem("isRegistered", isRegistered)
+          sessionStorage.setItem("isRegistered", isRegistered)
           navigate(isRegistered ? '/dashboard' : '/register')
         },
         () => {

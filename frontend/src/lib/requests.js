@@ -1,5 +1,5 @@
 async function post(url, body, isAuthenticated) {
-  const token = localStorage.getItem('token')
+  const token = sessionStorage.getItem('token')
 
   const headers = {'Content-Type': 'application/json'}
   if (isAuthenticated) {
@@ -28,7 +28,7 @@ async function postUrlEncoded(url, body, isAuthenticated) {
 }
 
 async function get(url, params = {}, isAuthenticated) {
-  const token = localStorage.getItem('token')
+  const token = sessionStorage.getItem('token')
   const paramString = (new URLSearchParams(params)).toString()
   const newUrl = paramString ? url + "?" + params : url
   const headers = {}

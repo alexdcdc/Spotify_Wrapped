@@ -11,7 +11,7 @@ const requestAuth = async () => {
   const codeVerifier = generateRandomString(64)
   const hashed = await sha256(codeVerifier)
   const codeChallenge = base64encode(hashed)
-  window.localStorage.setItem('code_verifier', codeVerifier)
+  sessionStorage.setItem('code_verifier', codeVerifier)
 
   const params = {
     response_type: 'code',
