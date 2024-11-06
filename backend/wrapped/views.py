@@ -7,10 +7,13 @@ import requests
 
 from wrapped.models import CustomUser, SpotifyAuthData, SpotifyProfile
 from wrapped.serializers import UserSerializer
+from django.conf import settings
 import os
 import base64
 import datetime
 import time
+
+import google.generativeai as genai
 
 
 
@@ -211,6 +214,7 @@ def recently_played_tracks(request):
 
     four_weeks_ago = datetime.datetime.now() - datetime.timedelta(weeks=4)
     after_timestamp = int(time.mktime(four_weeks_ago.timetuple()) * 1000)
+    print(after_timestamp)
 
     all_tracks = []
 
@@ -245,10 +249,49 @@ def recently_played_tracks(request):
 
         if 'cursors' in response.json() and response.json()["cursors"]:
             params['after'] = response.json()['cursors']['after']
-            print("here")
+            print(params['after'])
         else:
             break
 
     return Response(all_tracks, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def LLM_generate(request):
+    access_token = request.user.auth_data.access_token
+    headers = {
+        'Authorization': f'Bearer {access_token}'
+    }
+
+    top_artists_response = requests.get(
+        'https://api.spotify.com/v1/me/top/artists?limit=10',
+        headers=headers
+    )
+
+    if top_artists_response.status_code != 200:
+        return Response({'error': 'Failed to fetch top artists from Spotify API.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    top_artists = top_artists_response.json().get('items', [])
+    genres = {genre for artist in top_artists['items'] for genre in artist['genres']}
+    artist_names = [artist['name'] for artist in top_artists['items']]
+
+
+    model = genai.GenerativeModel("gemini-1.5-flash")
+    gemini_prompt = (
+        f"Based on a person who listens to genres like {', '.join(genres)} and artists like "
+        f"{', '.join(artist_names)}, describe their typical behavior, thinking style, and dressing "
+        "preferences. What kind of personality traits might they have?"
+    )
+    gemini_url =
+    gemini_response = requests.post(
+        gemini_url,
+        headers={"Authorization": f"Bearer {settings.GOOGLE_CLIENT_ID}"},
+        json={"prompt": gemini_prompt}
+    )
+
+
+
+
+
 
 

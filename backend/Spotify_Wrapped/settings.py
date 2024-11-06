@@ -27,6 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-h4qhs00s&*e$(h(&o$prb@@q=bh-r_23&_0pv5s82l_qb-eg_a'
 SPOTIFY_CLIENT_ID = os.getenv('REACT_APP_CLIENT_ID')
 SPOTIFY_CLIENT_SECRET = os.getenv('REACT_APP_CLIENT_SECRET')
+GOOGLE_CLIENT_ID = os.getenv('GEMINI_GOOGLE_CLIENT_ID')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
