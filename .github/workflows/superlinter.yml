@@ -3,12 +3,12 @@ name: Super-Linter
 on:
   pull_request:
     paths:
-      - "backend/wrapped"
-      - "frontend/src"
+      - "backend/wrapped/**"
+      - "frontend/src/**"
   push:
     paths:
-      - "backend/wrapped"
-      - "frontend/src"
+      - "backend/wrapped/**"
+      - "frontend/src/**"
 
 jobs:
   super-lint:
