@@ -177,6 +177,27 @@ h1 {
     color: #ffffff;
 }
 
+.navigate-button {
+    position: fixed;
+    bottom: 20px;
+    right: 5px;
+    width: 40px;
+    height: 40px;
+    background-color: #131414;
+    color: white;
+    font-size: 24px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.navigate-button:hover {
+    background-color: darkgray;
+}
 
 
 

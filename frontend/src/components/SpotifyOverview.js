@@ -1,19 +1,21 @@
 import { useState, useEffect } from 'react';
 import './SpotifyWrapped.css';
+import './panelTwo'; // Import panelTwo.js
+import SlideIndicator from './SlideIndicator'; // Import the SlideIndicator component
 
 function SpotifyWrapped() {
     const [spotifyData, setSpotifyData] = useState(null);
     const [error, setError] = useState(null);
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const totalSlides = 8; // Define the total number of slides
     const token = localStorage.getItem('token');
 
-    // Dynamically load Montserrat font
     useEffect(() => {
         const link = document.createElement('link');
         link.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap';
         link.rel = 'stylesheet';
         document.head.appendChild(link);
 
-        // Apply font style to the body
         document.body.style.fontFamily = "'Montserrat', sans-serif";
     }, []);
 
@@ -51,6 +53,14 @@ function SpotifyWrapped() {
 
     if (!token) return <p>Please sign in to view your Spotify Wrapped data.</p>;
 
+    const nextSlide = () => {
+        setCurrentSlide((prev) => (prev + 1) % totalSlides);
+    };
+
+    const prevSlide = () => {
+        setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+    };
+
     return (
         <div className="spotify-wrapper">
             <h1>The music that defined your month.</h1>
@@ -67,8 +77,8 @@ function SpotifyWrapped() {
                                     track1={track1}
                                     track2={track2}
                                     year={2015 + index}
-                                    startIndex={index * 2} // Pass the starting index for numbering
-                                    key={`${track1?.id || track2?.id || index}-${index}`} // Unique key
+                                    startIndex={index * 2}
+                                    key={`${track1?.id || track2?.id || index}-${index}`}
                                 />
                             );
                         })
@@ -76,13 +86,26 @@ function SpotifyWrapped() {
                         <p>No tracks available.</p>
                     )}
                 </div>
-            ) : null} {/* Removed the "Loading..." message */}
+            ) : null}
+
+            {/* Slide Navigation Buttons */}
+           {/*
+              <button onClick={nextSlide}>Next &gt;</button>
+           */}
+
+            {/* Slide Indicator on the right */}
+            <SlideIndicator currentSlide={currentSlide} totalSlides={totalSlides} />
+
+            {/* Circular button to navigate to panelTwo.js */}
+            <button className="navigate-button" onClick={() => window.location.href = './panel-two' }>
+                &gt;
+            </button>
         </div>
     );
 }
 
 function YearlyTrackItem({ track1, track2, startIndex }) {
-    if (!track1 || !track2) return null; // Ensure both tracks are available
+    if (!track1 || !track2) return null;
 
     const track1Name = track1.name;
     const artist1Name = track1.artists[0].name;
@@ -124,6 +147,4 @@ function YearlyTrackItem({ track1, track2, startIndex }) {
     );
 }
 
-
 export default SpotifyWrapped;
-
