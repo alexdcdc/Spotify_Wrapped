@@ -278,7 +278,7 @@ def recently_played_tracks(request):
 
         if 'cursors' in response.json() and response.json()["cursors"]:
             params['after'] = response.json()['cursors']['after']
-            print(params['after'])
+            print("here")
         else:
             break
 
@@ -301,7 +301,7 @@ def llm_generate(request):
     if top_artists_response.status_code != 200:
         return Response({'error': 'Failed to fetch top artists from Spotify API.'}, status=status.HTTP_400_BAD_REQUEST)
 
-    top_artists = top_artists_response.json().get('items', [])
+    top_artists = top_artists_response.json()
     genres = {genre for artist in top_artists['items'] for genre in artist['genres']}
     artist_names = [artist['name'] for artist in top_artists['items']]
 
@@ -318,11 +318,13 @@ def llm_generate(request):
         2. Their probable fashion choices and aesthetic preferences
         3. Their typical behaviors and habits
 
-        Keep the response natural and engaging, about 100-150 words.
+        Keep the response natural and engaging, describe each with 3-4 words.
         """
     response = model.generate_content(gemini_prompt)
 
     personality_description = response.text.strip()
+
+    print(personality_description)
 
     return Response({
         'personality_description': personality_description,
@@ -331,7 +333,6 @@ def llm_generate(request):
             'artists': artist_names
         }
     }, status=status.HTTP_200_OK)
-
 
 
 

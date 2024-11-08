@@ -28,6 +28,8 @@ from wrapped.views import (
 )
 from rest_framework import routers, serializers, viewsets
 
+from wrapped.views import llm_generate
+
 urlpatterns = [
     path('api/authenticate', register_by_access_token),
     path('api/user', get_user),
@@ -37,4 +39,5 @@ urlpatterns = [
     path('api/top-tracks', spotify_top_tracks),
     path('admin', admin.site.urls),
     path('api/wrapped-tracks', recently_played_tracks),
+    path('api/wrapped-llm', llm_generate),
 ]
