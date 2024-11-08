@@ -7,13 +7,20 @@ import requests
 
 from wrapped.models import CustomUser, SpotifyAuthData, SpotifyProfile
 from wrapped.serializers import UserSerializer
-from django.conf import settings
 import os
 import base64
 import datetime
 import time
 
 import google.generativeai as genai
+
+from collections import Counter
+import requests
+from django.conf import settings
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework import status
 
 
 
@@ -169,8 +176,30 @@ def spotify_top_tracks(request):
     body = response.json()
     return Response(body, status=status.HTTP_200_OK)
 
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def spotify_top_genres(request):
+    user = request.user
+    token = user.auth_data.access_token
+    url = "https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=20"
+    headers = {"Authorization": "Bearer " + token}
 
+    response = requests.get(url, headers=headers)
+    if response.status_code != 200:
+        return Response({'error': 'Failed to fetch top artists from Spotify API.'}, status=status.HTTP_400_BAD_REQUEST)
 
+    body = response.json()
+    genres = []
+
+    # Collect genres from each artist
+    for artist in body.get("items", []):
+        genres.extend(artist.get("genres", []))
+
+    # Count and sort genres
+    genre_counts = Counter(genres)
+    top_genres = genre_counts.most_common(10)  # Adjust the number as needed
+
+    return Response({"top_genres": top_genres}, status=status.HTTP_200_OK)
 
 
 
