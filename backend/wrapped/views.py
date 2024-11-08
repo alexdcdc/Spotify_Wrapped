@@ -257,14 +257,15 @@ def recently_played_tracks(request):
 
 
 @api_view(['GET'])
-def LLM_generate(request):
+def llm_generate(request):
     access_token = request.user.auth_data.access_token
     headers = {
         'Authorization': f'Bearer {access_token}'
     }
+    genai.configure(api_key=settings.GOOGLE_CLIENT_ID)
 
     top_artists_response = requests.get(
-        'https://api.spotify.com/v1/me/top/artists?limit=10',
+        'https://api.spotify.com/v1/me/top/artists?limit=5',
         headers=headers
     )
 
@@ -277,17 +278,30 @@ def LLM_generate(request):
 
 
     model = genai.GenerativeModel("gemini-1.5-flash")
-    gemini_prompt = (
-        f"Based on a person who listens to genres like {', '.join(genres)} and artists like "
-        f"{', '.join(artist_names)}, describe their typical behavior, thinking style, and dressing "
-        "preferences. What kind of personality traits might they have?"
-    )
-    gemini_url =
-    gemini_response = requests.post(
-        gemini_url,
-        headers={"Authorization": f"Bearer {settings.GOOGLE_CLIENT_ID}"},
-        json={"prompt": gemini_prompt}
-    )
+
+    gemini_prompt = f"""
+        Create a vibrant personality description for someone who:
+        - Frequently listens to genres like: {', '.join(genres)}
+        - Enjoys artists such as: {', '.join(artist_names)}
+
+        Please describe:
+        1. Their likely personality traits and thinking style
+        2. Their probable fashion choices and aesthetic preferences
+        3. Their typical behaviors and habits
+
+        Keep the response natural and engaging, about 100-150 words.
+        """
+    response = model.generate_content(gemini_prompt)
+
+    personality_description = response.text.strip()
+
+    return Response({
+        'personality_description': personality_description,
+        'based_on': {
+            'genres': list(genres),
+            'artists': artist_names
+        }
+    }, status=status.HTTP_200_OK)
 
 
 
