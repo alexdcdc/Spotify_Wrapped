@@ -1,27 +1,23 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+import { get } from './lib/requests'
 
 function Dashboard() {
     const [firstName, setFirstName] = useState("");
     const navigate = useNavigate(); // Initialize useNavigate
 
-    const getUserData = async () => {
-        const url = "http://localhost:8000/api/user";
-        const payload = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Token ' + localStorage.getItem('token'),
-            }
-        }
-        const response = await fetch(url, payload);
-        if (!response.ok) {
-            return Promise.reject("Unable to get user data");
-        }
+  const getUserData = async () => {
+    const url = 'http://localhost:8000/api/user'
 
-        const user = await response.json();
-        setFirstName(user.first_name);
+    const response = await get(url, {}, true)
+
+    if (!response.ok) {
+      return Promise.reject(new Error('Unable to get user data'))
     }
+
+    const user = await response.json()
+    setFirstName(user.first_name)
+  }
 
     useEffect(() => {
         getUserData();
@@ -41,4 +37,4 @@ function Dashboard() {
     );
 }
 
-export default Dashboard;
+export default Dashboard
