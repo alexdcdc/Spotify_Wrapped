@@ -20,6 +20,7 @@ media
 .idea/vcs.xml
 .idea/dataSources.xml
 .idea/*.iml
+.idea
 
 # AWS User-specific
 .idea/**/aws.xml
