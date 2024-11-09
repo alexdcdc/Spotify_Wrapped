@@ -19,7 +19,7 @@ media
 .idea/misc.xml
 .idea/vcs.xml
 .idea/dataSources.xml
-.idea/Spotify_Wrapped.iml
+.idea/*.iml
 
 # AWS User-specific
 .idea/**/aws.xml
