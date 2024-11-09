@@ -3,8 +3,8 @@ import { base64encode, generateRandomString, sha256 } from './lib/oauth-crypt'
 const redirectUri = process.env.REACT_APP_REDIRECT_URI
 const clientId = process.env.REACT_APP_CLIENT_ID
 
-const scope = 'user-read-private user-read-email user-read-recently-played user-top-read';
-const authUrl = new URL("https://accounts.spotify.com/authorize");
+const scope = 'user-read-private user-read-email user-read-recently-played user-top-read'
+const authUrl = new URL('https://accounts.spotify.com/authorize')
 
 // generated in the previous step
 const requestAuth = async () => {

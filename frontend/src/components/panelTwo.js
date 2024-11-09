@@ -1,10 +1,10 @@
 // panelTwo.js
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const PanelTwo = () => {
-  const [genres, setGenres] = useState([]);
-  const [error, setError] = useState(null);
+  const [genres, setGenres] = useState([])
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     const fetchTopGenres = async () => {
@@ -13,33 +13,35 @@ const PanelTwo = () => {
           headers: {
             Authorization: `Token ${localStorage.getItem('token')}`
           }
-        });
-        setGenres(response.data.top_genres);
+        })
+        setGenres(response.data.top_genres)
       } catch (err) {
-        setError('Failed to load top genres');
-        console.error(err);
+        setError('Failed to load top genres')
+        console.error(err)
       }
-    };
+    }
 
-    fetchTopGenres();
-  }, []);
+    fetchTopGenres()
+  }, [])
 
   return (
-    <div className="panel-two">
+    <div className='panel-two'>
       <h2>Top Genres</h2>
-      {error ? (
-        <p>{error}</p>
-      ) : (
-        <ul>
-          {genres.map((genre, index) => (
-            <li key={index}>
-              {genre[0]} ({genre[1]})
-            </li>
-          ))}
-        </ul>
-      )}
+      {error
+        ? (
+          <p>{error}</p>
+          )
+        : (
+          <ul>
+            {genres.map((genre, index) => (
+              <li key={index}>
+                {genre[0]} ({genre[1]})
+              </li>
+            ))}
+          </ul>
+          )}
     </div>
-  );
-};
+  )
+}
 
-export default PanelTwo;
+export default PanelTwo
