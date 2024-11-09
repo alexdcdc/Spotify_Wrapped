@@ -8,48 +8,61 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wrapped', '0002_remove_spotifyprofile_display_name_and_more'),
+        ("wrapped", "0002_remove_spotifyprofile_display_name_and_more"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Album',
+            name="Album",
             fields=[
-                ('spotify_id', models.TextField(primary_key=True, serialize=False)),
-                ('name', models.TextField()),
+                ("spotify_id", models.TextField(primary_key=True, serialize=False)),
+                ("name", models.TextField()),
             ],
         ),
         migrations.CreateModel(
-            name='Wrapped',
+            name="Wrapped",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Artist',
+            name="Artist",
             fields=[
-                ('spotify_id', models.TextField(primary_key=True, serialize=False)),
-                ('name', models.TextField()),
-                ('albums', models.ManyToManyField(to='wrapped.album')),
+                ("spotify_id", models.TextField(primary_key=True, serialize=False)),
+                ("name", models.TextField()),
+                ("albums", models.ManyToManyField(to="wrapped.album")),
             ],
         ),
         migrations.AddField(
-            model_name='album',
-            name='artists',
-            field=models.ManyToManyField(to='wrapped.artist'),
+            model_name="album",
+            name="artists",
+            field=models.ManyToManyField(to="wrapped.artist"),
         ),
         migrations.CreateModel(
-            name='Song',
+            name="Song",
             fields=[
-                ('spotify_id', models.TextField(primary_key=True, serialize=False)),
-                ('title', models.TextField()),
-                ('album', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='wrapped.album')),
-                ('artists', models.ManyToManyField(to='wrapped.artist')),
+                ("spotify_id", models.TextField(primary_key=True, serialize=False)),
+                ("title", models.TextField()),
+                (
+                    "album",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="wrapped.album"
+                    ),
+                ),
+                ("artists", models.ManyToManyField(to="wrapped.artist")),
             ],
         ),
         migrations.AddField(
-            model_name='artist',
-            name='songs',
-            field=models.ManyToManyField(to='wrapped.song'),
+            model_name="artist",
+            name="songs",
+            field=models.ManyToManyField(to="wrapped.song"),
         ),
     ]

@@ -1,4 +1,7 @@
 import requests
+import datetime
+import time
+import google.generativeai as genai
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
@@ -6,25 +9,11 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from wrapped.models import CustomUser, SpotifyAuthData, SpotifyProfile
 from wrapped.serializers import UserSerializer
-import os
-import base64
-import datetime
-import time
-
-import google.generativeai as genai
-
 from collections import Counter
-import requests
 from django.conf import settings
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from rest_framework import status
 
 
 
-from requests.exceptions import HTTPError
-from django.http import JsonResponse
 # takes in token
 # validates token
 # gets email to match user
@@ -118,8 +107,6 @@ def get_user(request):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
-
-
 @api_view(["GET", "POST"])
 @permission_classes([IsAuthenticated])
 def authentication_test(request):
@@ -135,26 +122,31 @@ def authentication_test(request):
 def health(request):
     return Response(status=status.HTTP_200_OK)
 
-@api_view(['GET'])
+
+@api_view(["GET"])
 def spotify_top_artists(request):
     access_token = request.user.auth_data.access_token
-    headers = {
-        'Authorization': f'Bearer {access_token}'
-    }
+    headers = {"Authorization": f"Bearer {access_token}"}
     top_artists_response = requests.get(
-        'https://api.spotify.com/v1/me/top/artists?limit=5',
-        headers=headers
+        "https://api.spotify.com/v1/me/top/artists?limit=5", headers=headers
     )
 
     if top_artists_response.status_code != 200:
-        return Response({'error': 'Failed to fetch top artists from Spotify API.'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            {"error": "Failed to fetch top artists from Spotify API."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
 
-    top_artists = top_artists_response.json().get('items', [])
-    artists = [{'name': artist['name'], 'popularity': artist['popularity']} for artist in top_artists]
+    top_artists = top_artists_response.json().get("items", [])
+    artists = [
+        {"name": artist["name"], "popularity": artist["popularity"]}
+        for artist in top_artists
+    ]
 
     return Response(artists, status=status.HTTP_200_OK)
 
-@api_view(['GET', 'POST'])
+
+@api_view(["GET", "POST"])
 @permission_classes([IsAuthenticated])
 def spotify_top_tracks(request):
     user = request.user
@@ -165,11 +157,15 @@ def spotify_top_tracks(request):
     response = requests.get(url, headers=headers)
     if response.status_code != 200:
         print(response)
-        return Response({'error': 'Failed to fetch top tracks from Spotify API.'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            {"error": "Failed to fetch top tracks from Spotify API."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
     body = response.json()
     return Response(body, status=status.HTTP_200_OK)
 
-@api_view(['GET', 'POST'])
+
+@api_view(["GET", "POST"])
 @permission_classes([IsAuthenticated])
 def spotify_top_genres(request):
     user = request.user
@@ -179,7 +175,10 @@ def spotify_top_genres(request):
 
     response = requests.get(url, headers=headers)
     if response.status_code != 200:
-        return Response({'error': 'Failed to fetch top artists from Spotify API.'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            {"error": "Failed to fetch top artists from Spotify API."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
 
     body = response.json()
     genres = []
@@ -195,44 +194,36 @@ def spotify_top_genres(request):
     return Response({"top_genres": top_genres}, status=status.HTTP_200_OK)
 
 
-
-
-
-
-
-
-
-
-@api_view(['GET'])
+@api_view(["GET"])
 def top_tracks(request):
     access_token = request.user.auth_data.access_token
 
     # Get top tracks
-    headers = {
-        'Authorization': f'Bearer {access_token}'
-    }
+    headers = {"Authorization": f"Bearer {access_token}"}
     top_tracks_response = requests.get(
-        'https://api.spotify.com/v1/me/top/tracks?limit=5',
-        headers=headers
+        "https://api.spotify.com/v1/me/top/tracks?limit=5", headers=headers
     )
 
     if top_tracks_response.status_code != 200:
-        return Response({'error': 'Failed to fetch top tracks from Spotify API.'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            {"error": "Failed to fetch top tracks from Spotify API."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
 
-    top_tracks = top_tracks_response.json().get('items', [])
-    tracks = [{'name': track['name'], 'popularity': track['popularity']} for track in top_tracks]
+    top_tracks = top_tracks_response.json().get("items", [])
+    tracks = [
+        {"name": track["name"], "popularity": track["popularity"]}
+        for track in top_tracks
+    ]
 
     return Response(tracks, status=status.HTTP_200_OK)
 
 
-@api_view(['GET'])
+@api_view(["GET"])
 def recently_played_tracks(request):
 
     access_token = request.user.auth_data.access_token
-    headers = {
-        'Authorization': f'Bearer {access_token}'
-    }
-
+    headers = {"Authorization": f"Bearer {access_token}"}
 
     four_weeks_ago = datetime.datetime.now() - datetime.timedelta(weeks=4)
     after_timestamp = int(time.mktime(four_weeks_ago.timetuple()) * 1000)
@@ -240,37 +231,36 @@ def recently_played_tracks(request):
 
     all_tracks = []
 
-
-    params = {
-        'limit': 50,
-        'after': after_timestamp
-    }
+    params = {"limit": 50, "after": after_timestamp}
     while True:
         response = requests.get(
-            'https://api.spotify.com/v1/me/player/recently-played',
+            "https://api.spotify.com/v1/me/player/recently-played",
             headers=headers,
-            params=params
+            params=params,
         )
 
         print(response.status_code)
 
         if response.status_code != 200:
-            return Response({'error': 'Failed to fetch recently played tracks from Spotify API.'},
-                            status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"error": "Failed to fetch recently played tracks from Spotify API."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
-        data = response.json().get('items', [])
-        all_tracks.extend([
-            {
-                'name': item['track']['name'],
-                'played_at': item['played_at'],
-                'artists': [artist['name'] for artist in item['track']['artists']]
-            }
-            for item in data
-        ])
+        data = response.json().get("items", [])
+        all_tracks.extend(
+            [
+                {
+                    "name": item["track"]["name"],
+                    "played_at": item["played_at"],
+                    "artists": [artist["name"] for artist in item["track"]["artists"]],
+                }
+                for item in data
+            ]
+        )
 
-
-        if 'cursors' in response.json() and response.json()["cursors"]:
-            params['after'] = response.json()['cursors']['after']
+        if "cursors" in response.json() and response.json()["cursors"]:
+            params["after"] = response.json()["cursors"]["after"]
             print("here")
         else:
             break
@@ -278,26 +268,25 @@ def recently_played_tracks(request):
     return Response(all_tracks, status=status.HTTP_200_OK)
 
 
-@api_view(['GET'])
+@api_view(["GET"])
 def llm_generate(request):
     access_token = request.user.auth_data.access_token
-    headers = {
-        'Authorization': f'Bearer {access_token}'
-    }
+    headers = {"Authorization": f"Bearer {access_token}"}
     genai.configure(api_key=settings.GOOGLE_CLIENT_ID)
 
     top_artists_response = requests.get(
-        'https://api.spotify.com/v1/me/top/artists?limit=5',
-        headers=headers
+        "https://api.spotify.com/v1/me/top/artists?limit=5", headers=headers
     )
 
     if top_artists_response.status_code != 200:
-        return Response({'error': 'Failed to fetch top artists from Spotify API.'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            {"error": "Failed to fetch top artists from Spotify API."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
 
     top_artists = top_artists_response.json()
-    genres = {genre for artist in top_artists['items'] for genre in artist['genres']}
-    artist_names = [artist['name'] for artist in top_artists['items']]
-
+    genres = {genre for artist in top_artists["items"] for genre in artist["genres"]}
+    artist_names = [artist["name"] for artist in top_artists["items"]]
 
     model = genai.GenerativeModel("gemini-1.5-flash")
 
@@ -319,16 +308,10 @@ def llm_generate(request):
 
     print(personality_description)
 
-    return Response({
-        'personality_description': personality_description,
-        'based_on': {
-            'genres': list(genres),
-            'artists': artist_names
-        }
-    }, status=status.HTTP_200_OK)
-
-
-
-
-
-
+    return Response(
+        {
+            "personality_description": personality_description,
+            "based_on": {"genres": list(genres), "artists": artist_names},
+        },
+        status=status.HTTP_200_OK,
+    )

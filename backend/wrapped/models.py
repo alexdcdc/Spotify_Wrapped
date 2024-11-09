@@ -40,38 +40,43 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.email
 
+
 class Wrapped(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+
 
 class AbstractPanel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     wrapped = models.ForeignKey(Wrapped, on_delete=models.CASCADE)
     order = models.PositiveSmallIntegerField()
+
     class Meta:
         abstract = True
 
 
 class Artist(models.Model):
     spotify_id = models.TextField(primary_key=True)
-    albums = models.ManyToManyField('Album')
+    albums = models.ManyToManyField("Album")
     name = models.TextField()
-    songs = models.ManyToManyField('Song')
+    songs = models.ManyToManyField("Song")
 
 
 class Album(models.Model):
     spotify_id = models.TextField(primary_key=True)
     name = models.TextField()
-    artists = models.ManyToManyField('Artist')
+    artists = models.ManyToManyField("Artist")
 
 
 class Song(models.Model):
     spotify_id = models.TextField(primary_key=True)
     title = models.TextField()
-    artists = models.ManyToManyField('Artist')
-    album = models.ForeignKey('Album', on_delete=models.CASCADE)  # Specify on_delete behavior
+    artists = models.ManyToManyField("Artist")
+    album = models.ForeignKey(
+        "Album", on_delete=models.CASCADE
+    )  # Specify on_delete behavior
 
 
-'''
+"""
 To be completed after wrapped user story
 class PanelOne(AbstractPanel):
 
@@ -88,11 +93,7 @@ class PanelSix(AbstractPanel):
 class PanelSeven(AbstractPanel):
 
 class PanelEight(AbstractPanel):
-'''
-
-
-
-
+"""
 
 
 # Create your models here.
