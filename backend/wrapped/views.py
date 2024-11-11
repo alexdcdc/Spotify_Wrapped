@@ -1,7 +1,10 @@
-import requests
 import datetime
 import time
+from collections import Counter
+
 import google.generativeai as genai
+import requests
+from django.conf import settings
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
@@ -9,8 +12,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from wrapped.models import CustomUser, SpotifyAuthData, SpotifyProfile, Wrapped
 from wrapped.serializers import UserSerializer, WrappedSerializer
-from collections import Counter
-from django.conf import settings
+
+
 
 
 # takes in token

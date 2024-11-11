@@ -1,9 +1,6 @@
 import uuid
-
-from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.models import PermissionsMixin, AbstractUser
 from django.db import models
-from django.db.models import PositiveIntegerField, PositiveSmallIntegerField
 from wrapped.managers import CustomUserManager
 
 
@@ -26,7 +23,7 @@ class CustomUser(AbstractUser):
     is_registered = models.BooleanField(default=False)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS: list[models.Field] = []
 
     auth_data = models.OneToOneField(
         SpotifyAuthData, on_delete=models.CASCADE, null=True, related_name="user"
