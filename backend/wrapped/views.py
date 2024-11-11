@@ -155,7 +155,6 @@ def spotify_top_tracks(request):
 
     response = requests.get(url, headers=headers)
     if response.status_code != 200:
-        print(response)
         return Response(
             {"error": "Failed to fetch top tracks from Spotify API."},
             status=status.HTTP_400_BAD_REQUEST,
