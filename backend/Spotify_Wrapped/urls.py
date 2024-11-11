@@ -25,9 +25,11 @@ from wrapped.views import (
     spotify_top_tracks,
     spotify_top_genres,
     recently_played_tracks,
-    llm_generate
+    llm_generate,
+    danceability_score
 )
 from rest_framework import routers, serializers, viewsets
+
 
 urlpatterns = [
     path('api/authenticate', register_by_access_token),
@@ -39,4 +41,5 @@ urlpatterns = [
     path('admin', admin.site.urls),
     path('api/wrapped-tracks', recently_played_tracks),
     path('api/wrapped-llm', llm_generate),
+    path('api/danceability', danceability_score)
 ]

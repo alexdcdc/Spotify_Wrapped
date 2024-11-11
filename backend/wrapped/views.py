@@ -315,3 +315,51 @@ def llm_generate(request):
         },
         status=status.HTTP_200_OK,
     )
+
+
+
+@api_view(["GET"])
+def danceability_score(request):
+    access_token = request.user.auth_data.access_token
+    headers = {"Authorization": f"Bearer {access_token}"}
+
+
+    top_tracks_response = requests.get(
+        "https://api.spotify.com/v1/me/top/tracks?limit=10", headers=headers
+    )
+
+    if top_tracks_response.status_code != 200:
+        return Response(
+            {"error": "Failed to fetch top tracks from Spotify API."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    tracks = top_tracks_response.json().get("items", [])
+    track_ids = [track["id"] for track in tracks]
+
+
+    audio_features_response = requests.get(
+        f"https://api.spotify.com/v1/audio-features?ids={','.join(track_ids)}",
+        headers=headers,
+    )
+
+    if audio_features_response.status_code != 200:
+        return Response(
+            {"error": "Failed to fetch audio features from Spotify API."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    audio_features = audio_features_response.json().get("audio_features", [])
+
+    total_danceability = sum(feature["danceability"] for feature in audio_features if feature)
+    average_danceability = total_danceability / len(audio_features) if audio_features else 0
+
+    return Response({"average_danceability": average_danceability})
+
+
+
+
+
+
+
+
