@@ -35,6 +35,7 @@ body, html {
 
 /* Independent styling for h1 */
 h1 {
+    padding-top: .1em;
     text-align: center;
     font-size: 2vw;
     font-weight: bold;
@@ -61,8 +62,10 @@ h1 {
     max-width: 90%;
     width: 100%;
     margin: auto;
-    margin-top: 6vw;
+    margin-top: 3.4vw;
 }
+
+
 
 /* Individual yearly track items */
 .yearly-track-item {
@@ -76,7 +79,18 @@ h1 {
     align-items: center;
     animation: fadeIn 1s ease forwards;
     gap: 1vw;
+
+    opacity: 0; /* Initially hidden */
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 0.6s;
 }
+
+.yearly-track-item:nth-child(1) { animation-delay: 0.6s; }
+.yearly-track-item:nth-child(2) { animation-delay: 0.8s; }
+.yearly-track-item:nth-child(3) { animation-delay: 1s; }
+.yearly-track-item:nth-child(4) { animation-delay: 1.2s; }
+.yearly-track-item:nth-child(5) { animation-delay: 1.4s; }
+
 
 /* Album cover container */
 .album-cover-container {
@@ -102,13 +116,18 @@ h1 {
     z-index: 2;
 }
 .album-cover:last-child {
-    transform: translate(0.5vw, 0.5vw);
+    transform: translate(-7.0vw, 8.0vw);
     z-index: 1;
 }
 
 /* Track details styling */
 .track-details {
-    text-align: center;
+    position: relative;
+    top: 6vw;
+    left: -2vw;
+    justify-content: center;
+
+
     margin-top: 1vw;
     width: 100%;
 }
@@ -121,24 +140,42 @@ h1 {
     margin: 2px 0;
 }
 
-/* Artist name and track name styling */
-.artist-name, .track-name {
-    font-size: 0.8vw;
+/* Artist name styling */
+.artist-name {
+    font-size: 0.9rem;
+    font-weight: normal;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s;
     display: block;
 }
 
-/* Hover effects */
-.artist-name:hover, .track-name:hover {
+/* Track name styling */
+.track-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #1db954;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+/* Hover effects for track and artist names */
+.artist-name:hover {
+    color: #1db954;
+}
+
+.track-name:hover {
     color: #ffffff;
 }
+
 
 /* Navigate button styling */
 .navigate-button {
     position: fixed;
     bottom: 1vw;
     right: 1vw;
-    width: 3vw;
-    height: 3vw;
+    width: 2.5vw;
+    height: 2.5vw;
     background-color: #131414;
     color: white;
     font-size: 1.2vw;
@@ -176,12 +213,15 @@ h1 {
         width: 30vw;
     }
 
-    .album-cover:first-child {
-        transform: translate(-1vw, -1vw);
-    }
 
+    .album-cover:first-child {
+    transform: translate(-0.5vw, -0.5vw);
+    z-index: 2;
+
+    }
     .album-cover:last-child {
-        transform: translate(1vw, 1vw);
+        transform: translate(-7.0vw, 8.0vw);
+        z-index: 1;
     }
 
     .track-label, .artist-name, .track-name {
