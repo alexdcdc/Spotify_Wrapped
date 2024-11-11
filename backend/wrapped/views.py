@@ -236,8 +236,6 @@ def recently_played_tracks(request):
             params=params,
         )
 
-        print(response.status_code)
-
         if response.status_code != 200:
             return Response(
                 {"error": "Failed to fetch recently played tracks from Spotify API."},
