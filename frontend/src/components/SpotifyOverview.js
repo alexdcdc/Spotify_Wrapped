@@ -53,6 +53,7 @@ function SpotifyWrapped () {
 
   if (!token) return <p>Please sign in to view your Spotify Wrapped data.</p>
 
+  /*
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % totalSlides)
   }
@@ -60,6 +61,7 @@ function SpotifyWrapped () {
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides)
   }
+  */
 
   return (
     <div className='spotify-wrapper'>

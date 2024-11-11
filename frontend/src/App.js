@@ -12,6 +12,8 @@ import NewWrappedForm from './NewWrappedForm'
 import WrappedPage from './WrappedPage'
 
 function App () {
+
+  sessionStorage.setItem('isDark', !sessionStorage.getItem('isDark'))
   return (
     <div>
       <Routes>
