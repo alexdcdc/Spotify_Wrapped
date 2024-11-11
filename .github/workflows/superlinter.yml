@@ -28,3 +28,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_ALL_CODEBASE: true
           FILTER_REGEX_INCLUDE: "(backend/wrapped/[^/]*py|frontend/src/.*js).*"
+          FIX_JAVASCRIPT_STANDARD: true
+          FIX_PYTHON_BLACK: true
+          FIX_PYTHON_ISORT: true
+          FIX_CSS: true
+          FIX_JSX: true

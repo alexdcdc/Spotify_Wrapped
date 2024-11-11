@@ -6,7 +6,7 @@ import SlideIndicator from './SlideIndicator' // Import the SlideIndicator compo
 function SpotifyWrapped () {
   const [spotifyData, setSpotifyData] = useState(null)
   const [error, setError] = useState(null)
-  const [currentSlide, setCurrentSlide] = useState(0)
+  const [currentSlide] = useState(0)
   const totalSlides = 8 // Define the total number of slides
   const token = localStorage.getItem('token')
 
