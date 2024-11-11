@@ -5,19 +5,20 @@ body, html {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     height: 100%;
+    overflow-x: hidden;
 }
 
 /* Wrapper for Spotify content */
 .spotify-wrapper {
-    background: rgb(0, 0, 0);
     background: linear-gradient(158deg, rgba(0, 0, 0, 1) 10%, rgba(173, 52, 113, 1) 100%, rgba(255, 77, 167, 1) 100%);
-    padding: 20px;
+    padding: 1vw;
     text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     min-height: 100vh;
     box-sizing: border-box;
+    max-width: 100%;
 }
 
 /* Fade-in animation */
@@ -34,25 +35,19 @@ body, html {
 
 /* Independent styling for h1 */
 h1 {
-    position: relative;
-    top: 20px;
     text-align: center;
-    font-size: 2rem;
+    font-size: 2vw;
     font-weight: bold;
-    right: 334px;
     color: #ff4dce;
-    margin: 20px 0 -80px;
-    transition: top 0.3s;
-    opacity: 0; /* Initially hidden */
-    animation: fadeIn 1s ease forwards; /* Apply fade-in */
+    margin: 10px 0;
+    animation: fadeIn 1s ease forwards;
     animation-delay: 0.2s;
 }
 
 /* Error styling */
 .error {
     color: red;
-    margin: 10px 0;
-    opacity: 0;
+    margin: 2vw 0;
     animation: fadeIn 1s ease forwards;
     animation-delay: 0.4s;
 }
@@ -60,53 +55,36 @@ h1 {
 /* Yearly tracks section */
 .yearly-tracks {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: 40px;
+    gap: .1vw;
     max-width: 90%;
     width: 100%;
-    margin:  auto;
+    margin: auto;
+    margin-top: 6vw;
 }
 
 /* Individual yearly track items */
 .yearly-track-item {
     background-color: transparent;
-    padding: 15px;
-    width: 200px;
+    padding: 1vw;
+    width: 15vw;
     text-align: center;
     border-radius: 8px;
-    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
-    opacity: 0; /* Initially hidden */
     animation: fadeIn 1s ease forwards;
-    animation-delay: 0.6s;
-}
-
-.yearly-track-item:nth-child(1) { animation-delay: 0.6s; }
-.yearly-track-item:nth-child(2) { animation-delay: 0.8s; }
-.yearly-track-item:nth-child(3) { animation-delay: 1s; }
-.yearly-track-item:nth-child(4) { animation-delay: 1.2s; }
-.yearly-track-item:nth-child(5) { animation-delay: 1.4s; }
-
-
-/* Add more delays if you have more items */
-
-/* Add this class for text and album covers inside yearly-track-item */
-.yearly-track-item * {
-    opacity: 0;
-    animation: fadeIn 1s ease forwards;
-
+    gap: 1vw;
 }
 
 /* Album cover container */
 .album-cover-container {
+    width: 10vw;
+    height: auto;
+    display: flex;
+    justify-content: center;
     position: relative;
-    width: 150px;
-    height: 140px;
-    margin: 0 auto 15px;
 }
 
 /* Album cover images */
@@ -114,78 +92,56 @@ h1 {
     width: 100%;
     height: auto;
     border-radius: 8px;
-    position: absolute;
     transition: transform 0.3s;
+    margin-bottom: 1vw;
 }
 
-/* First album cover styling */
+/* Stacked album cover effect */
 .album-cover:first-child {
-    top: 0;
-    left: 0;
+    transform: translate(-0.5vw, -0.5vw);
     z-index: 2;
-    transform: translate(-5px, -5px);
 }
-
-/* Last album cover styling */
 .album-cover:last-child {
-    top: 125px;
-    right: -30px;
+    transform: translate(0.5vw, 0.5vw);
     z-index: 1;
 }
 
 /* Track details styling */
 .track-details {
-    margin: 140px 00px -100px; /* Adjusted margin to move track details further down */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
+    margin-top: 1vw;
+    width: 100%;
 }
 
 /* Track label styling */
 .track-label {
-    font-size: 2.0rem;
+    font-size: 1.5vw;
     font-weight: bolder;
     color: #ff4dce;
-    margin: 4px 0;
+    margin: 2px 0;
 }
 
-/* Artist name styling */
-.artist-name {
-    font-size: 0.9rem;
-    font-weight: normal;
-    color: #ffffff;
-    text-decoration: none;
-    transition: color 0.3s;
+/* Artist name and track name styling */
+.artist-name, .track-name {
+    font-size: 0.8vw;
+    display: block;
 }
 
-/* Track name styling */
-.track-name {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #1db954;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-/* Hover effects for track and artist names */
-.artist-name:hover {
-    color: #1db954;
-}
-
-.track-name:hover {
+/* Hover effects */
+.artist-name:hover, .track-name:hover {
     color: #ffffff;
 }
 
+/* Navigate button styling */
 .navigate-button {
     position: fixed;
-    bottom: 20px;
-    right: 5px;
-    width: 40px;
-    height: 40px;
+    bottom: 1vw;
+    right: 1vw;
+    width: 3vw;
+    height: 3vw;
     background-color: #131414;
     color: white;
-    font-size: 24px;
+    font-size: 1.2vw;
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -195,13 +151,46 @@ h1 {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Hover effects */
 .navigate-button:hover {
     background-color: darkgray;
 }
 
+/* Media Queries for Smaller Screens */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 4vw;
+    }
 
+    .yearly-tracks {
+        margin-top: 8vw;
+    }
 
+    .yearly-track-item {
+        width: 80%;
+        padding: 4vw;
+        gap: 2vw;
+    }
 
+    .album-cover-container {
+        width: 30vw;
+    }
 
+    .album-cover:first-child {
+        transform: translate(-1vw, -1vw);
+    }
 
+    .album-cover:last-child {
+        transform: translate(1vw, 1vw);
+    }
+
+    .track-label, .artist-name, .track-name {
+        font-size: 2.5vw;
+    }
+
+    .navigate-button {
+        width: 8vw;
+        height: 8vw;
+    }
+}
 
