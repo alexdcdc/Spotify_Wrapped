@@ -1,5 +1,5 @@
 import uuid
-from django.contrib.auth.models import PermissionsMixin, AbstractUser
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from wrapped.managers import CustomUserManager
 

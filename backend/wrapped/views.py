@@ -14,8 +14,6 @@ from wrapped.models import CustomUser, SpotifyAuthData, SpotifyProfile, Wrapped
 from wrapped.serializers import UserSerializer, WrappedSerializer
 
 
-
-
 # takes in token
 # validates token
 # gets email to match user

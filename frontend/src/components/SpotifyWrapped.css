@@ -1,16 +1,16 @@
 /* Base styling */
 body, html {
     background-color: #1db954;
-    color: #ffffff;
+    color: #fff;
     margin: 0;
-    font-family: 'Montserrat', sans-serif;
+    font-family: Montserrat, sans-serif;
     height: 100%;
 }
 
 /* Wrapper for Spotify content */
 .spotify-wrapper {
-    background: rgb(0, 0, 0);
-    background: linear-gradient(158deg, rgba(0, 0, 0, 1) 10%, rgba(173, 52, 113, 1) 100%, rgba(255, 77, 167, 1) 100%);
+    background: rgb(0 0 0);
+    background: linear-gradient(158deg, rgb(0 0 0 / 100%) 10%, rgb(173 52 113 / 100%) 100%, rgb(255 77 167 / 100%) 100%);
     padding: 20px;
     text-align: center;
     display: flex;
@@ -21,11 +21,12 @@ body, html {
 }
 
 /* Fade-in animation */
-@keyframes fadeIn {
+@keyframes fade-in {
     0% {
         opacity: 0;
         transform: translateY(20px);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -44,7 +45,7 @@ h1 {
     margin: 20px 0 -80px;
     transition: top 0.3s;
     opacity: 0; /* Initially hidden */
-    animation: fadeIn 1s ease forwards; /* Apply fade-in */
+    animation: fade-in 1s ease forwards; /* Apply fade-in */
     animation-delay: 0.2s;
 }
 
@@ -53,7 +54,7 @@ h1 {
     color: red;
     margin: 10px 0;
     opacity: 0;
-    animation: fadeIn 1s ease forwards;
+    animation: fade-in 1s ease forwards;
     animation-delay: 0.4s;
 }
 
@@ -81,7 +82,7 @@ h1 {
     justify-content: flex-start;
     align-items: center;
     opacity: 0; /* Initially hidden */
-    animation: fadeIn 1s ease forwards;
+    animation: fade-in 1s ease forwards;
     animation-delay: 0.6s;
 }
 
@@ -97,7 +98,7 @@ h1 {
 /* Add this class for text and album covers inside yearly-track-item */
 .yearly-track-item * {
     opacity: 0;
-    animation: fadeIn 1s ease forwards;
+    animation: fade-in 1s ease forwards;
 
 }
 
@@ -135,7 +136,7 @@ h1 {
 
 /* Track details styling */
 .track-details {
-    margin: 140px 00px -100px; /* Adjusted margin to move track details further down */
+    margin: 140px 00 -100px; /* Adjusted margin to move track details further down */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -154,7 +155,7 @@ h1 {
 .artist-name {
     font-size: 0.9rem;
     font-weight: normal;
-    color: #ffffff;
+    color: #fff;
     text-decoration: none;
     transition: color 0.3s;
 }
@@ -174,7 +175,7 @@ h1 {
 }
 
 .track-name:hover {
-    color: #ffffff;
+    color: #fff;
 }
 
 .navigate-button {
@@ -192,7 +193,7 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px rgb(0 0 0 / 30%);
 }
 
 .navigate-button:hover {
