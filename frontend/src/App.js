@@ -8,6 +8,8 @@ import Register from './Register'
 import PrivateRoutes from './PrivateRoutes'
 import SpotifyOverview from './components/SpotifyOverview'
 import PanelTwo from './components/panelTwo'
+import NewWrappedForm from './NewWrappedForm'
+import WrappedPage from './WrappedPage'
 
 function App () {
   return (
@@ -19,9 +21,13 @@ function App () {
           <Route path='callback' element={<Callback />} />
           <Route path='register' element={<Register />} />
           <Route element={<PrivateRoutes />}>
-            <Route path='dashboard' element={<Dashboard />} />
-            <Route path='dashboard/overview' element={<SpotifyOverview />} /> {/* New route for SpotifyOverview */}
-            <Route path='dashboard/panel-two' element={<PanelTwo />} />
+            <Route path='dashboard'>
+              <Route path='' element={<Dashboard />} />
+              <Route path='overview' element={<SpotifyOverview />} /> {/* New route for SpotifyOverview */}
+              <Route path='panel-two' element={<PanelTwo />} />
+            </Route>
+            <Route path='wrapped/:id' element={<WrappedPage />} />
+            <Route path='create-wrapped' element={<NewWrappedForm />} />
           </Route>
         </Route>
       </Routes>

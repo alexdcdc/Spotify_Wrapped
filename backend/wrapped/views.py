@@ -7,11 +7,10 @@ from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from wrapped.models import CustomUser, SpotifyAuthData, SpotifyProfile
-from wrapped.serializers import UserSerializer
+from wrapped.models import CustomUser, SpotifyAuthData, SpotifyProfile, Wrapped
+from wrapped.serializers import UserSerializer, WrappedSerializer
 from collections import Counter
 from django.conf import settings
-
 
 
 # takes in token
@@ -221,7 +220,6 @@ def top_tracks(request):
 
 @api_view(["GET"])
 def recently_played_tracks(request):
-
     access_token = request.user.auth_data.access_token
     headers = {"Authorization": f"Bearer {access_token}"}
 
@@ -315,3 +313,41 @@ def llm_generate(request):
         },
         status=status.HTTP_200_OK,
     )
+
+
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def wrapped(request):
+    user = request.user
+    data = request.data
+    if request.method == "POST":
+        if not ("name" in data and data["name"]):
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        new_wrapped = Wrapped(user=user, name=data["name"])
+        new_wrapped.save()
+        serializer = WrappedSerializer(new_wrapped)
+        return Response(
+            {
+                "message": "New wrapped successfully created",
+                "wrapped": serializer.data,
+            },
+            status=status.HTTP_200_OK,
+        )
+
+    elif request.method == "GET":
+        serializer = WrappedSerializer(Wrapped.objects.filter(user=user), many=True)
+        return Response({"wrapped_list": serializer.data}, status=status.HTTP_200_OK)
+
+    else:
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_wrapped_with_id(request, wrapped_id):
+    user = request.user
+    try:
+        serializer = WrappedSerializer(Wrapped.objects.get(id=wrapped_id, user=user))
+        return Response({"wrapped": serializer.data}, status=status.HTTP_200_OK)
+    except Wrapped.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)

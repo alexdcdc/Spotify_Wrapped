@@ -1,0 +1,18 @@
+.pop-up-form-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 0;
+}
+
+.pop-up-form {
+    background-color: rgba(255, 255, 255, 1);
+    width: 30%;
+    height: 50%;
+    z-index: 1;
+    color: #000000;
+}
