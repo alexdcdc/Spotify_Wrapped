@@ -10,6 +10,7 @@ import SpotifyOverview from './components/SpotifyOverview'
 import PanelTwo from './components/panelTwo'
 import NewWrappedForm from './NewWrappedForm'
 import WrappedPage from './WrappedPage'
+//import SpotifyWrappedPersonality from './components/llmPanel'
 
 function App () {
 
@@ -30,6 +31,7 @@ function App () {
             </Route>
             <Route path='wrapped/:id' element={<WrappedPage />} />
             <Route path='create-wrapped' element={<NewWrappedForm />} />
+            {/*<Route path='wrapped-llm' element={<SpotifyWrappedPersonality/>}/>*/}
           </Route>
         </Route>
       </Routes>
