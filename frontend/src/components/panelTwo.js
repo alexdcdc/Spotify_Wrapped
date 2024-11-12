@@ -1,10 +1,13 @@
-// panelTwo.js
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import './panelTwo.css';
+import SlideIndicator from './SlideIndicator'; // Import SlideIndicator
 
 const PanelTwo = () => {
-  const [genres, setGenres] = useState([])
-  const [error, setError] = useState(null)
+  const [genres, setGenres] = useState([]);
+  const [error, setError] = useState(null);
+
+  // Fixed currentSlide and totalSlides for static example
 
   useEffect(() => {
     const fetchTopGenres = async () => {
@@ -13,16 +16,21 @@ const PanelTwo = () => {
           headers: {
             Authorization: `Token ${localStorage.getItem('token')}`
           }
-        })
-        setGenres(response.data.top_genres)
+        });
+        setGenres(response.data.top_genres);
       } catch (err) {
-        setError('Failed to load top genres')
-        console.error(err)
+        setError('Failed to load top genres');
+        console.error(err);
       }
-    }
+    };
 
-    fetchTopGenres()
-  }, [])
+    fetchTopGenres();
+  }, []);
+
+  // Sort genres by the number of occurrences in descending order and limit to top 5
+  const sortedGenres = genres
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5);
 
   return (
     <div className='panel-two'>
@@ -30,18 +38,22 @@ const PanelTwo = () => {
       {error
         ? (
           <p>{error}</p>
-          )
+        )
         : (
-          <ul>
-            {genres.map((genre, index) => (
-              <li key={index}>
-                {genre[0]} ({genre[1]})
-              </li>
-            ))}
-          </ul>
-          )}
+          <>
+            <ul>
+              {sortedGenres.map((genre, index) => (
+                <li key={index}>
+                  {genre[0]} ({genre[1]})
+                </li>
+              ))}
+            </ul>
+            {/* Static SlideIndicator */}
+            <SlideIndicator currentSlide={1} totalSlides={2} />
+          </>
+        )}
     </div>
-  )
-}
+  );
+};
 
-export default PanelTwo
+export default PanelTwo;

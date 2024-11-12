@@ -98,7 +98,7 @@ function PanelOne () {
       {/* <button onClick={nextSlide}>Next &gt;</button> */}
 
       {/* Slide Indicator on the right */}
-      <SlideIndicator currentSlide={3} totalSlides={4} />
+      <SlideIndicator currentSlide={0} totalSlides={2} />
 
       {/* Circular button to navigate to panelTwo.js */}
       <button className='navigate-button' onClick={() => { window.location.href = './panel-two' }}>

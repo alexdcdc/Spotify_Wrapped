@@ -1,6 +1,5 @@
-/* Ensure background overrides any default */
 html {
-    background: linear-gradient(158deg, rgba(0, 0, 0, 1) 10%, rgba(173, 52, 113, 1) 100%, rgba(255, 77, 167, 1) 100%) !important;
+    background: linear-gradient(158deg, rgba(0, 0, 0, 1) 10%, rgba(173, 52, 113, 1) 100%, rgba(255, 77, 167, 1) 100%);
     min-height: 100vh;
     overflow-x: hidden;
 }
@@ -9,7 +8,7 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    background: transparent !important; /* Set transparent to remove default color */
+    background: transparent;
     font-family: 'Montserrat', sans-serif;
     color: #ffffff;
 }
@@ -24,6 +23,7 @@ body {
     box-sizing: border-box;
     max-width: 100%;
 }
+
 
 /* Rest of your CSS remains unchanged */
 
@@ -149,7 +149,7 @@ h1 {
 
 /* Artist name styling */
 .artist-name {
-    font-size: 0.9rem;
+    font-size: 1vw;
     font-weight: normal;
     color: #ffffff;
     text-decoration: none;
@@ -159,7 +159,7 @@ h1 {
 
 /* Track name styling */
 .track-name {
-    font-size: 1.1rem;
+    font-size: 1vw;
     font-weight: bold;
     color: #1db954;
     text-decoration: none;
@@ -201,7 +201,7 @@ h1 {
 }
 
 /* Media Queries for Smaller Screens */
-@media (max-width: 768px) {
+@media (max-width: 1050px) {
 
     .spotify-wrapper {
         padding-bottom: 6vw; /* Adds extra padding at the bottom in smaller viewports */

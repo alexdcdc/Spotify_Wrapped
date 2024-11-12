@@ -23,15 +23,15 @@ function Dashboard () {
     getUserData()
   }, [])
 
-  const handleNavigateToSpotifyOverview = () => {
-    navigate('/dashboard/overview') // Navigate to the Spotify Overview page
+  const handleNavigateToPanelOne = () => {
+    navigate('/dashboard/panel-one') // Navigate to the Spotify Overview page
   }
 
   return (
     <div>
       <p>Welcome to the dashboard, {firstName}.</p>
-      <button onClick={handleNavigateToSpotifyOverview}>
-        Go to Spotify Overview
+      <button onClick={handleNavigateToPanelOne}>
+        Go to PanelOne
       </button>
     </div>
   )

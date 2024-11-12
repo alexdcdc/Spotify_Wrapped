@@ -6,8 +6,8 @@ import Dashboard from './Dashboard'
 import Callback from './Callback'
 import Register from './Register'
 import PrivateRoutes from './PrivateRoutes'
-import SpotifyOverview from './components/SpotifyOverview'
-import PanelTwo from './components/panelTwo'
+import PanelOne from './components/PanelOne';
+import PanelTwo from './components/panelTwo';
 
 function App () {
   return (
@@ -20,7 +20,7 @@ function App () {
           <Route path='register' element={<Register />} />
           <Route element={<PrivateRoutes />}>
             <Route path='dashboard' element={<Dashboard />} />
-            <Route path='dashboard/overview' element={<SpotifyOverview />} /> {/* New route for SpotifyOverview */}
+            <Route path='dashboard/panel-one' element={<PanelOne />} /> {/* New route for SpotifyOverview */}
             <Route path='dashboard/panel-two' element={<PanelTwo />} />
           </Route>
         </Route>
