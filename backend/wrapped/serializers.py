@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from wrapped.models import CustomUser, SpotifyProfile
+from wrapped.models import CustomUser, SpotifyProfile, Wrapped
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -20,3 +20,13 @@ class UserSerializer(serializers.ModelSerializer):
             "is_registered",
         ]
         depth = 2
+
+
+class WrappedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Wrapped
+        fields = [
+            "id",
+            "name",
+            "date_created",
+        ]

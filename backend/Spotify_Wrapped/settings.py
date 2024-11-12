@@ -24,7 +24,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-h4qhs00s&*e$(h(&o$prb@@q=bh-r_23&_0pv5s82l_qb-eg_a"
+SECRET_KEY = 'django-insecure-h4qhs00s&*e$(h(&o$prb@@q=bh-r_23&_0pv5s82l_qb-eg_a'
+SPOTIFY_CLIENT_ID = os.getenv('REACT_APP_CLIENT_ID')
+SPOTIFY_CLIENT_SECRET = os.getenv('REACT_APP_CLIENT_SECRET')
+GOOGLE_CLIENT_ID = os.getenv('GEMINI_GOOGLE_CLIENT_ID')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -134,10 +138,6 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-# Important keys for accessing Spotify API
-SPOTIFY_KEY = os.getenv("SPOTIFY_CLIENT_ID")
-SPOTIFY_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET")
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
