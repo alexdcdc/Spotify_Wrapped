@@ -51,6 +51,8 @@ h1 {
     font-weight: bold;
     color: #ff4dce;
     margin: 10px 0;
+
+    opacity: 0; /* Initially hidden */
     animation: fadeIn 1s ease forwards;
     animation-delay: 0.35s;
 }
