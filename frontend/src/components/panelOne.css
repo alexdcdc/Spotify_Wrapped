@@ -27,10 +27,6 @@ body {
     overflow-y: auto; /* Allow scrolling if content overflows */
 }
 
-
-/* Rest of your CSS remains unchanged */
-
-
 /* Fade-in animation */
 @keyframes fadeIn {
     0% {
@@ -43,22 +39,21 @@ body {
     }
 }
 
-/* Independent styling for h1 */
-h1 {
+/* Independent styling for h1 inside .spotify-wrapper */
+.spotify-wrapper h1 {
     padding-top: .1em;
     text-align: center;
     font-size: 2vw;
     font-weight: bold;
     color: #ff4dce;
     margin: 10px 0;
-
     opacity: 0; /* Initially hidden */
     animation: fadeIn 1s ease forwards;
     animation-delay: 0.35s;
 }
 
 /* Error styling */
-.error {
+.spotify-wrapper .error {
     color: red;
     margin: 2vw 0;
     animation: fadeIn 1s ease forwards;
@@ -66,7 +61,7 @@ h1 {
 }
 
 /* Yearly tracks section */
-.yearly-tracks {
+.spotify-wrapper .yearly-tracks {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -77,10 +72,8 @@ h1 {
     margin-top: 3.4vw;
 }
 
-
-
 /* Individual yearly track items */
-.yearly-track-item {
+.spotify-wrapper .yearly-track-item {
     background-color: transparent;
     padding: 1vw;
     width: 15vw;
@@ -91,21 +84,19 @@ h1 {
     align-items: center;
     animation: fadeIn 1s ease forwards;
     gap: 1vw;
-
     opacity: 0; /* Initially hidden */
     animation: fadeIn 1s ease forwards;
     animation-delay: 0.6s;
 }
 
-.yearly-track-item:nth-child(1) { animation-delay: 0.6s; }
-.yearly-track-item:nth-child(2) { animation-delay: 0.8s; }
-.yearly-track-item:nth-child(3) { animation-delay: 1s; }
-.yearly-track-item:nth-child(4) { animation-delay: 1.2s; }
-.yearly-track-item:nth-child(5) { animation-delay: 1.4s; }
-
+.spotify-wrapper .yearly-track-item:nth-child(1) { animation-delay: 0.6s; }
+.spotify-wrapper .yearly-track-item:nth-child(2) { animation-delay: 0.8s; }
+.spotify-wrapper .yearly-track-item:nth-child(3) { animation-delay: 1s; }
+.spotify-wrapper .yearly-track-item:nth-child(4) { animation-delay: 1.2s; }
+.spotify-wrapper .yearly-track-item:nth-child(5) { animation-delay: 1.4s; }
 
 /* Album cover container */
-.album-cover-container {
+.spotify-wrapper .album-cover-container {
     width: 10vw;
     height: auto;
     display: flex;
@@ -114,7 +105,7 @@ h1 {
 }
 
 /* Album cover images */
-.album-cover {
+.spotify-wrapper .album-cover {
     width: 100%;
     height: auto;
     border-radius: 8px;
@@ -123,29 +114,27 @@ h1 {
 }
 
 /* Stacked album cover effect */
-.album-cover:first-child {
+.spotify-wrapper .album-cover:first-child {
     transform: translate(-0.5vw, -0.5vw);
     z-index: 2;
 }
-.album-cover:last-child {
+.spotify-wrapper .album-cover:last-child {
     transform: translate(-7.0vw, 8.0vw);
     z-index: 1;
 }
 
 /* Track details styling */
-.track-details {
+.spotify-wrapper .track-details {
     position: relative;
     top: 6vw;
     left: -2vw;
     justify-content: center;
-
-
     margin-top: 1vw;
     width: 100%;
 }
 
 /* Track label styling */
-.track-label {
+.spotify-wrapper .track-label {
     font-size: 1.5vw;
     font-weight: bolder;
     color: #ff4dce;
@@ -153,7 +142,7 @@ h1 {
 }
 
 /* Artist name styling */
-.artist-name {
+.spotify-wrapper .artist-name {
     font-size: 1vw;
     font-weight: normal;
     color: #ffffff;
@@ -163,7 +152,7 @@ h1 {
 }
 
 /* Track name styling */
-.track-name {
+.spotify-wrapper .track-name {
     font-size: 1vw;
     font-weight: bold;
     color: #1db954;
@@ -172,17 +161,16 @@ h1 {
 }
 
 /* Hover effects for track and artist names */
-.artist-name:hover {
+.spotify-wrapper .artist-name:hover {
     color: #1db954;
 }
 
-.track-name:hover {
+.spotify-wrapper .track-name:hover {
     color: #ffffff;
 }
 
-
 /* Navigate button styling */
-.navigate-button {
+.spotify-wrapper .navigate-button {
     position: fixed;
     bottom: 1vw;
     right: 1vw;
@@ -201,50 +189,51 @@ h1 {
 }
 
 /* Hover effects */
-.navigate-button:hover {
+.spotify-wrapper .navigate-button:hover {
     background-color: darkgray;
 }
 
 /* Media Queries for Smaller Screens */
 @media (max-width: 1050px) {
-
     .spotify-wrapper {
         padding-bottom: 6vw; /* Adds extra padding at the bottom in smaller viewports */
         overflow-y: auto; /* Ensure scrolling is enabled on smaller screens */
     }
 
-    h1 {
+    .spotify-wrapper h1 {
         font-size: 4vw;
     }
 
-    .yearly-tracks {
+    .spotify-wrapper .yearly-tracks {
         margin-top: 6vw;
     }
 
-    .yearly-track-item {
+    .spotify-wrapper .yearly-track-item {
         width: 80%;
         padding: 6vw;
         gap: 4vw;
     }
 
-    .album-cover-container {
+    .spotify-wrapper .album-cover-container {
         width: 30vw;
     }
 
-    .album-cover:first-child {
+    .spotify-wrapper .album-cover:first-child {
         transform: translate(-0.5vw, -0.5vw);
         z-index: 2;
     }
-    .album-cover:last-child {
+    .spotify-wrapper .album-cover:last-child {
         transform: translate(-7.0vw, 8.0vw);
         z-index: 1;
     }
 
-    .track-label, .artist-name, .track-name {
+    .spotify-wrapper .track-label,
+    .spotify-wrapper .artist-name,
+    .spotify-wrapper .track-name {
         font-size: 2.5vw;
     }
 
-    .navigate-button {
+    .spotify-wrapper .navigate-button {
         position: fixed;
         bottom: 2vw;
         right: 1vw;

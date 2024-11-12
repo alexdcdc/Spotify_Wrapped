@@ -1,6 +1,6 @@
 // DanceabilityPanel.js
 import React, { useEffect, useState } from 'react';
-import './SpotifyWrapped.css';
+import './panelOne.css.css';
 
 function DanceabilityPanel({ token }) {
   const [danceability, setDanceability] = useState(null);

@@ -1,115 +1,108 @@
-/* For the entire slide background */
-.panel-container {
-  background-color: #013220; /* Sets the background color of the whole page to black */
-  color: #fff; /* Adjust text color to white for visibility */
+/* panelTwo.css */
+
+/* Container-specific styles */
+.panel-two {
   margin: 0;
   padding: 0;
-  font-family: 'Arial', sans-serif;
-  line-height: 1.5;
-  height: 100vh; /* Make sure the container takes full viewport height */
-  overflow: hidden; /* Prevent scrolling */
-}
+  font-family: Arial, sans-serif;
 
-/* Styling for the panel-two section */
-.panel-two {
-  padding: 1rem; /* Reduced padding for a smaller box */
-  background: linear-gradient(135deg, #ff007f, #d5006c);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 400px; /* Set a smaller max-width for the panel */
-  width: 100%;
-  margin: 0 auto;
-  box-sizing: border-box;
-  height: 100%; /* Ensure the panel takes up the available height */
+  background: rgb(173,236,227);
+  background: linear-gradient(180deg, rgba(173,236,227,1) 0%, rgba(249,216,43,1) 20%, rgba(201,30,13,1) 40%, rgba(13,0,44,1) 60%, rgba(80,30,240,1) 80%);
+
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
 }
 
-/* Header styling for panel-two */
-.panel-two h2 {
-  font-size: 1.6rem; /* Smaller font size for the header */
-  font-weight: bold;
+.panel-two .box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  max-width: 700px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  text-align: center;
   color: #333;
-  margin-bottom: 0.8rem; /* Smaller margin for a more compact layout */
+  margin: 20px;
+  box-sizing: border-box;
+  height: 750px; /* Example fixed height */
 }
 
-/* Unordered list styling within panel-two */
-.panel-two ul {
+
+/* Local heading style */
+.panel-two h2 {
+  font-size: 2rem; /* Slightly larger heading size for clarity */
+  margin-bottom: 1.5rem; /* Increased space below the heading */
+  color: #333;
+}
+
+/* Genre list styling */
+.panel-two .genre-list {
   list-style-type: none;
-  padding-left: 0;
+  padding: 0;
   margin: 0;
-  width: 100%;
-  max-height: calc(100vh - 150px); /* Limit the height of the list */
-  overflow-y: auto; /* Enable scrolling only for the list */
+  width: 100%; /* Full width inside the box */
 }
 
-/* List item styling within panel-two */
-.panel-two li {
-  font-size: 1.1rem; /* Slightly smaller font size for list items */
-  color: #555;
-  margin-bottom: 0.6rem; /* Reduced margin for list items */
-  padding: 0.8rem; /* Reduced padding for smaller items */
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #000000;
-  transition: background-color 0.3s ease;
+/* Genre item styling */
+.panel-two .genre-item {
+  font-size: 1.2rem;
+  margin: 0.75rem 0;
+  padding: 12px 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center; /* Center text in each genre item */
+  align-items: center;
+  transition: transform 0.2s;
+  width: 100%; /* Full width inside the box */
+  box-sizing: border-box;
 }
 
-/* Hover effect for list items within panel-two */
-.panel-two li:hover {
-  background-color: #ffeff7;
-  cursor: pointer;
+.panel-two .genre-item:hover {
+  transform: scale(1.05);
 }
 
-/* Strong text within list items inside panel-two */
-.panel-two li strong {
+.panel-two .genre-rank {
   font-weight: bold;
+  color: #007bff;
+  margin-right: 10px;
 }
 
-/* Paragraph styling within panel-two */
-.panel-two p {
-  color: #e74c3c;
-  font-size: 1rem; /* Smaller font size for the paragraph */
+.panel-two .genre-name {
+  color: #333;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .panel-two {
-    padding: 1rem; /* Reduce padding on smaller screens */
-    max-width: 90%; /* Ensure the panel takes up less space on mobile */
+/* Color classes for genre items */
+.panel-two .genre-item.genre-1 { background-color: #ffebee; }
+.panel-two .genre-item.genre-2 { background-color: #e3f2fd; }
+.panel-two .genre-item.genre-3 { background-color: #e8f5e9; }
+.panel-two .genre-item.genre-4 { background-color: #fff3e0; }
+.panel-two .genre-item.genre-5 { background-color: #f3e5f5; }
+
+/* Slide indicator styling */
+.panel-two .SlideIndicator {
+  margin-top: 2rem;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 600px) {
+  .panel-two .box {
+    padding: 15px;
   }
 
   .panel-two h2 {
-    font-size: 1.4rem; /* Smaller header size on smaller screens */
+    font-size: 1.5rem;
+    margin-bottom: 1rem; /* Reduced margin */
   }
 
-  .panel-two li {
-    font-size: 1rem; /* Adjust font size for smaller screens */
-    padding: 0.6rem; /* Reduce padding to fit better */
-  }
-
-  .panel-two p {
-    font-size: 0.9rem; /* Adjust paragraph size for smaller screens */
-  }
-}
-
-@media (max-width: 480px) {
-  .panel-two {
-    padding: 0.8rem; /* Further reduce padding for very small screens */
-  }
-
-  .panel-two h2 {
-    font-size: 1.2rem; /* Even smaller header size */
-  }
-
-  .panel-two li {
-    font-size: 0.9rem; /* Further reduce font size for mobile */
-    padding: 0.5rem; /* Adjust padding for better spacing */
-  }
-
-  .panel-two p {
-    font-size: 0.8rem; /* Slightly smaller paragraph text */
+  .panel-two .genre-item {
+    font-size: 1rem;
+    padding: 8px 15px;
   }
 }
