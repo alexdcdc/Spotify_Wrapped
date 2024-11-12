@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import './SpotifyWrapped.css'
+import './panelOne.css'
 import './panelTwo' // Import panelTwo.js
 import SlideIndicator from './SlideIndicator' // Import the SlideIndicator component
 

@@ -1,9 +1,10 @@
+/* Remove the gradient from html */
 html {
-    background: linear-gradient(158deg, rgba(0, 0, 0, 1) 10%, rgba(173, 52, 113, 1) 100%, rgba(255, 77, 167, 1) 100%);
     min-height: 100vh;
     overflow-x: hidden;
 }
 
+/* Body remains the same */
 body {
     margin: 0;
     padding: 0;
@@ -13,7 +14,7 @@ body {
     color: #ffffff;
 }
 
-/* Wrapper to ensure full content height */
+/* Apply the gradient to a specific wrapper (e.g. .spotify-wrapper) */
 .spotify-wrapper {
     min-height: 100vh;
     padding: 1vw;
@@ -22,6 +23,8 @@ body {
     align-items: start;
     box-sizing: border-box;
     max-width: 100%;
+    background: linear-gradient(158deg, rgba(0, 0, 0, 1) 10%, rgba(173, 52, 113, 1) 100%, rgba(255, 77, 167, 1) 100%);
+    overflow-y: auto; /* Allow scrolling if content overflows */
 }
 
 
@@ -49,7 +52,7 @@ h1 {
     color: #ff4dce;
     margin: 10px 0;
     animation: fadeIn 1s ease forwards;
-    animation-delay: 0.2s;
+    animation-delay: 0.35s;
 }
 
 /* Error styling */
@@ -205,6 +208,7 @@ h1 {
 
     .spotify-wrapper {
         padding-bottom: 6vw; /* Adds extra padding at the bottom in smaller viewports */
+        overflow-y: auto; /* Ensure scrolling is enabled on smaller screens */
     }
 
     h1 {
@@ -225,11 +229,9 @@ h1 {
         width: 30vw;
     }
 
-
     .album-cover:first-child {
-    transform: translate(-0.5vw, -0.5vw);
-    z-index: 2;
-
+        transform: translate(-0.5vw, -0.5vw);
+        z-index: 2;
     }
     .album-cover:last-child {
         transform: translate(-7.0vw, 8.0vw);
@@ -258,4 +260,3 @@ h1 {
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     }
 }
-
