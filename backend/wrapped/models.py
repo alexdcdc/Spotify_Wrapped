@@ -46,20 +46,30 @@ class Wrapped(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
 
-class AbstractPanel(models.Model):
+class Panel(models.Model):
+    class PanelType(models.TextChoices):
+        TOP_TRACKS = 'TT'
+        LLM = 'LM'
+        TOP_GENRES = 'TG'
+        GAME = 'GM'
+        DANCE = "DC"
+        INTRO = "IN"
+        PRE_LLM = "PL"
+        PRE_GAME = "PG"
+
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    wrapped = models.ForeignKey(Wrapped, on_delete=models.CASCADE)
+    wrapped = models.ForeignKey(Wrapped, on_delete=models.CASCADE, related_name="panels")
     order = models.PositiveSmallIntegerField()
+    type = models.CharField(max_length = 2, choices = PanelType.choices, default=PanelType.TOP_TRACKS)
+    data = models.JSONField(default=dict)
 
-    class Meta:
-        abstract = True
-
-
+"""
 class Artist(models.Model):
     spotify_id = models.TextField(primary_key=True)
     albums = models.ManyToManyField("Album")
     name = models.TextField()
-    songs = models.ManyToManyField("Song")
+    songs = models.ManyToManyField("Track")
 
 
 class Album(models.Model):
@@ -68,7 +78,7 @@ class Album(models.Model):
     artists = models.ManyToManyField("Artist")
 
 
-class Song(models.Model):
+class Track(models.Model):
     spotify_id = models.TextField(primary_key=True)
     title = models.TextField()
     artists = models.ManyToManyField("Artist")
@@ -76,25 +86,22 @@ class Song(models.Model):
         "Album", on_delete=models.CASCADE
     )  # Specify on_delete behavior
 
+class PanelArtistOrdering(models.Model):
+    panel = models.ForeignKey(AbstractPanel, on_delete=models.CASCADE)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    order = models.PositiveSmallIntegerField()
+
+class PanelTrackOrdering(models.Model):
+    panel = models.ForeignKey(AbstractPanel, on_delete=models.CASCADE)
+    track = models.ForeignKey(Track, on_delete=models.CASCADE)
+    order = models.PositiveSmallIntegerField()
+
+class TopTracksPanel(AbstractPanel):
+    tracks = models.ManyToManyField(Track, through=PanelTrackOrdering);
 
 """
-To be completed after wrapped user story
-class PanelOne(AbstractPanel):
 
-class PanelTwo(AbstractPanel):
 
-class PanelThree(AbstractPanel):
-
-class PanelFour(AbstractPanel):
-
-class PanelFive(AbstractPanel):
-
-class PanelSix(AbstractPanel):
-
-class PanelSeven(AbstractPanel):
-
-class PanelEight(AbstractPanel):
-"""
 
 
 # Create your models here.
