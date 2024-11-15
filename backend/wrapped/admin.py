@@ -1,5 +1,5 @@
 from django.contrib import admin
-from wrapped.models import CustomUser, SpotifyAuthData, SpotifyProfile, Wrapped
+from wrapped.models import CustomUser, SpotifyAuthData, SpotifyProfile, Wrapped, Panel
 
 
 # Register your models here.
@@ -20,4 +20,9 @@ class CustomUserProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Wrapped)
 class WrappedAdmin(admin.ModelAdmin):
-    list_display = ("name", "date_created", "user")
+    pass
+
+
+@admin.register(Panel)
+class PanelAdmin(admin.ModelAdmin):
+    pass

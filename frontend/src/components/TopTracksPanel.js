@@ -1,13 +1,10 @@
 import { useState, useEffect } from 'react'
 import './SpotifyWrapped.css'
-import './panelTwo' // Import panelTwo.js
-import SlideIndicator from './SlideIndicator' // Import the SlideIndicator component
+import './TopGenresPanel' // Import TopGenresPanel.js
 
 function SpotifyWrapped () {
   const [spotifyData, setSpotifyData] = useState(null)
   const [error, setError] = useState(null)
-  const [currentSlide] = useState(0)
-  const totalSlides = 8 // Define the total number of slides
   const token = localStorage.getItem('token')
 
   useEffect(() => {
@@ -95,19 +92,6 @@ function SpotifyWrapped () {
             </div>
             )
           : null}
-
-      {/* Slide Navigation Buttons */}
-      {/*
-              <button onClick={nextSlide}>Next &gt;</button>
-           */}
-
-      {/* Slide Indicator on the right */}
-      <SlideIndicator currentSlide={currentSlide} totalSlides={totalSlides} />
-
-      {/* Circular button to navigate to panelTwo.js */}
-      <button className='navigate-button' onClick={() => { window.location.href = './panel-two' }}>
-        &gt;
-      </button>
     </div>
   )
 }

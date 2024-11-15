@@ -217,6 +217,7 @@ def top_tracks(request):
 
     return Response(tracks, status=status.HTTP_200_OK)
 
+
 def generate_top_tracks_panel():
     access_token = request.user.auth_data.access_token
 

@@ -48,21 +48,29 @@ class Wrapped(models.Model):
 
 class Panel(models.Model):
     class PanelType(models.TextChoices):
-        TOP_TRACKS = 'TT'
-        LLM = 'LM'
-        TOP_GENRES = 'TG'
-        GAME = 'GM'
-        DANCE = "DC"
         INTRO = "IN"
+        TOP_TRACKS = "TT"
         PRE_LLM = "PL"
+        LLM = "LM"
+        TOP_GENRES = "TG"
         PRE_GAME = "PG"
-
+        GAME = "GM"
+        DANCE = "DC"
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    wrapped = models.ForeignKey(Wrapped, on_delete=models.CASCADE, related_name="panels")
+    wrapped = models.ForeignKey(
+        Wrapped, on_delete=models.CASCADE, related_name="panels"
+    )
     order = models.PositiveSmallIntegerField()
-    type = models.CharField(max_length = 2, choices = PanelType.choices, default=PanelType.TOP_TRACKS)
+    type = models.CharField(
+        max_length=2, choices=PanelType.choices, default=PanelType.TOP_TRACKS
+    )
     data = models.JSONField(default=dict)
+
+    class Meta:
+        unique_together = (("wrapped", "order"),)
+        ordering = ("order",)
+
 
 """
 class Artist(models.Model):
@@ -100,8 +108,6 @@ class TopTracksPanel(AbstractPanel):
     tracks = models.ManyToManyField(Track, through=PanelTrackOrdering);
 
 """
-
-
 
 
 # Create your models here.

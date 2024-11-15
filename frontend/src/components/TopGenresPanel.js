@@ -1,8 +1,8 @@
-// panelTwo.js
+// TopGenresPanel.js
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
-const PanelTwo = () => {
+const TopGenresPanel = () => {
   const [genres, setGenres] = useState([])
   const [error, setError] = useState(null)
 
@@ -44,4 +44,4 @@ const PanelTwo = () => {
   )
 }
 
-export default PanelTwo
+export default TopGenresPanel
