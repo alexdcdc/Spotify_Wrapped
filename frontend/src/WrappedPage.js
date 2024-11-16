@@ -61,13 +61,15 @@ function WrappedPage () {
         <Component data={currentPanelNum < totalPanels ? wrappedPanels[currentPanelNum].data : {}} />
         {/* Circular button to navigate to TopGenresPanel.js */}
         {currentPanelNum + 1 < totalPanels
-          ? (<button
+          ? (
+            <button
               className='navigate-button' onClick={() => {
                 setCurrentPanelNum((currentPanelNum + 1))
               }}
-             >
-            &gt;
-          </button>)
+            >
+              &gt;
+            </button>
+            )
           : (<p>All done! <Link to='/dashboard'>Back to dashboard</Link></p>)}
 
         <SlideIndicator currentSlide={currentPanelNum} totalSlides={totalPanels} />

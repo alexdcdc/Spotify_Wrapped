@@ -10,7 +10,14 @@ from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from wrapped.models import CustomUser, SpotifyAuthData, SpotifyProfile, Wrapped, Panel, PanelType
+from wrapped.models import (
+    CustomUser,
+    SpotifyAuthData,
+    SpotifyProfile,
+    Wrapped,
+    Panel,
+    PanelType,
+)
 from wrapped.serializers import UserSerializer, WrappedSerializer
 
 
@@ -355,6 +362,7 @@ def wrapped(request):
     else:
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
+
 def generate_wrapped(user, name):
     PANEL_ORDER = [
         PanelType.INTRO,
@@ -378,6 +386,7 @@ def generate_wrapped(user, name):
 
     return new_wrapped
 
+
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def get_wrapped_with_id(request, wrapped_id):
@@ -387,6 +396,7 @@ def get_wrapped_with_id(request, wrapped_id):
         return Response({"wrapped": serializer.data}, status=status.HTTP_200_OK)
     except Wrapped.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
+
 
 def generate_panel(user, parent_wrapped, order, panel_type):
     panel = Panel()
@@ -411,24 +421,39 @@ def generate_panel(user, parent_wrapped, order, panel_type):
         case PanelType.GAME:
             panel.data = generate_data_game(user)
         case default:
-            return Exception(f'Invalid panel type specified {default}')
+            return Exception(f"Invalid panel type specified {default}")
 
     panel.save()
     return panel
 
+
 def generate_data_intro(user):
     return {}
+
+
 def generate_data_llm(user):
     return {}
+
+
 def generate_data_pre_llm(user):
     return {}
+
+
 def generate_data_top_tracks(user):
     return {}
+
+
 def generate_data_top_genres(user):
     return {}
+
+
 def generate_data_pre_game(user):
     return {}
+
+
 def generate_data_danceability(user):
     return {}
+
+
 def generate_data_game(user):
     return {}

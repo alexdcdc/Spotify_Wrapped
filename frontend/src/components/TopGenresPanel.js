@@ -11,7 +11,7 @@ const TopGenresPanel = () => {
       try {
         const response = await axios.get('http://localhost:8000/api/spotify_top_genres', {
           headers: {
-            Authorization: `Token ${localStorage.getItem('token')}`
+            Authorization: `Token ${sessionStorage.getItem('token')}`
           }
         })
         setGenres(response.data.top_genres)

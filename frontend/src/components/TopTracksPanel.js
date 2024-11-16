@@ -5,7 +5,7 @@ import './TopGenresPanel' // Import TopGenresPanel.js
 function SpotifyWrapped () {
   const [spotifyData, setSpotifyData] = useState(null)
   const [error, setError] = useState(null)
-  const token = localStorage.getItem('token')
+  const token = sessionStorage.getItem('token')
 
   useEffect(() => {
     const link = document.createElement('link')
