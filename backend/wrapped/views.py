@@ -16,7 +16,7 @@ from wrapped.models import (
     PanelType,
     SpotifyAuthData,
     SpotifyProfile,
-    Wrapped
+    Wrapped,
 )
 from wrapped.serializers import UserSerializer, WrappedSerializer
 
