@@ -274,6 +274,7 @@ def llm_generate(request):
     headers = {"Authorization": f"Bearer {access_token}"}
     genai.configure(api_key=settings.GOOGLE_CLIENT_ID)
 
+
     top_artists_response = requests.get(
         "https://api.spotify.com/v1/me/top/artists?limit=5", headers=headers
     )
@@ -288,29 +289,46 @@ def llm_generate(request):
     genres = {genre for artist in top_artists["items"] for genre in artist["genres"]}
     artist_names = [artist["name"] for artist in top_artists["items"]]
 
-    model = genai.GenerativeModel("gemini-1.5-flash")
 
+    model = genai.GenerativeModel("gemini-1.5-flash")
     gemini_prompt = f"""
         Create a vibrant personality description for someone who:
         - Frequently listens to genres like: {', '.join(genres)}
         - Enjoys artists such as: {', '.join(artist_names)}
 
-        Please describe:
-        1. Their likely personality traits and thinking style
-        2. Their probable fashion choices and aesthetic preferences
-        3. Their typical behaviors and habits
+        Please describe the following with clear labels:
 
-        Keep the response natural and engaging, describe each with 3-4 words.
+        1. Personality & Thinking Style: Describe likely personality traits and thinking style in 3-4 words.
+        2. Fashion Choices: Describe probable fashion choices and aesthetic preferences in 3-4 words. Make sure it's specific clothing.
+        3. Behavior: Describe typical behaviors and habits in 3-4 words.
+
+        Make sure each section starts with the label (e.g., "Personality & Thinking Style:", "Fashion Choices:", "Behavior:").
+        You also don't have to add the numbers, they're just there to help you structure your response. 
         """
     response = model.generate_content(gemini_prompt)
+    full_description = response.text.strip()
 
-    personality_description = response.text.strip()
 
-    print(personality_description)
+    personality_description = ""
+    fashion_choices = ""
+    behavior_description = ""
+
+    if "Personality & Thinking Style:" in full_description:
+        personality_description = full_description.split("Personality & Thinking Style:")[1].split("Fashion Choices:")[
+            0].strip()
+
+    if "Fashion Choices:" in full_description:
+        fashion_choices = full_description.split("Fashion Choices:")[1].split("Behavior:")[0].strip()
+
+    if "Behavior:" in full_description:
+        behavior_description = full_description.split("Behavior:")[1].strip()
+
 
     return Response(
         {
             "personality_description": personality_description,
+            "fashion_choices": fashion_choices,
+            "behavior_description": behavior_description,
             "based_on": {"genres": list(genres), "artists": artist_names},
         },
         status=status.HTTP_200_OK,
