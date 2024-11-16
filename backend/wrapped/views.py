@@ -337,7 +337,7 @@ def wrapped(request):
     if request.method == "POST":
         if not ("name" in data and data["name"]):
             return Response(status=status.HTTP_400_BAD_REQUEST)
-        new_wrapped = Wrapped(user=user, name=data["name"])
+        new_wrapped = generate_wrapped(user, data["name"])
         new_wrapped.save()
         serializer = WrappedSerializer(new_wrapped)
         return Response(
@@ -355,6 +355,28 @@ def wrapped(request):
     else:
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
+def generate_wrapped(user, name):
+    PANEL_ORDER = [
+        PanelType.INTRO,
+        PanelType.TOP_TRACKS,
+        PanelType.DANCE,
+        PanelType.TOP_GENRES,
+        PanelType.PRE_LLM,
+        PanelType.LLM,
+        PanelType.PRE_GAME,
+        PanelType.GAME,
+    ]
+    new_wrapped = Wrapped()
+    new_wrapped.user = user
+    new_wrapped.name = name
+    new_wrapped.save()
+
+    order = 1
+    for panel_type in PANEL_ORDER:
+        generate_panel(user, new_wrapped, order, panel_type)
+        order += 1
+
+    return new_wrapped
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
@@ -366,8 +388,8 @@ def get_wrapped_with_id(request, wrapped_id):
     except Wrapped.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-def generate_panel(parent_wrapped, order, panel_type):
-    panel = Panel.objects.new()
+def generate_panel(user, parent_wrapped, order, panel_type):
+    panel = Panel()
     panel.wrapped = parent_wrapped
     panel.order = order
     panel.type = panel_type
@@ -375,21 +397,21 @@ def generate_panel(parent_wrapped, order, panel_type):
         case PanelType.INTRO:
             panel.data = generate_data_intro(user)
         case PanelType.LLM:
-            panel = generate_data_llm(user)
+            panel.data = generate_data_llm(user)
         case PanelType.PRE_LLM:
-            panel = generate_data_pre_llm(user)
+            panel.data = generate_data_pre_llm(user)
         case PanelType.DANCE:
-            panel = generate_data_danceability(user)
+            panel.data = generate_data_danceability(user)
         case PanelType.PRE_GAME:
-            panel = generate_data_pre_game(user)
+            panel.data = generate_data_pre_game(user)
         case PanelType.TOP_GENRES:
-            panel = generate_data_top_genres(user)
+            panel.data = generate_data_top_genres(user)
         case PanelType.TOP_TRACKS:
-            panel = generate_data_top_tracks(user)
+            panel.data = generate_data_top_tracks(user)
         case PanelType.GAME:
-            panel = generate_data_game(user)
+            panel.data = generate_data_game(user)
         case default:
-            return Exception("Invalid panel type specified")
+            return Exception(f'Invalid panel type specified {default}')
 
     panel.save()
     return panel
