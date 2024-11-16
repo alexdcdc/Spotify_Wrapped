@@ -10,9 +10,14 @@ from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-
-from wrapped.models import (CustomUser, Panel, PanelType, SpotifyAuthData,
-                            SpotifyProfile, Wrapped)
+from wrapped.models import (
+    CustomUser,
+    Panel,
+    PanelType,
+    SpotifyAuthData,
+    SpotifyProfile,
+    Wrapped
+)
 from wrapped.serializers import UserSerializer, WrappedSerializer
 
 
@@ -218,6 +223,7 @@ def top_tracks(request):
     ]
 
     return Response(tracks, status=status.HTTP_200_OK)
+
 
 @api_view(["GET"])
 def recently_played_tracks(request):
