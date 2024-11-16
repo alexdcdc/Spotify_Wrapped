@@ -45,18 +45,17 @@ class Wrapped(models.Model):
     name = models.CharField(max_length=255)
     date_created = models.DateTimeField(auto_now_add=True)
 
+class PanelType(models.TextChoices):
+    INTRO = "IN"
+    TOP_TRACKS = "TT"
+    PRE_LLM = "PL"
+    LLM = "LM"
+    TOP_GENRES = "TG"
+    PRE_GAME = "PG"
+    GAME = "GM"
+    DANCE = "DC"
 
 class Panel(models.Model):
-    class PanelType(models.TextChoices):
-        INTRO = "IN"
-        TOP_TRACKS = "TT"
-        PRE_LLM = "PL"
-        LLM = "LM"
-        TOP_GENRES = "TG"
-        PRE_GAME = "PG"
-        GAME = "GM"
-        DANCE = "DC"
-
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     wrapped = models.ForeignKey(
         Wrapped, on_delete=models.CASCADE, related_name="panels"
@@ -66,6 +65,8 @@ class Panel(models.Model):
         max_length=2, choices=PanelType.choices, default=PanelType.TOP_TRACKS
     )
     data = models.JSONField(default=dict)
+
+
 
     class Meta:
         unique_together = (("wrapped", "order"),)

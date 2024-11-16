@@ -10,7 +10,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from wrapped.models import CustomUser, SpotifyAuthData, SpotifyProfile, Wrapped
+from wrapped.models import CustomUser, SpotifyAuthData, SpotifyProfile, Wrapped, Panel, PanelType
 from wrapped.serializers import UserSerializer, WrappedSerializer
 
 
@@ -365,3 +365,48 @@ def get_wrapped_with_id(request, wrapped_id):
         return Response({"wrapped": serializer.data}, status=status.HTTP_200_OK)
     except Wrapped.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+def generate_panel(parent_wrapped, order, panel_type):
+    panel = Panel.objects.new()
+    panel.wrapped = parent_wrapped
+    panel.order = order
+    panel.type = panel_type
+    match panel_type:
+        case PanelType.INTRO:
+            panel.data = generate_data_intro(user)
+        case PanelType.LLM:
+            panel = generate_data_llm(user)
+        case PanelType.PRE_LLM:
+            panel = generate_data_pre_llm(user)
+        case PanelType.DANCE:
+            panel = generate_data_danceability(user)
+        case PanelType.PRE_GAME:
+            panel = generate_data_pre_game(user)
+        case PanelType.TOP_GENRES:
+            panel = generate_data_top_genres(user)
+        case PanelType.TOP_TRACKS:
+            panel = generate_data_top_tracks(user)
+        case PanelType.GAME:
+            panel = generate_data_game(user)
+        case default:
+            return Exception("Invalid panel type specified")
+
+    panel.save()
+    return panel
+
+def generate_data_intro(user):
+    return {}
+def generate_data_llm(user):
+    return {}
+def generate_data_pre_llm(user):
+    return {}
+def generate_data_top_tracks(user):
+    return {}
+def generate_data_top_genres(user):
+    return {}
+def generate_data_pre_game(user):
+    return {}
+def generate_data_danceability(user):
+    return {}
+def generate_data_game(user):
+    return {}
