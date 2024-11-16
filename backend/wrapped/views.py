@@ -10,14 +10,9 @@ from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from wrapped.models import (
-    CustomUser,
-    SpotifyAuthData,
-    SpotifyProfile,
-    Wrapped,
-    Panel,
-    PanelType,
-)
+
+from wrapped.models import (CustomUser, Panel, PanelType, SpotifyAuthData,
+                            SpotifyProfile, Wrapped)
 from wrapped.serializers import UserSerializer, WrappedSerializer
 
 
@@ -223,23 +218,6 @@ def top_tracks(request):
     ]
 
     return Response(tracks, status=status.HTTP_200_OK)
-
-
-def generate_top_tracks_panel():
-    access_token = request.user.auth_data.access_token
-
-    # Get top tracks
-    headers = {"Authorization": f"Bearer {access_token}"}
-    top_tracks_response = requests.get(
-        "https://api.spotify.com/v1/me/top/tracks?limit=5", headers=headers
-    )
-
-    if top_tracks_response.status_code != 200:
-        return Response(
-            {"error": "Failed to fetch top tracks from Spotify API."},
-            status=status.HTTP_400_BAD_REQUEST,
-        )
-
 
 @api_view(["GET"])
 def recently_played_tracks(request):

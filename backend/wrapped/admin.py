@@ -1,5 +1,7 @@
 from django.contrib import admin
-from wrapped.models import CustomUser, SpotifyAuthData, SpotifyProfile, Wrapped, Panel
+
+from wrapped.models import (CustomUser, Panel, SpotifyAuthData, SpotifyProfile,
+                            Wrapped)
 
 
 # Register your models here.

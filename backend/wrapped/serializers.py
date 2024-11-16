@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from wrapped.models import CustomUser, SpotifyProfile, Wrapped, Panel
+
+from wrapped.models import CustomUser, Panel, SpotifyProfile, Wrapped
 
 
 class ProfileSerializer(serializers.ModelSerializer):
