@@ -15,6 +15,12 @@
   min-height: 100vh;
 }
 
+.element::before {
+    content: url('p2.png');
+    display: inline-block;
+    /* Additional styles */
+}git pull
+
 .panel-two .box {
   display: flex;
   flex-direction: column;

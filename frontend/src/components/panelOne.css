@@ -1,11 +1,11 @@
 /* Remove the gradient from html */
-html {
+.spotify-page main {
     min-height: 100vh;
     overflow-x: hidden;
 }
 
 /* Body remains the same */
-body {
+.spotify-page {
     margin: 0;
     padding: 0;
     min-height: 100vh;
@@ -198,8 +198,8 @@ body {
 /* Media Queries for Smaller Screens */
 @media (max-width: 1050px) {
     .spotify-wrapper {
-        padding-bottom: 6vw; /* Adds extra padding at the bottom in smaller viewports */
-        overflow-y: auto; /* Ensure scrolling is enabled on smaller screens */
+        padding-bottom: 6vw; /* Adds extra padding at the bottom */
+        position: relative; /* Ensure it doesn't restrict scrolling */
     }
 
     .spotify-wrapper h1 {
