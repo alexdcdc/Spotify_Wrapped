@@ -8,7 +8,7 @@ import Register from './Register'
 import PrivateRoutes from './PrivateRoutes'
 import PanelOne from './components/PanelOne';
 import PanelTwo from './components/panelTwo';
-import danceabilityPanel from "./components/danceabilityPanel";
+import DanceabilityPanel from "./components/danceabilityPanel";
 import LLMPanel from "./components/llmPanel";
 
 
@@ -26,7 +26,7 @@ function App () {
             <Route path='dashboard/panel-one' element={<PanelOne />} /> {/* New route for SpotifyOverview */}
             <Route path='dashboard/panel-two' element={<PanelTwo />} />
             <Route path = 'dashboard/llm-panel' element={<LLMPanel />} />
-            <Route path = 'dashboard/danceabilityPanel' element={<danceabilityPanel />} />
+            <Route path = 'dashboard/danceability-panel' element={<DanceabilityPanel />} />
           </Route>
         </Route>
       </Routes>

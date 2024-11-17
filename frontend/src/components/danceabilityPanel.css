@@ -1,0 +1,111 @@
+/* General Styles */
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.danceability-wrapper {
+  padding: 20px;
+  text-align: center;
+  color: white;
+  background: linear-gradient(135deg, black, orange);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Danceability Spectrum Styles */
+.score-container {
+  margin: 20px auto;
+  width: 80%;
+  position: relative;
+}
+
+.spectrum {
+  position: relative;
+  height: 10px;
+  width: 100%;
+  background: linear-gradient(to right, black, orange);
+  border-radius: 5px;
+  margin: 20px auto;
+}
+
+.score-indicator {
+  position: absolute;
+  top: -5px;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  border: 2px solid #ff6600;
+  transition: left 0.3s ease;
+}
+
+/* SVG Container Styles */
+.svg-container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.left-side {
+  left: 0;
+  width: 100px;
+  height: auto;
+}
+
+.right-side {
+  right: 0;
+  width: 100px;
+  height: auto;
+}
+
+.svg-container img {
+  width: 100%;
+  height: auto;
+}
+
+/* Error Message Styles */
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+/* Navigation Button Styles */
+.navigation-buttons button {
+  background-color: #ff6600;
+  color: white;
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.navigation-buttons button:hover {
+  background-color: #ff4500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .danceability-wrapper {
+    padding: 10px;
+  }
+
+  .score-container {
+    width: 90%;
+  }
+
+  .navigation-buttons button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .svg-container {
+    display: none; /* Hide SVGs on smaller screens */
+  }
+}
