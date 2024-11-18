@@ -1,0 +1,15 @@
+
+
+.custom-font {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-weight: bold;
+}
+
+body {
+    background-color: var(--background-color);
+}
+
+.title {
+    color: var(--primary-text-color);
+}
+
