@@ -171,4 +171,10 @@ def spotify_top_artists(request):
 
     return Response(artists, status=status.HTTP_200_OK)
 
+@api_view(['GET'])
+def is_authenticated(request):
+    if request.user and request.user.is_authenticated:
+        return Response({"logged_in": True}, status=status.HTTP_200_OK)
+    return Response({"logged_in": False}, status=status.HTTP_200_OK)
+
 
