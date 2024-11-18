@@ -46,20 +46,39 @@ class Wrapped(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
 
-class AbstractPanel(models.Model):
+class PanelType(models.TextChoices):
+    INTRO = "IN"
+    TOP_TRACKS = "TT"
+    PRE_LLM = "PL"
+    LLM = "LM"
+    TOP_GENRES = "TG"
+    PRE_GAME = "PG"
+    GAME = "GM"
+    DANCE = "DC"
+
+
+class Panel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    wrapped = models.ForeignKey(Wrapped, on_delete=models.CASCADE)
+    wrapped = models.ForeignKey(
+        Wrapped, on_delete=models.CASCADE, related_name="panels"
+    )
     order = models.PositiveSmallIntegerField()
+    type = models.CharField(
+        max_length=2, choices=PanelType.choices, default=PanelType.TOP_TRACKS
+    )
+    data = models.JSONField(default=dict)
 
     class Meta:
-        abstract = True
+        unique_together = (("wrapped", "order"),)
+        ordering = ("order",)
 
 
+"""
 class Artist(models.Model):
     spotify_id = models.TextField(primary_key=True)
     albums = models.ManyToManyField("Album")
     name = models.TextField()
-    songs = models.ManyToManyField("Song")
+    songs = models.ManyToManyField("Track")
 
 
 class Album(models.Model):
@@ -68,7 +87,7 @@ class Album(models.Model):
     artists = models.ManyToManyField("Artist")
 
 
-class Song(models.Model):
+class Track(models.Model):
     spotify_id = models.TextField(primary_key=True)
     title = models.TextField()
     artists = models.ManyToManyField("Artist")
@@ -76,24 +95,19 @@ class Song(models.Model):
         "Album", on_delete=models.CASCADE
     )  # Specify on_delete behavior
 
+class PanelArtistOrdering(models.Model):
+    panel = models.ForeignKey(AbstractPanel, on_delete=models.CASCADE)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    order = models.PositiveSmallIntegerField()
 
-"""
-To be completed after wrapped user story
-class PanelOne(AbstractPanel):
+class PanelTrackOrdering(models.Model):
+    panel = models.ForeignKey(AbstractPanel, on_delete=models.CASCADE)
+    track = models.ForeignKey(Track, on_delete=models.CASCADE)
+    order = models.PositiveSmallIntegerField()
 
-class PanelTwo(AbstractPanel):
+class TopTracksPanel(AbstractPanel):
+    tracks = models.ManyToManyField(Track, through=PanelTrackOrdering);
 
-class PanelThree(AbstractPanel):
-
-class PanelFour(AbstractPanel):
-
-class PanelFive(AbstractPanel):
-
-class PanelSix(AbstractPanel):
-
-class PanelSeven(AbstractPanel):
-
-class PanelEight(AbstractPanel):
 """
 
 

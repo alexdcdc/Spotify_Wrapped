@@ -1,5 +1,7 @@
+/*
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Tag } from '@/components/ui/tag'
 
@@ -56,3 +58,10 @@ const SpotifyWrappedPersonality = () => {
 }
 
 export default SpotifyWrappedPersonality
+*/
+
+function LLMPanel () {
+  return <p>LLM Panel TBA</p>
+}
+
+export default LLMPanel

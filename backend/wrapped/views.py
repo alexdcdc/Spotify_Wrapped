@@ -10,7 +10,14 @@ from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from wrapped.models import CustomUser, SpotifyAuthData, SpotifyProfile, Wrapped
+from wrapped.models import (
+    CustomUser,
+    Panel,
+    PanelType,
+    SpotifyAuthData,
+    SpotifyProfile,
+    Wrapped,
+)
 from wrapped.serializers import UserSerializer, WrappedSerializer
 
 
@@ -321,7 +328,7 @@ def wrapped(request):
     if request.method == "POST":
         if not ("name" in data and data["name"]):
             return Response(status=status.HTTP_400_BAD_REQUEST)
-        new_wrapped = Wrapped(user=user, name=data["name"])
+        new_wrapped = generate_wrapped(user, data["name"])
         new_wrapped.save()
         serializer = WrappedSerializer(new_wrapped)
         return Response(
@@ -340,6 +347,30 @@ def wrapped(request):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
+def generate_wrapped(user, name):
+    PANEL_ORDER = [
+        PanelType.INTRO,
+        PanelType.TOP_TRACKS,
+        PanelType.DANCE,
+        PanelType.TOP_GENRES,
+        PanelType.PRE_LLM,
+        PanelType.LLM,
+        PanelType.PRE_GAME,
+        PanelType.GAME,
+    ]
+    new_wrapped = Wrapped()
+    new_wrapped.user = user
+    new_wrapped.name = name
+    new_wrapped.save()
+
+    order = 1
+    for panel_type in PANEL_ORDER:
+        generate_panel(user, new_wrapped, order, panel_type)
+        order += 1
+
+    return new_wrapped
+
+
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def get_wrapped_with_id(request, wrapped_id):
@@ -349,3 +380,64 @@ def get_wrapped_with_id(request, wrapped_id):
         return Response({"wrapped": serializer.data}, status=status.HTTP_200_OK)
     except Wrapped.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+def generate_panel(user, parent_wrapped, order, panel_type):
+    panel = Panel()
+    panel.wrapped = parent_wrapped
+    panel.order = order
+    panel.type = panel_type
+    match panel_type:
+        case PanelType.INTRO:
+            panel.data = generate_data_intro(user)
+        case PanelType.LLM:
+            panel.data = generate_data_llm(user)
+        case PanelType.PRE_LLM:
+            panel.data = generate_data_pre_llm(user)
+        case PanelType.DANCE:
+            panel.data = generate_data_danceability(user)
+        case PanelType.PRE_GAME:
+            panel.data = generate_data_pre_game(user)
+        case PanelType.TOP_GENRES:
+            panel.data = generate_data_top_genres(user)
+        case PanelType.TOP_TRACKS:
+            panel.data = generate_data_top_tracks(user)
+        case PanelType.GAME:
+            panel.data = generate_data_game(user)
+        case default:
+            return Exception(f"Invalid panel type specified {default}")
+
+    panel.save()
+    return panel
+
+
+def generate_data_intro(user):
+    return {}
+
+
+def generate_data_llm(user):
+    return {}
+
+
+def generate_data_pre_llm(user):
+    return {}
+
+
+def generate_data_top_tracks(user):
+    return {}
+
+
+def generate_data_top_genres(user):
+    return {}
+
+
+def generate_data_pre_game(user):
+    return {}
+
+
+def generate_data_danceability(user):
+    return {}
+
+
+def generate_data_game(user):
+    return {}
