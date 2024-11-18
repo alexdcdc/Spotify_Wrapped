@@ -63,7 +63,7 @@ function DanceabilityPanel() {
       <h1>Your Danceability Spectrum</h1>
       <div className="svg-container left-side">
 
-        <img src="/src/components/dancing_figure.svg" alt="Dance Visual Left" />
+        <img src="../../public/dancingFigure.svg" alt="Dance Visual Left" />
       </div>
       {error ? (
         <p className="error">{error}</p>
@@ -84,7 +84,7 @@ function DanceabilityPanel() {
       )}
       <div className="svg-container right-side">
 
-        <img src="/src/components/musical_notes.svg" alt="Dance Visual Right" />
+        <img src="./musical_notes.svg" alt="Dance Visual Right" />
       </div>
       <div className="navigation-buttons">
         <button onClick={prevSlide}>&lt; Prev</button>
