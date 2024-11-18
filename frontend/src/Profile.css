@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 3em;
 
 }
 
@@ -15,9 +16,9 @@
 }
 
 .profile-row {
-    display: flex;
-    align-items: center;
-    gap: 1em; /* Spacing between image and details */
+    display: inline-flex;
+    align-items: start;
+    gap: 3em; /* Spacing between image and details */
 }
 
 .profile-container h1 {
@@ -56,6 +57,7 @@
 }
 
 .delete-button {
+    display: block;
     margin-top: 30px;
     padding: 10px 20px;
     background-color: #d9534f;

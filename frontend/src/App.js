@@ -8,9 +8,10 @@ import Register from "./Register"
 import Profile from "./Profile";
 import Contact from "./Contact";
 import Logout from "./Logout";
-
+import { isAuthenticated } from "./lib/auth"
 
 function App() {
+    console.log(isAuthenticated())
 
     return (
         <div>

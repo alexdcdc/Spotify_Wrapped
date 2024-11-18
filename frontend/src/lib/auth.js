@@ -1,3 +1,6 @@
 function isAuthenticated() {
-  return !!sessionStorage.getItem("token");
+  return !!localStorage.getItem("token");
 }
+
+
+export { isAuthenticated }
