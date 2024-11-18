@@ -372,7 +372,10 @@ def danceability_score(request):
     total_danceability = sum(feature["danceability"] for feature in audio_features if feature)
     average_danceability = total_danceability / len(audio_features) if audio_features else 0
 
-    return Response({"average_danceability": 100*average_danceability})
+    return Response({"average_danceability": (int)(100*average_danceability)})
+
+
+
 
 
 

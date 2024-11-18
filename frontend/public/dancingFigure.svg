@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300">
+  <!-- Dancing Figure -->
+  <g id="dancer">
+    <!-- Head -->
+    <circle cx="100" cy="60" r="20" fill="#1DB954"/>
+
+    <!-- Body -->
+    <path d="M100 80 L100 150" stroke="#1DB954" stroke-width="8" stroke-linecap="round"/>
+
+    <!-- Arms - wavy for dance movement -->
+    <path d="M100 100 Q130 110 150 90" stroke="#1DB954" stroke-width="6" stroke-linecap="round"/>
+    <path d="M100 100 Q70 120 50 100" stroke="#1DB954" stroke-width="6" stroke-linecap="round"/>
+
+    <!-- Legs - in dancing position -->
+    <path d="M100 150 Q120 200 140 220" stroke="#1DB954" stroke-width="8" stroke-linecap="round"/>
+    <path d="M100 150 Q80 190 60 200" stroke="#1DB954" stroke-width="8" stroke-linecap="round"/>
+  </g>
+
+  <!-- Musical Notes -->
+  <g id="notes">
+    <path d="M30 50 Q40 30 50 50 L50 80 L30 80 L30 50" fill="#1DB954"/>
+    <line x1="50" y1="50" x2="58" y2="45" stroke="#1DB954" stroke-width="2"/>
+
+    <path d="M150 140 Q160 120 170 140 L170 170 L150 170 L150 140" fill="#1DB954"/>
+    <line x1="170" y1="140" x2="178" y2="135" stroke="#1DB954" stroke-width="2"/>
+
+    <path d="M40 250 Q50 230 60 250 L60 280 L40 280 L40 250" fill="#1DB954"/>
+    <line x1="60" y1="250" x2="68" y2="245" stroke="#1DB954" stroke-width="2"/>
+  </g>
+
+  <!-- Animated circles for visual interest -->
+  <circle cx="160" cy="60" r="5" fill="#1DB954">
+    <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="30" cy="150" r="4" fill="#1DB954">
+    <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="170" cy="200" r="6" fill="#1DB954">
+    <animate attributeName="opacity" values="0;1;0" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+</svg>
