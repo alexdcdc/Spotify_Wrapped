@@ -23,7 +23,8 @@ function Dashboard() {
     useEffect(() => {getUserData()}, [])
 
     return (
-        <div>
+
+        <div className="title">
             <p>Welcome to the dashboard, {firstName}.</p>
         </div>
     )

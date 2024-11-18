@@ -1,12 +1,16 @@
 import {Outlet} from "react-router-dom"
+import NavBar from "./NavBar"
+import {useState} from "react";
 
 function Layout() {
     return (
-        <div>
-            <h1>Rendered by Layout component!</h1>
-            {<Outlet/>}
-        </div>
-    )
-}
+            <div>
+                <NavBar/>
 
-export default Layout
+                {<Outlet/>}
+            </div>
+
+            )
+            }
+
+            export default Layout
