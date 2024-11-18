@@ -1,0 +1,208 @@
+/* Base styling */
+body, html {
+    background-color: #1db954;
+    color: #fff;
+    margin: 0;
+    font-family: Montserrat, sans-serif;
+    height: 100%;
+}
+
+/* Wrapper for Spotify content */
+.spotify-wrapper {
+    background: rgb(0 0 0);
+    background: linear-gradient(158deg, rgb(0 0 0 / 100%) 10%, rgb(173 52 113 / 100%) 100%, rgb(255 77 167 / 100%) 100%);
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Fade-in animation */
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Independent styling for h1 */
+h1 {
+    position: relative;
+    top: 20px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    right: 334px;
+    color: #ff4dce;
+    margin: 20px 0 -80px;
+    transition: top 0.3s;
+    opacity: 0; /* Initially hidden */
+    animation: fade-in 1s ease forwards; /* Apply fade-in */
+    animation-delay: 0.2s;
+}
+
+/* Error styling */
+.error {
+    color: red;
+    margin: 10px 0;
+    opacity: 0;
+    animation: fade-in 1s ease forwards;
+    animation-delay: 0.4s;
+}
+
+/* Yearly tracks section */
+.yearly-tracks {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 40px;
+    max-width: 90%;
+    width: 100%;
+    margin:  auto;
+}
+
+/* Individual yearly track items */
+.yearly-track-item {
+    background-color: transparent;
+    padding: 15px;
+    width: 200px;
+    text-align: center;
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    opacity: 0; /* Initially hidden */
+    animation: fade-in 1s ease forwards;
+    animation-delay: 0.6s;
+}
+
+.yearly-track-item:nth-child(1) { animation-delay: 0.6s; }
+.yearly-track-item:nth-child(2) { animation-delay: 0.8s; }
+.yearly-track-item:nth-child(3) { animation-delay: 1s; }
+.yearly-track-item:nth-child(4) { animation-delay: 1.2s; }
+.yearly-track-item:nth-child(5) { animation-delay: 1.4s; }
+
+
+/* Add more delays if you have more items */
+
+/* Add this class for text and album covers inside yearly-track-item */
+.yearly-track-item * {
+    opacity: 0;
+    animation: fade-in 1s ease forwards;
+
+}
+
+/* Album cover container */
+.album-cover-container {
+    position: relative;
+    width: 150px;
+    height: 140px;
+    margin: 0 auto 15px;
+}
+
+/* Album cover images */
+.album-cover {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    position: absolute;
+    transition: transform 0.3s;
+}
+
+/* First album cover styling */
+.album-cover:first-child {
+    top: 0;
+    left: 0;
+    z-index: 2;
+    transform: translate(-5px, -5px);
+}
+
+/* Last album cover styling */
+.album-cover:last-child {
+    top: 125px;
+    right: -30px;
+    z-index: 1;
+}
+
+/* Track details styling */
+.track-details {
+    margin: 140px 00 -100px; /* Adjusted margin to move track details further down */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Track label styling */
+.track-label {
+    font-size: 2.0rem;
+    font-weight: bolder;
+    color: #ff4dce;
+    margin: 4px 0;
+}
+
+/* Artist name styling */
+.artist-name {
+    font-size: 0.9rem;
+    font-weight: normal;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+/* Track name styling */
+.track-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #1db954;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+/* Hover effects for track and artist names */
+.artist-name:hover {
+    color: #1db954;
+}
+
+.track-name:hover {
+    color: #fff;
+}
+
+.navigate-button {
+    position: fixed;
+    bottom: 20px;
+    right: 5px;
+    width: 40px;
+    height: 40px;
+    background-color: #131414;
+    color: white;
+    font-size: 24px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 30%);
+}
+
+.navigate-button:hover {
+    background-color: darkgray;
+}
+
+
+
+
+
+
+

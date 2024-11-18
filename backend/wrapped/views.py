@@ -1,17 +1,25 @@
 import requests
 import datetime
 import time
+from collections import Counter
+
 import google.generativeai as genai
+import requests
+from django.conf import settings
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from wrapped.models import CustomUser, SpotifyAuthData, SpotifyProfile
-from wrapped.serializers import UserSerializer
-from collections import Counter
-from django.conf import settings
-
+from wrapped.models import (
+    CustomUser,
+    Panel,
+    PanelType,
+    SpotifyAuthData,
+    SpotifyProfile,
+    Wrapped,
+)
+from wrapped.serializers import UserSerializer, WrappedSerializer
 
 
 # takes in token
@@ -156,7 +164,6 @@ def spotify_top_tracks(request):
 
     response = requests.get(url, headers=headers)
     if response.status_code != 200:
-        print(response)
         return Response(
             {"error": "Failed to fetch top tracks from Spotify API."},
             status=status.HTTP_400_BAD_REQUEST,
@@ -221,7 +228,6 @@ def top_tracks(request):
 
 @api_view(["GET"])
 def recently_played_tracks(request):
-
     access_token = request.user.auth_data.access_token
     headers = {"Authorization": f"Bearer {access_token}"}
 
@@ -238,8 +244,6 @@ def recently_played_tracks(request):
             headers=headers,
             params=params,
         )
-
-        print(response.status_code)
 
         if response.status_code != 200:
             return Response(
@@ -274,7 +278,6 @@ def llm_generate(request):
     headers = {"Authorization": f"Bearer {access_token}"}
     genai.configure(api_key=settings.GOOGLE_CLIENT_ID)
 
-
     top_artists_response = requests.get(
         "https://api.spotify.com/v1/me/top/artists?limit=5", headers=headers
     )
@@ -288,7 +291,6 @@ def llm_generate(request):
     top_artists = top_artists_response.json()
     genres = {genre for artist in top_artists["items"] for genre in artist["genres"]}
     artist_names = [artist["name"] for artist in top_artists["items"]]
-
 
     model = genai.GenerativeModel("gemini-1.5-flash")
     gemini_prompt = f"""
@@ -376,11 +378,124 @@ def danceability_score(request):
 
 
 
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def wrapped(request):
+    user = request.user
+    data = request.data
+    if request.method == "POST":
+        if not ("name" in data and data["name"]):
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        new_wrapped = generate_wrapped(user, data["name"])
+        new_wrapped.save()
+        serializer = WrappedSerializer(new_wrapped)
+        return Response(
+            {
+                "message": "New wrapped successfully created",
+                "wrapped": serializer.data,
+            },
+            status=status.HTTP_200_OK,
+        )
+
+    elif request.method == "GET":
+        serializer = WrappedSerializer(Wrapped.objects.filter(user=user), many=True)
+        return Response({"wrapped_list": serializer.data}, status=status.HTTP_200_OK)
+
+    else:
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
+def generate_wrapped(user, name):
+    PANEL_ORDER = [
+        PanelType.INTRO,
+        PanelType.TOP_TRACKS,
+        PanelType.DANCE,
+        PanelType.TOP_GENRES,
+        PanelType.PRE_LLM,
+        PanelType.LLM,
+        PanelType.PRE_GAME,
+        PanelType.GAME,
+    ]
+    new_wrapped = Wrapped()
+    new_wrapped.user = user
+    new_wrapped.name = name
+    new_wrapped.save()
+
+    order = 1
+    for panel_type in PANEL_ORDER:
+        generate_panel(user, new_wrapped, order, panel_type)
+        order += 1
+
+    return new_wrapped
 
 
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_wrapped_with_id(request, wrapped_id):
+    user = request.user
+    try:
+        serializer = WrappedSerializer(Wrapped.objects.get(id=wrapped_id, user=user))
+        return Response({"wrapped": serializer.data}, status=status.HTTP_200_OK)
+    except Wrapped.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
 
+def generate_panel(user, parent_wrapped, order, panel_type):
+    panel = Panel()
+    panel.wrapped = parent_wrapped
+    panel.order = order
+    panel.type = panel_type
+    match panel_type:
+        case PanelType.INTRO:
+            panel.data = generate_data_intro(user)
+        case PanelType.LLM:
+            panel.data = generate_data_llm(user)
+        case PanelType.PRE_LLM:
+            panel.data = generate_data_pre_llm(user)
+        case PanelType.DANCE:
+            panel.data = generate_data_danceability(user)
+        case PanelType.PRE_GAME:
+            panel.data = generate_data_pre_game(user)
+        case PanelType.TOP_GENRES:
+            panel.data = generate_data_top_genres(user)
+        case PanelType.TOP_TRACKS:
+            panel.data = generate_data_top_tracks(user)
+        case PanelType.GAME:
+            panel.data = generate_data_game(user)
+        case default:
+            return Exception(f"Invalid panel type specified {default}")
+
+    panel.save()
+    return panel
 
 
+def generate_data_intro(user):
+    return {}
+
+
+def generate_data_llm(user):
+    return {}
+
+
+def generate_data_pre_llm(user):
+    return {}
+
+
+def generate_data_top_tracks(user):
+    return {}
+
+
+def generate_data_top_genres(user):
+    return {}
+
+
+def generate_data_pre_game(user):
+    return {}
+
+
+def generate_data_danceability(user):
+    return {}
+
+
+def generate_data_game(user):
+    return {}

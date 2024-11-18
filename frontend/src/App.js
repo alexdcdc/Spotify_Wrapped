@@ -11,8 +11,14 @@ import PanelTwo from './components/panelTwo';
 import DanceabilityPanel from "./components/danceabilityPanel";
 import LLMPanel from "./components/llmPanel";
 
+import SpotifyOverview from './components/TopTracksPanel'
+import TopGenresPanel from './components/TopGenresPanel'
+import NewWrappedForm from './NewWrappedForm'
+import WrappedPage from './WrappedPage'
+// import SpotifyWrappedPersonality from './components/llmPanel'
 
 function App () {
+  sessionStorage.setItem('isDark', !sessionStorage.getItem('isDark'))
   return (
     <div>
       <Routes>
@@ -22,11 +28,17 @@ function App () {
           <Route path='callback' element={<Callback />} />
           <Route path='register' element={<Register />} />
           <Route element={<PrivateRoutes />}>
-            <Route path='dashboard' element={<Dashboard />} />
             <Route path='dashboard/panel-one' element={<PanelOne />} /> {/* New route for SpotifyOverview */}
-            <Route path='dashboard/panel-two' element={<PanelTwo />} />
             <Route path = 'dashboard/llm-panel' element={<LLMPanel />} />
             <Route path = 'dashboard/danceability-panel' element={<DanceabilityPanel />} />
+            <Route path='dashboard'>
+              <Route path='' element={<Dashboard />} />
+              <Route path='overview' element={<SpotifyOverview />} /> {/* New route for SpotifyOverview */}
+              <Route path='panel-two' element={<TopGenresPanel />} />
+            </Route>
+            <Route path='wrapped/:id' element={<WrappedPage />} />
+            <Route path='create-wrapped' element={<NewWrappedForm />} />
+            {/* <Route path='wrapped-llm' element={<SpotifyWrappedPersonality/>}/> */}
           </Route>
         </Route>
       </Routes>
