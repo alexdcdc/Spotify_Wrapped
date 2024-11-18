@@ -12,8 +12,8 @@ const PanelTwo = () => {
       try {
         const response = await axios.get('http://localhost:8000/api/spotify_top_genres', {
           headers: {
-            Authorization: `Token ${localStorage.getItem('token')}`
-          }
+            Authorization: `Token ${localStorage.getItem('token')}`,
+          },
         });
         setGenres(response.data.top_genres);
       } catch (err) {
@@ -25,7 +25,7 @@ const PanelTwo = () => {
     fetchTopGenres();
   }, []);
 
-  // Limit the display to the top 5 genres
+  // Limit to the top 5 genres
   const topGenres = Array.isArray(genres) ? genres.slice(0, 5) : [];
 
   return (
@@ -37,9 +37,14 @@ const PanelTwo = () => {
         ) : (
           <ul className="genre-list">
             {topGenres.map((genre, index) => (
-              <li key={index} className={`genre-item genre-${index + 1}`}>
-                <span className="genre-rank">#{index + 1}</span>
-                <span className="genre-name">{genre[0]}</span>
+              <li key={index} className="genre-item">
+                {/* Bar with proportional width and color */}
+                <div className={`genre-bar genre-${index + 1}`}></div>
+                {/* Text block with rank and genre name */}
+                <div className="genre-text">
+                  <span className="genre-rank">#{index + 1}</span>
+                  <span className="genre-name">{genre[0]}</span>
+                </div>
               </li>
             ))}
           </ul>
@@ -51,3 +56,4 @@ const PanelTwo = () => {
 };
 
 export default PanelTwo;
+
