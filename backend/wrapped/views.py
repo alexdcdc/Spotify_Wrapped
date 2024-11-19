@@ -1,6 +1,7 @@
 import datetime
 import time
 from collections import Counter
+from random import choice
 
 import google.generativeai as genai
 import requests
@@ -20,6 +21,16 @@ from wrapped.models import (
 )
 from wrapped.serializers import UserSerializer, WrappedSerializer
 
+
+def get_spotify_endpoint(endpoint, params, token):
+    url = f"https://api.spotify.com/v1{endpoint}"
+    headers = {"Authorization": "Bearer " + token}
+
+    response = requests.get(url, headers=headers, params=params)
+    if response.ok:
+        return response.json()
+
+    return Exception(f"ERROR: Call to endpoint {endpoint} failed with status code {response.status_code}")
 
 # takes in token
 # validates token
@@ -438,6 +449,12 @@ def generate_data_pre_game(user):
 def generate_data_danceability(user):
     return {}
 
+@api_view(["GET"])
+def generate_data_game(request):
+    user = request.user
+    data = get_spotify_endpoint("/me/top/tracks", {"time_range": "long_term", "limit": "50"}, user.auth_data.access_token)
 
-def generate_data_game(user):
-    return {}
+    tracks = data["items"]
+    random_track = choice(tracks)
+
+    return Response({"choices": tracks, "correct": random_track}, status=status.HTTP_200_OK)
