@@ -44,5 +44,4 @@ urlpatterns = [
     path('api/wrapped-llm', llm_generate),
     path('api/wrapped', wrapped),
     path('api/wrapped/<str:wrapped_id>', get_wrapped_with_id),
-    path('api/game', generate_data_game)
 ]

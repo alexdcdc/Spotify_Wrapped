@@ -449,12 +449,9 @@ def generate_data_pre_game(user):
 def generate_data_danceability(user):
     return {}
 
-@api_view(["GET"])
-def generate_data_game(request):
-    user = request.user
+def generate_data_game(user):
     data = get_spotify_endpoint("/me/top/tracks", {"time_range": "long_term", "limit": "50"}, user.auth_data.access_token)
-
     tracks = data["items"]
     random_track = choice(tracks)
 
-    return Response({"choices": tracks, "correct": random_track}, status=status.HTTP_200_OK)
+    return {"choices": tracks, "correct": random_track}
