@@ -1,21 +1,19 @@
 import {useState} from "react";
+import PlaybackButton from "./PlaybackButton";
 
 function GamePanel ({data}) {
   const [answer, setAnswer] = useState("")
   const [submitted, setSubmitted] = useState(false)
   const [correctMessage, setCorrectMessage] = useState("")
+
+
   const correctTrack = data.correct
   const trackChoices = data.choices.map((track) => <option key={track.id}>{track.name}</option>)
-  const preview_url = correctTrack.preview_url
 
   console.log(data);
   if (!correctTrack || !data.choices) {
     return (<p>Invalid data passed into game panel</p>)
   }
-
-
-
-
 
   const checkAnswer = (e) => {
     e.preventDefault()
@@ -34,13 +32,10 @@ function GamePanel ({data}) {
 
 
 
-
   if (!submitted) {
     return (
       <div>
-        <audio controls>
-          <source src={preview_url} type="audio/mpeg"/>
-        </audio>
+        <PlaybackButton url={correctTrack.preview_url} start={data.clip_start} duration={data.clip_duration} maxPlays={2}/>
         <form onSubmit = {checkAnswer}>
           <input list="track-choices" name="track-name" value = {answer} onChange={updateAnswer}/>
             <datalist id="track-choices">

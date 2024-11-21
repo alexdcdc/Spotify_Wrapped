@@ -1,7 +1,7 @@
 import datetime
 import time
 from collections import Counter
-from random import choice
+from random import choice, randint
 
 import google.generativeai as genai
 import requests
@@ -454,4 +454,7 @@ def generate_data_game(user):
     tracks = data["items"]
     random_track = choice(tracks)
 
-    return {"choices": tracks, "correct": random_track}
+    clip_start = randint(0, 27)
+    clip_duration = 3
+
+    return {"choices": tracks, "correct": random_track, "clip_start": clip_start, "clip_duration": clip_duration}
