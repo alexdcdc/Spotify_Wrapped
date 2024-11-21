@@ -13,3 +13,145 @@ body {
     color: var(--primary-text-color);
 }
 
+
+.sign-in-button {
+    display: block;
+    margin-left: auto;
+    padding: 10px 20px;
+    background-color: #1ED760;
+    color: var(--primary-text-color);
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/*body {*/
+/*  margin: 0;*/
+/*  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',*/
+/*    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',*/
+/*    sans-serif;*/
+/*  -webkit-font-smoothing: antialiased;*/
+/*  -moz-osx-font-smoothing: grayscale;*/
+/*}*/
+
+/*code {*/
+/*  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',*/
+/*    monospace;*/
+/*}*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+[data-theme="light"] {
+  --background-color: #ffffff;
+  --foreground-color: #003cff;
+  --primary-text-color: #000000;
+  --secondary-text-color: #ffffff;
+  --toggle-bg: #f0eb9d;
+  --toggle-fg: #ffd000;
+}
+
+[data-theme="dark"] {
+  --background-color: #000000;
+  --foreground-color: #567aff;
+  --primary-text-color: #ffffff;
+  --secondary-text-color: #000000;
+  --toggle-bg: #283452;
+  --toggle-fg: #00a6ff;
+}
+
+.profile-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3em;
+
+}
+
+.profile-container {
+    text-align: center;
+    background-color: var(--background-color);;
+    padding: 3em;
+    width: 80vw;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.profile-row {
+    display: inline-flex;
+    align-items: start;
+    gap: 3em; /* Spacing between image and details */
+}
+
+.profile-container h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    background-color: #cccccc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-text-color);
+    margin: 0 auto 10px;
+}
+
+.profile-details {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.profile-details p {
+    font-size: 1rem;
+    color: var(--primary-text-color);
+    margin: 5px 0;
+}
+
+.profile-details p strong {
+    font-weight: bold;
+}
+
+.delete-button {
+    display: block;
+    margin-left: auto;
+    margin-top: 30px;
+    padding: 10px 20px;
+    background-color: #d9534f;
+    color: var(--primary-text-color);
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: #c9302c;
+}
+
+
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.25em;
+    font-weight: lighter;
+
+}
+
+
+

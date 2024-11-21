@@ -9,4 +9,4 @@ function logout() {
 }
 
 
-export { isAuthenticated }
+export { isAuthenticated, logout}

@@ -27,7 +27,7 @@ const requestAuth = async () => {
 
 function SpotifyButton() {
     return (
-        <button onClick = { requestAuth }>Log in with Spotify</button>
+        <button className="sign-in-button" onClick = { requestAuth }>Log in with Spotify</button>
     )
 }
 

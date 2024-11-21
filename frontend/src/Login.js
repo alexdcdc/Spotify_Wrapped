@@ -1,7 +1,7 @@
 import SpotifyButton from "./SpotifyButton"
 function Login() {
     return (
-        <SpotifyButton/>
+        <h1> WELCOME TO YOUR WRAPPED SPACE </h1>
     );
 }
 

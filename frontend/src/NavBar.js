@@ -4,7 +4,9 @@ import { useTheme } from './ThemeContext';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import { isAuthenticated } from "./lib/auth"
+import { isAuthenticated, logout } from "./lib/auth"
+import SpotifyButton from "./SpotifyButton";
+
 
 function NavBar() {
     const navigate = useNavigate();
@@ -54,8 +56,8 @@ function NavBar() {
                                 </a>
                             </li>
                             <li>
-                                <a className="dropdown-item" href="/logout"
-                                   onClick={ logout() }>
+                                <a className="dropdown-item"
+                                   onClick={ () => {logout()} }>
                                     Log Out
                                 </a>
                             </li>
@@ -71,9 +73,12 @@ function NavBar() {
                 <a className="navbar-brand ps-3 custom-font" href="/dashboard"
                    onClick={() => handleNavigation('/dashboard')}>Vibe Dive</a>
 
+                <ul className="navbar-nav ms-auto pe-3">
+                    <SpotifyButton/>
+                </ul>
             </nav>
-        );
+    );
     }
-}
+    }
 
-export default NavBar;
+    export default NavBar;
