@@ -4,34 +4,39 @@
 .panel-two {
   margin: 0;
   padding: 0;
-  font-family: 'Lineto Circular', Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 
-  background: linear-gradient(
-    180deg,
-    rgba(173, 236, 227, 1) 0%,
-    rgba(249, 216, 43, 1) 20%,
-    rgba(201, 30, 13, 1) 40%,
-    rgba(13, 0, 44, 1) 60%,
-    rgba(80, 30, 240, 1) 80%
-  );
+  background: linear-gradient(158deg, rgba(0, 0, 0, 1) 10%, rgba(173, 52, 113, 1) 100%, rgba(255, 77, 167, 1) 100%);
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
 }
 
-/* Main box containing the genres */
 .panel-two .box {
   width: 90%;
-  max-width: 800px;
-  padding: 120px 80px;  /* Increased padding for more height */
+  max-width: 600px;
+  padding: 100px 80px;
   background-color: #f10086;
-  border-radius: 25px;
+  border-radius: 10px; /* Less rounded corners */
   text-align: center;
   color: white;
   margin: 20px;
   box-sizing: border-box;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  position: relative; /* Needed for positioning the pseudo-element */
+}
+
+.panel-two .box::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 45px; /* Height of the teal bar */
+  background-color: #8cdde6; /* Light teal blue color */
+  border-bottom-left-radius: 10px; /* Match the box radius */
+  border-bottom-right-radius: 10px;
 }
 
 /* Heading style */
@@ -63,7 +68,7 @@
 
 /* Bar element inside each genre item */
 .genre-bar {
-  height: 20px;
+  height: 70px;
   border-radius: 50px;
   display: inline-block;
   flex-shrink: 0;
@@ -78,7 +83,7 @@
   width: 65%;
 }
 .genre-bar.genre-3 {
-  background-color: #82b1ff; /* Blue */
+  background-color:  #00008B; /* Blue */
   width: 50%;
 }
 .genre-bar.genre-4 {
