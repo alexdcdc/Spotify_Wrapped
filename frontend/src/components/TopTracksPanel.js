@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react'
-<<<<<<<< HEAD:frontend/src/components/PanelOne.js
 import './panelOne.css'
-import './panelTwo' // Import panelTwo.js
+import './TopGenresPanel' // Import panelTwo.js
 import SlideIndicator from './SlideIndicator' // Import the SlideIndicator component
-========
 import './SpotifyWrapped.css'
-import './TopGenresPanel' // Import TopGenresPanel.js
->>>>>>>> origin/master:frontend/src/components/TopTracksPanel.js
 
 function PanelOne () {
   const [spotifyData, setSpotifyData] = useState(null)
@@ -98,7 +94,6 @@ function PanelOne () {
             </div>
             )
           : null}
-<<<<<<<< HEAD:frontend/src/components/PanelOne.js
 
       {/* Slide Navigation Buttons */}
       {/* <button onClick={nextSlide}>Next &gt;</button> */}
@@ -107,11 +102,9 @@ function PanelOne () {
       <SlideIndicator currentSlide={0} totalSlides={2} />
 
       {/* Circular button to navigate to panelTwo.js */}
-      <button className='navigate-button' onClick={() => { window.location.href = './panel-two' }}>
+      <button className='navigate-button' onClick={() => { window.location.href = './TopGenresPanel.js' }}>
         &gt;
       </button>
-========
->>>>>>>> origin/master:frontend/src/components/TopTracksPanel.js
     </div>
   )
 }

@@ -59,13 +59,7 @@ function LLMPanel() {
 
   return (
       <div className='llm-wrapper'>
-            <Player
-          src="https://assets3.lottiefiles.com/packages/lf20_kqyepz3i.json"
-          className="lottie-svg left"
-          loop
-          autoplay
-          style={{ width: 200, height: 200, position: 'absolute', top: '10%', left: '-50px' }}
-        />
+
         <h1>Your Personality Snapshot</h1>
         {error ? (
             <p className='error'>{error}</p>
@@ -100,13 +94,6 @@ function LLMPanel() {
           <button onClick={prevSlide}>&lt; Prev</button>
           <button onClick={nextSlide}>Next &gt;</button>
         </div>
-            <Player
-          src="https://assets3.lottiefiles.com/packages/lf20_kqyepz3i.json"
-          className="lottie-svg right"
-          loop
-          autoplay
-          style={{ width: 200, height: 200, position: 'absolute', bottom: '10%', right: '-50px' }}
-        />
       </div>
   )
 }

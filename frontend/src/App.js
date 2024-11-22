@@ -7,9 +7,8 @@ import Callback from './Callback'
 import Register from './Register'
 import PrivateRoutes from './PrivateRoutes'
 import PanelOne from './components/PanelOne';
-import PanelTwo from './components/panelTwo';
 import DanceabilityPanel from "./components/danceabilityPanel";
-import LLMPanel from "./components/llmPanel";
+import LLMPanel from "./components/LLMPanel";
 
 import SpotifyOverview from './components/TopTracksPanel'
 import TopGenresPanel from './components/TopGenresPanel'
