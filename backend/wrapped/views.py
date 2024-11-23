@@ -310,21 +310,24 @@ def llm_generate(request):
     response = model.generate_content(gemini_prompt)
     full_description = response.text.strip()
 
-
     personality_description = ""
     fashion_choices = ""
     behavior_description = ""
 
     if "Personality & Thinking Style:" in full_description:
-        personality_description = full_description.split("Personality & Thinking Style:")[1].split("Fashion Choices:")[
-            0].strip()
+        personality_description = (
+            full_description.split("Personality & Thinking Style:")[1]
+            .split("Fashion Choices:")[0]
+            .strip()
+        )
 
     if "Fashion Choices:" in full_description:
-        fashion_choices = full_description.split("Fashion Choices:")[1].split("Behavior:")[0].strip()
+        fashion_choices = (
+            full_description.split("Fashion Choices:")[1].split("Behavior:")[0].strip()
+        )
 
     if "Behavior:" in full_description:
         behavior_description = full_description.split("Behavior:")[1].strip()
-
 
     return Response(
         {
@@ -337,12 +340,10 @@ def llm_generate(request):
     )
 
 
-
 @api_view(["GET"])
 def danceability_score(request):
     access_token = request.user.auth_data.access_token
     headers = {"Authorization": f"Bearer {access_token}"}
-
 
     top_tracks_response = requests.get(
         "https://api.spotify.com/v1/me/top/tracks?limit=10", headers=headers
@@ -357,7 +358,6 @@ def danceability_score(request):
     tracks = top_tracks_response.json().get("items", [])
     track_ids = [track["id"] for track in tracks]
 
-
     audio_features_response = requests.get(
         f"https://api.spotify.com/v1/audio-features?ids={','.join(track_ids)}",
         headers=headers,
@@ -371,11 +371,14 @@ def danceability_score(request):
 
     audio_features = audio_features_response.json().get("audio_features", [])
 
-    total_danceability = sum(feature["danceability"] for feature in audio_features if feature)
-    average_danceability = total_danceability / len(audio_features) if audio_features else 0
+    total_danceability = sum(
+        feature["danceability"] for feature in audio_features if feature
+    )
+    average_danceability = (
+        total_danceability / len(audio_features) if audio_features else 0
+    )
 
-    return Response({"average_danceability": (int)(100*average_danceability)})
-
+    return Response({"average_danceability": (int)(100 * average_danceability)})
 
 
 @api_view(["GET", "POST"])

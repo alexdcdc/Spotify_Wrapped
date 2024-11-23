@@ -33,6 +33,7 @@ async function get (url, params = {}, isAuthenticated) {
   const newUrl = paramString ? url + '?' + params : url
   const headers = {}
   if (isAuthenticated) {
+    console.log(token)
     headers.Authorization = 'Token ' + token
   }
 

@@ -12,7 +12,7 @@ const PanelTwo = () => {
       try {
         const response = await axios.get('http://localhost:8000/api/spotify_top_genres', {
           headers: {
-            Authorization: `Token ${localStorage.getItem('token')}`
+            Authorization: `Token ${sessionStorage.getItem('token')}`
           }
         })
         setGenres(response.data.top_genres)
@@ -32,23 +32,25 @@ const PanelTwo = () => {
     <div className='panel-two'>
       <div className='box'>
         <h2 className='panel-heading'>My Top Genres</h2>
-        {error ? (
-          <p>{error}</p>
-        ) : (
-          <ul className='genre-list'>
-            {topGenres.map((genre, index) => (
-              <li key={index} className='genre-item'>
-                {/* Bar with proportional width and color */}
-                <div className={`genre-bar genre-${index + 1}`} />
-                {/* Text block with rank and genre name */}
-                <div className='genre-text'>
-                  <span className='genre-rank'>#{index + 1}</span>
-                  <span className='genre-name'>{genre[0]}</span>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
+        {error
+          ? (
+            <p>{error}</p>
+            )
+          : (
+            <ul className='genre-list'>
+              {topGenres.map((genre, index) => (
+                <li key={index} className='genre-item'>
+                  {/* Bar with proportional width and color */}
+                  <div className={`genre-bar genre-${index + 1}`} />
+                  {/* Text block with rank and genre name */}
+                  <div className='genre-text'>
+                    <span className='genre-rank'>#{index + 1}</span>
+                    <span className='genre-name'>{genre[0]}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            )}
         <SlideIndicator currentSlide={1} totalSlides={2} />
       </div>
     </div>
