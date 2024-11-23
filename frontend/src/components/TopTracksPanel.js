@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react'
 import './panelOne.css'
-import './TopGenresPanel'
+import './TopGenresPanel' // Import panelTwo.js
 import SlideIndicator from './SlideIndicator' // Import the SlideIndicator component
+
 
 function PanelOne () {
   const [spotifyData, setSpotifyData] = useState(null)
   const [error, setError] = useState(null)
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const totalSlides = 8 // Define the total number of slides
   const token = sessionStorage.getItem('token')
 
   useEffect(() => {

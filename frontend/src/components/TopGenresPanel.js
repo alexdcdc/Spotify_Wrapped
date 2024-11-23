@@ -55,5 +55,4 @@ const PanelTwo = () => {
   );
 };
 
-export default PanelTwo;
-
+export default PanelTwo
