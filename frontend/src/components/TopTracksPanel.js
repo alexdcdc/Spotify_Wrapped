@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './panelOne.css'
 import './TopGenresPanel' // Import panelTwo.js
 import SlideIndicator from './SlideIndicator' // Import the SlideIndicator component
-import './SpotifyWrapped.css'
+
 
 function PanelOne () {
   const [spotifyData, setSpotifyData] = useState(null)

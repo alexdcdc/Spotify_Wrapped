@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './panelOne.css'
 import './TopGenresPanel'
 import SlideIndicator from './SlideIndicator' // Import the SlideIndicator component
-import './SpotifyWrapped.css'
+
 
 
 function PanelOne () {
