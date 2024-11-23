@@ -300,11 +300,11 @@ def llm_generate(request):
         Please describe the following with clear labels:
 
         1. Personality & Thinking Style: Describe likely personality traits and thinking style in 3-4 words.
-        2. Fashion Choices: Describe probable fashion choices and aesthetic preferences in 3-4 words. 
+        2. Fashion Choices: Describe probable fashion choices and aesthetic preferences in 3-4 words.
            Make sure it's specific clothing.
         3. Behavior: Describe typical behaviors and habits in 3-4 words.
 
-        Make sure each section starts with the label 
+        Make sure each section starts with the label
         (e.g., "Personality & Thinking Style:", "Fashion Choices:", "Behavior:").
         You also don't have to add the numbers, they're just there to help you structure your response.
         """
