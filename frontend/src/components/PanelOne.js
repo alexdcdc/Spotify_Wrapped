@@ -1,13 +1,10 @@
 import { useState, useEffect } from 'react'
 import './panelOne.css'
 import './TopGenresPanel'
-import SlideIndicator from './SlideIndicator' // Import the SlideIndicator component
 
 function PanelOne () {
   const [spotifyData, setSpotifyData] = useState(null)
   const [error, setError] = useState(null)
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const totalSlides = 8 // Define the total number of slides
   const token = sessionStorage.getItem('token')
 
   useEffect(() => {
@@ -53,16 +50,6 @@ function PanelOne () {
 
   if (!token) return <p>Please sign in to view your Spotify Wrapped data.</p>
 
-  /*
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % totalSlides)
-  }
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides)
-  }
-  */
-
   return (
     <div className='spotify-wrapper'>
       <h1>The music that defined your month.</h1>
@@ -95,12 +82,6 @@ function PanelOne () {
             </div>
             )
           : null}
-
-      {/* Slide Navigation Buttons */}
-      {/* <button onClick={nextSlide}>Next &gt;</button> */}
-
-      {/* Slide Indicator on the right */}
-      <SlideIndicator currentSlide={0} totalSlides={2} />
 
       {/* Circular button to navigate to panelTwo.js */}
       <button className='navigate-button' onClick={() => { window.location.href = './TopGenresPanel.js' }}>
