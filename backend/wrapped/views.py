@@ -1,9 +1,9 @@
+import requests
 import datetime
 import time
 from collections import Counter
 
 import google.generativeai as genai
-import requests
 from django.conf import settings
 from rest_framework import status
 from rest_framework.authtoken.models import Token
@@ -292,32 +292,94 @@ def llm_generate(request):
     artist_names = [artist["name"] for artist in top_artists["items"]]
 
     model = genai.GenerativeModel("gemini-1.5-flash")
-
     gemini_prompt = f"""
         Create a vibrant personality description for someone who:
         - Frequently listens to genres like: {', '.join(genres)}
         - Enjoys artists such as: {', '.join(artist_names)}
 
-        Please describe:
-        1. Their likely personality traits and thinking style
-        2. Their probable fashion choices and aesthetic preferences
-        3. Their typical behaviors and habits
+        Please describe the following with clear labels:
 
-        Keep the response natural and engaging, describe each with 3-4 words.
+        1. Personality & Thinking Style: Describe likely personality traits and thinking style in 3-4 words.
+        2. Fashion Choices: Describe probable fashion choices and aesthetic preferences in 3-4 words.
+           Make sure it's specific clothing.
+        3. Behavior: Describe typical behaviors and habits in 3-4 words.
+
+        Make sure each section starts with the label
+        (e.g., "Personality & Thinking Style:", "Fashion Choices:", "Behavior:").
+        You also don't have to add the numbers, they're just there to help you structure your response.
         """
     response = model.generate_content(gemini_prompt)
+    full_description = response.text.strip()
 
-    personality_description = response.text.strip()
+    personality_description = ""
+    fashion_choices = ""
+    behavior_description = ""
 
-    print(personality_description)
+    if "Personality & Thinking Style:" in full_description:
+        personality_description = (
+            full_description.split("Personality & Thinking Style:")[1]
+            .split("Fashion Choices:")[0]
+            .strip()
+        )
+
+    if "Fashion Choices:" in full_description:
+        fashion_choices = (
+            full_description.split("Fashion Choices:")[1].split("Behavior:")[0].strip()
+        )
+
+    if "Behavior:" in full_description:
+        behavior_description = full_description.split("Behavior:")[1].strip()
 
     return Response(
         {
             "personality_description": personality_description,
+            "fashion_choices": fashion_choices,
+            "behavior_description": behavior_description,
             "based_on": {"genres": list(genres), "artists": artist_names},
         },
         status=status.HTTP_200_OK,
     )
+
+
+@api_view(["GET"])
+def danceability_score(request):
+    access_token = request.user.auth_data.access_token
+    headers = {"Authorization": f"Bearer {access_token}"}
+
+    top_tracks_response = requests.get(
+        "https://api.spotify.com/v1/me/top/tracks?limit=10", headers=headers
+    )
+
+    if top_tracks_response.status_code != 200:
+        return Response(
+            {"error": "Failed to fetch top tracks from Spotify API."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    tracks = top_tracks_response.json().get("items", [])
+    track_ids = [track["id"] for track in tracks]
+
+    audio_features_response = requests.get(
+        f"https://api.spotify.com/v1/audio-features?ids={','.join(track_ids)}",
+        headers=headers,
+    )
+
+    if audio_features_response.status_code != 200:
+        return Response(
+            {"error": "Failed to fetch audio features from Spotify API."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    audio_features = audio_features_response.json().get("audio_features", [])
+
+    total_danceability = sum(
+        feature["danceability"] for feature in audio_features if feature
+    )
+    average_danceability = (
+        total_danceability / len(audio_features) if audio_features else 0
+    )
+
+    return Response({"average_danceability": (int)(100 * average_danceability)})
 
 
 @api_view(["GET", "POST"])
