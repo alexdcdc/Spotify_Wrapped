@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './danceabilityPanel.css'
-import DancingFigure from "../images/dancingFigure.svg"
+import DancingFigure from '../images/dancingFigure.svg'
 
 function DanceabilityPanel () {
   const [danceabilityScore, setDanceabilityScore] = useState(null)

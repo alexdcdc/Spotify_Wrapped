@@ -4,7 +4,6 @@ import time
 from collections import Counter
 
 import google.generativeai as genai
-import requests
 from django.conf import settings
 from rest_framework import status
 from rest_framework.authtoken.models import Token
@@ -301,11 +300,13 @@ def llm_generate(request):
         Please describe the following with clear labels:
 
         1. Personality & Thinking Style: Describe likely personality traits and thinking style in 3-4 words.
-        2. Fashion Choices: Describe probable fashion choices and aesthetic preferences in 3-4 words. Make sure it's specific clothing.
+        2. Fashion Choices: Describe probable fashion choices and aesthetic preferences in 3-4 words. 
+           Make sure it's specific clothing.
         3. Behavior: Describe typical behaviors and habits in 3-4 words.
 
-        Make sure each section starts with the label (e.g., "Personality & Thinking Style:", "Fashion Choices:", "Behavior:").
-        You also don't have to add the numbers, they're just there to help you structure your response. 
+        Make sure each section starts with the label 
+        (e.g., "Personality & Thinking Style:", "Fashion Choices:", "Behavior:").
+        You also don't have to add the numbers, they're just there to help you structure your response.
         """
     response = model.generate_content(gemini_prompt)
     full_description = response.text.strip()
