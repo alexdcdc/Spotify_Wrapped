@@ -9,7 +9,7 @@ function LLMPanel() {
   const [error, setError] = useState(null)
   const [currentSlide, setCurrentSlide] = useState(0)
   const totalSlides = 3  // Adjusted to match the three main sections
-  const token = localStorage.getItem('token')
+  const token = sessionStorage.getItem('token')
 
   useEffect(() => {
     const link = document.createElement('link')

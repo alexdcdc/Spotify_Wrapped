@@ -6,7 +6,7 @@ function DanceabilityPanel() {
   const [error, setError] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = 3; // Example: Adjust to the actual number of slides.
-  const token = localStorage.getItem('token');
+  const token = sessionStorage.getItem('token');
 
   useEffect(() => {
     // Add Google Font dynamically

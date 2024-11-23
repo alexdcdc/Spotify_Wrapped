@@ -8,7 +8,7 @@ function PanelOne () {
   const [error, setError] = useState(null)
   const [currentSlide, setCurrentSlide] = useState(0)
   const totalSlides = 8 // Define the total number of slides
-  const token = localStorage.getItem('token')
+  const token = sessionStorage.getItem('token')
 
   useEffect(() => {
     const link = document.createElement('link')
