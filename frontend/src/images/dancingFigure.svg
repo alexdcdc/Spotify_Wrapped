@@ -2,7 +2,7 @@
   <!-- Dancing Figure -->
   <g id="dancer">
     <!-- Head -->
-    <circle cx="100" cy="60" r="20" fill="#1DB954"/>
+    <circle cx="100" cy="60" r="20" fill="orange"/>
 
     <!-- Body -->
     <path d="M100 80 L100 150" stroke="#1DB954" stroke-width="8" stroke-linecap="round"/>
