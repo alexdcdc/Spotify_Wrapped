@@ -3,8 +3,6 @@ import './panelOne.css'
 import './TopGenresPanel'
 import SlideIndicator from './SlideIndicator' // Import the SlideIndicator component
 
-
-
 function PanelOne () {
   const [spotifyData, setSpotifyData] = useState(null)
   const [error, setError] = useState(null)
@@ -95,7 +93,6 @@ function PanelOne () {
             </div>
             )
           : null}
-
 
       {/* Slide Navigation Buttons */}
       {/* <button onClick={nextSlide}>Next &gt;</button> */}

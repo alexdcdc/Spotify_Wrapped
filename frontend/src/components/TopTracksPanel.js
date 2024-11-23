@@ -3,7 +3,6 @@ import './panelOne.css'
 import './TopGenresPanel' // Import panelTwo.js
 import SlideIndicator from './SlideIndicator' // Import the SlideIndicator component
 
-
 function PanelOne () {
   const [spotifyData, setSpotifyData] = useState(null)
   const [error, setError] = useState(null)

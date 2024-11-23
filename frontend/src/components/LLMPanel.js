@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react'
 import './llmPanel.css'
 import SlideIndicator from './SlideIndicator'
-import Player from 'react-lottie-player';
+import Player from 'react-lottie-player'
 
-
-function LLMPanel() {
+function LLMPanel () {
   const [llmData, setLlmData] = useState(null)
   const [error, setError] = useState(null)
   const [currentSlide, setCurrentSlide] = useState(0)
-  const totalSlides = 3  // Adjusted to match the three main sections
+  const totalSlides = 3 // Adjusted to match the three main sections
   const token = localStorage.getItem('token')
 
   useEffect(() => {
@@ -58,43 +57,47 @@ function LLMPanel() {
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides)
 
   return (
-      <div className='llm-wrapper'>
+    <div className='llm-wrapper'>
 
-        <h1>Your Personality Snapshot</h1>
-        {error ? (
-            <p className='error'>{error}</p>
-        ) : llmData ? (
+      <h1>Your Personality Snapshot</h1>
+      {error
+        ? (
+          <p className='error'>{error}</p>
+          )
+        : llmData
+          ? (
             <div className='insight-content'>
               {llmData.personality_description && (
-                  <div className='insight-card'>
-                    <h2>Personality & Thinking Style</h2>
-                    <p>{llmData.personality_description}</p>
-                  </div>
+                <div className='insight-card'>
+                  <h2>Personality & Thinking Style</h2>
+                  <p>{llmData.personality_description}</p>
+                </div>
               )}
 
               {llmData.fashion_choices && (
-                  <div className='insight-card'>
-                    <h2>Fashion Choices</h2>
-                    <p>{llmData.fashion_choices}</p>
-                  </div>
+                <div className='insight-card'>
+                  <h2>Fashion Choices</h2>
+                  <p>{llmData.fashion_choices}</p>
+                </div>
               )}
 
               {llmData.behavior_description && (
-                  <div className='insight-card'>
-                    <h2>Behavior</h2>
-                    <p>{llmData.behavior_description}</p>
-                  </div>
+                <div className='insight-card'>
+                  <h2>Behavior</h2>
+                  <p>{llmData.behavior_description}</p>
+                </div>
               )}
             </div>
-        ) : (
+            )
+          : (
             <p>Loading your insights...</p>
-        )}
-        <SlideIndicator currentSlide={currentSlide} totalSlides={totalSlides}/>
-        <div className="navigation-buttons">
-          <button onClick={prevSlide}>&lt; Prev</button>
-          <button onClick={nextSlide}>Next &gt;</button>
-        </div>
+            )}
+      <SlideIndicator currentSlide={currentSlide} totalSlides={totalSlides} />
+      <div className='navigation-buttons'>
+        <button onClick={prevSlide}>&lt; Prev</button>
+        <button onClick={nextSlide}>Next &gt;</button>
       </div>
+    </div>
   )
 }
 
