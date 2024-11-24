@@ -17,8 +17,9 @@ from wrapped.models import (
     SpotifyAuthData,
     SpotifyProfile,
     Wrapped,
+    ContactMessage
 )
-from wrapped.serializers import UserSerializer, WrappedSerializer
+from wrapped.serializers import UserSerializer, WrappedSerializer, ContactMessageSerializer
 
 
 # takes in token
@@ -380,6 +381,16 @@ def get_wrapped_with_id(request, wrapped_id):
         return Response({"wrapped": serializer.data}, status=status.HTTP_200_OK)
     except Wrapped.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def contact(request):
+    serializer = ContactMessageSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({'message': 'Your message has been sent successfully!'}, status=status.HTTP_201_CREATED)
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 def generate_panel(user, parent_wrapped, order, panel_type):
