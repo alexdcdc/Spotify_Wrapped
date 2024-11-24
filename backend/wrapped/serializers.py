@@ -1,6 +1,5 @@
 from rest_framework import serializers
-
-from wrapped.models import CustomUser, Panel, SpotifyProfile, Wrapped
+from wrapped.models import CustomUser, ContactMessage, Panel, SpotifyProfile, Wrapped
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -35,10 +34,6 @@ class WrappedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wrapped
         fields = ["id", "name", "date_created", "panels"]
-
-
-from rest_framework import serializers
-from .models import ContactMessage
 
 
 class ContactMessageSerializer(serializers.ModelSerializer):
