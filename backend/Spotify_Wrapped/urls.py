@@ -29,6 +29,7 @@ from wrapped.views import (
     danceability_score,
     wrapped,
     get_wrapped_with_id,
+    send_email,
 )
 from rest_framework import routers, serializers, viewsets
 
@@ -44,5 +45,6 @@ urlpatterns = [
     path('api/wrapped-llm', llm_generate),
     path('api/wrapped', wrapped),
     path('api/wrapped/<str:wrapped_id>', get_wrapped_with_id),
-    path('api/danceability', danceability_score)
+    path('api/email', send_email),
+    path('api/danceability', danceability_score),
 ]
