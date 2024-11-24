@@ -28,6 +28,7 @@ from wrapped.views import (
     llm_generate,
     wrapped,
     get_wrapped_with_id,
+    send_email,
 )
 from rest_framework import routers, serializers, viewsets
 
@@ -42,5 +43,6 @@ urlpatterns = [
     path('api/wrapped-tracks', recently_played_tracks),
     path('api/wrapped-llm', llm_generate),
     path('api/wrapped', wrapped),
-    path('api/wrapped/<str:wrapped_id>', get_wrapped_with_id)
+    path('api/wrapped/<str:wrapped_id>', get_wrapped_with_id),
+    path('api/email', send_email),
 ]

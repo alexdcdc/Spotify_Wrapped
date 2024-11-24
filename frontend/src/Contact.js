@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './Contact.css';
+import {post} from "./lib/requests";
 
 function Contact() {
   const [name, setName] = useState('');
@@ -18,11 +19,7 @@ function Contact() {
     };
 
     try {
-      const response = await fetch('http://localhost:8000/api/email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+      const response = await post("http://localhost:8000/api/email", data, false)
 
       if (!response.ok) {
         throw new Error('Network response was not ok');

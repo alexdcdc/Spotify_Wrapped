@@ -5,6 +5,7 @@ from collections import Counter
 import google.generativeai as genai
 import requests
 from django.conf import settings
+from django.core.mail import send_mail
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
@@ -452,3 +453,21 @@ def generate_data_danceability(user):
 
 def generate_data_game(user):
     return {}
+
+@api_view(["POST"])
+def send_email(request):
+    data = request.data
+    user_email_addr = data["email"]
+    message = data["message"]
+    user_name = data["name"]
+    subject = f'Comment from {user_email_addr}'
+    body = f'Name: {user_name}\nAddress: {user_email_addr}\n\n{message}'
+    mail_status = send_mail(subject=subject, message=body, from_email=settings.EMAIL_HOST_USER, recipient_list=[settings.EMAIL_HOST_USER])
+    if mail_status == 1:
+        send_mail(subject="Spotify Wrapped comment confirmation",
+                  message="Your inquiry has been successfully sent! You will hear back from us in 1-2 business days.",
+                  from_email=settings.EMAIL_HOST_USER,
+                  recipient_list=[user_email_addr])
+        return Response({"message": "Email successfully sent"}, status=status.HTTP_200_OK)
+    else:
+        return Response({"message": "Could not send email"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
