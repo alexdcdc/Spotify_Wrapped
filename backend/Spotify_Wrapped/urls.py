@@ -26,6 +26,7 @@ from wrapped.views import (
     spotify_top_genres,
     recently_played_tracks,
     llm_generate,
+    danceability_score,
     wrapped,
     get_wrapped_with_id,
     send_email,
@@ -45,4 +46,5 @@ urlpatterns = [
     path('api/wrapped', wrapped),
     path('api/wrapped/<str:wrapped_id>', get_wrapped_with_id),
     path('api/email', send_email),
+    path('api/danceability', danceability_score),
 ]
