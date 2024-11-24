@@ -18,9 +18,12 @@ from wrapped.models import (
     SpotifyAuthData,
     SpotifyProfile,
     Wrapped,
-    ContactMessage
 )
-from wrapped.serializers import UserSerializer, WrappedSerializer, ContactMessageSerializer
+from wrapped.serializers import (
+    UserSerializer,
+    WrappedSerializer,
+    ContactMessageSerializer,
+)
 
 
 # takes in token
@@ -383,13 +386,17 @@ def get_wrapped_with_id(request, wrapped_id):
     except Wrapped.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-@api_view(['POST'])
+
+@api_view(["POST"])
 @permission_classes([AllowAny])
 def contact(request):
     serializer = ContactMessageSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-        return Response({'message': 'Your message has been sent successfully!'}, status=status.HTTP_201_CREATED)
+        return Response(
+            {"message": "Your message has been sent successfully!"},
+            status=status.HTTP_201_CREATED,
+        )
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -454,20 +461,33 @@ def generate_data_danceability(user):
 def generate_data_game(user):
     return {}
 
+
 @api_view(["POST"])
 def send_email(request):
     data = request.data
     user_email_addr = data["email"]
     message = data["message"]
     user_name = data["name"]
-    subject = f'Comment from {user_email_addr}'
-    body = f'Name: {user_name}\nAddress: {user_email_addr}\n\n{message}'
-    mail_status = send_mail(subject=subject, message=body, from_email=settings.EMAIL_HOST_USER, recipient_list=[settings.EMAIL_HOST_USER])
+    subject = f"Comment from {user_email_addr}"
+    body = f"Name: {user_name}\nAddress: {user_email_addr}\n\n{message}"
+    mail_status = send_mail(
+        subject=subject,
+        message=body,
+        from_email=settings.EMAIL_HOST_USER,
+        recipient_list=[settings.EMAIL_HOST_USER],
+    )
     if mail_status == 1:
-        send_mail(subject="Spotify Wrapped comment confirmation",
-                  message="Your inquiry has been successfully sent! You will hear back from us in 1-2 business days.",
-                  from_email=settings.EMAIL_HOST_USER,
-                  recipient_list=[user_email_addr])
-        return Response({"message": "Email successfully sent"}, status=status.HTTP_200_OK)
+        send_mail(
+            subject="Spotify Wrapped comment confirmation",
+            message="Your inquiry has been successfully sent! You will hear back from us in 1-2 business days.",
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[user_email_addr],
+        )
+        return Response(
+            {"message": "Email successfully sent"}, status=status.HTTP_200_OK
+        )
     else:
-        return Response({"message": "Could not send email"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(
+            {"message": "Could not send email"},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        )

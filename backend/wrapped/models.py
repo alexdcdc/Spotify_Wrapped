@@ -82,6 +82,7 @@ class ContactMessage(models.Model):
     def __str__(self):
         return f"ContactMessage from {self.name} ({self.email})"
 
+
 """
 class Artist(models.Model):
     spotify_id = models.TextField(primary_key=True)
