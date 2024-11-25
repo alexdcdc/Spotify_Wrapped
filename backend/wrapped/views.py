@@ -34,7 +34,10 @@ def get_spotify_endpoint(endpoint, params, token):
     if response.ok:
         return response.json()
 
-    return Exception(f"ERROR: Call to endpoint {endpoint} failed with status code {response.status_code}")
+    return Exception(
+        f"ERROR: Call to endpoint {endpoint} failed with status code {response.status_code}"
+    )
+
 
 # takes in token
 # validates token
@@ -515,15 +518,25 @@ def generate_data_pre_game(user):
 def generate_data_danceability(user):
     return {}
 
+
 def generate_data_game(user):
-    data = get_spotify_endpoint("/me/top/tracks", {"time_range": "long_term", "limit": "50"}, user.auth_data.access_token)
+    data = get_spotify_endpoint(
+        "/me/top/tracks",
+        {"time_range": "long_term", "limit": "50"},
+        user.auth_data.access_token,
+    )
     tracks = data["items"]
     random_track = choice(tracks)
 
     clip_start = randint(0, 27)
     clip_duration = 3
 
-    return {"choices": tracks, "correct": random_track, "clip_start": clip_start, "clip_duration": clip_duration}
+    return {
+        "choices": tracks,
+        "correct": random_track,
+        "clip_start": clip_start,
+        "clip_duration": clip_duration,
+    }
 
 
 @api_view(["POST"])

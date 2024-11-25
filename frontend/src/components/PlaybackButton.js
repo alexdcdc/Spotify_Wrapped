@@ -1,6 +1,6 @@
-import {useState} from "react";
+import { useState } from 'react'
 
-function PlaybackButton({url, start, duration, maxPlays}) {
+function PlaybackButton ({ url, start, duration, maxPlays }) {
   const [isTrackPlaying, setIsTrackPlaying] = useState(false)
   const [playsRemaining, setPlaysRemaining] = useState(maxPlays)
   const audio = new Audio(url)
@@ -13,7 +13,7 @@ function PlaybackButton({url, start, duration, maxPlays}) {
 
   const startPlayback = async () => {
     if (!isTrackPlaying) {
-      audio.currentTime = start;
+      audio.currentTime = start
       await audio.play()
       setIsTrackPlaying(true)
       setTimeout(stopPlayBack, duration * 1000)
@@ -21,7 +21,7 @@ function PlaybackButton({url, start, duration, maxPlays}) {
   }
 
   if (playsRemaining > 0) {
-    return (<button onClick={startPlayback}>{isTrackPlaying ? "Playing..." : "Play"}</button>)
+    return (<button onClick={startPlayback}>{isTrackPlaying ? 'Playing...' : 'Play'}</button>)
   }
 
   return (<p>No more plays remaining!</p>)

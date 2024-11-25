@@ -10,12 +10,10 @@ import PrivateRoutes from './PrivateRoutes'
 import PanelOne from './components/PanelOne'
 import DanceabilityPanel from './components/danceabilityPanel'
 import LLMPanel from './components/LLMPanel'
-
-import SpotifyOverview from './components/PanelOne'
 import TopGenresPanel from './components/TopGenresPanel'
 import NewWrappedForm from './NewWrappedForm'
 import WrappedPage from './WrappedPage'
-// import SpotifyWrappedPersonality from './components/llmPanel'
+import SpotifyWrappedPersonality from './components/llmPanel'
 
 function App () {
   sessionStorage.setItem('isDark', !sessionStorage.getItem('isDark'))
@@ -34,12 +32,11 @@ function App () {
             <Route path='dashboard/danceability-panel' element={<DanceabilityPanel />} />
             <Route path='dashboard'>
               <Route path='' element={<Dashboard />} />
-              <Route path='overview' element={<SpotifyOverview />} /> {/* New route for SpotifyOverview */}
               <Route path='panel-two' element={<TopGenresPanel />} />
             </Route>
             <Route path='wrapped/:id' element={<WrappedPage />} />
             <Route path='create-wrapped' element={<NewWrappedForm />} />
-            {/* <Route path='wrapped-llm' element={<SpotifyWrappedPersonality/>}/> */}
+            <Route path='wrapped-llm' element={<SpotifyWrappedPersonality />} />
           </Route>
         </Route>
       </Routes>

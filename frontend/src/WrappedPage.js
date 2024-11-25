@@ -10,7 +10,7 @@ import PreGamePanel from './components/PreGamePanel'
 import DancePanel from './components/DancePanel'
 import GamePanel from './components/GamePanel'
 import SlideIndicator from './components/SlideIndicator'
-import "./WrappedPage.css"
+import './WrappedPage.css'
 
 const componentMap = {
   IN: IntroPanel,
