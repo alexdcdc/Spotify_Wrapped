@@ -1,6 +1,4 @@
 import requests
-import datetime
-import time
 from collections import Counter
 from random import choice, randint
 
@@ -132,43 +130,10 @@ def get_user(request):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
-@api_view(["GET", "POST"])
-@permission_classes([IsAuthenticated])
-def authentication_test(request):
-    print(request.user)
-    return Response(
-        {"message": "User successfully authenticated"},
-        status=status.HTTP_200_OK,
-    )
-
-
 @api_view(["GET"])
 @permission_classes([AllowAny])
 def health(request):
     return Response(status=status.HTTP_200_OK)
-
-
-@api_view(["GET"])
-def spotify_top_artists(request):
-    access_token = request.user.auth_data.access_token
-    headers = {"Authorization": f"Bearer {access_token}"}
-    top_artists_response = requests.get(
-        "https://api.spotify.com/v1/me/top/artists?limit=5", headers=headers
-    )
-
-    if top_artists_response.status_code != 200:
-        return Response(
-            {"error": "Failed to fetch top artists from Spotify API."},
-            status=status.HTTP_400_BAD_REQUEST,
-        )
-
-    top_artists = top_artists_response.json().get("items", [])
-    artists = [
-        {"name": artist["name"], "popularity": artist["popularity"]}
-        for artist in top_artists
-    ]
-
-    return Response(artists, status=status.HTTP_200_OK)
 
 
 @api_view(["GET", "POST"])
