@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import './panelTwo.css'
-import SlideIndicator from './SlideIndicator'
 
 const PanelTwo = () => {
   const [genres, setGenres] = useState([])
@@ -51,7 +50,6 @@ const PanelTwo = () => {
               ))}
             </ul>
             )}
-        <SlideIndicator currentSlide={1} totalSlides={2} />
       </div>
     </div>
   )

@@ -1,12 +1,9 @@
 import { useState, useEffect } from 'react'
 import './llmPanel.css'
-import SlideIndicator from './SlideIndicator'
 
 function LLMPanel () {
   const [llmData, setLlmData] = useState(null)
   const [error, setError] = useState(null)
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const totalSlides = 3 // Adjusted to match the three main sections
   const token = sessionStorage.getItem('token')
 
   useEffect(() => {
@@ -52,9 +49,6 @@ function LLMPanel () {
 
   if (!token) return <p>Please sign in to view your personality insights.</p>
 
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % totalSlides)
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides)
-
   return (
     <div className='llm-wrapper'>
 
@@ -91,11 +85,6 @@ function LLMPanel () {
           : (
             <p>Loading your insights...</p>
             )}
-      <SlideIndicator currentSlide={currentSlide} totalSlides={totalSlides} />
-      <div className='navigation-buttons'>
-        <button onClick={prevSlide}>&lt; Prev</button>
-        <button onClick={nextSlide}>Next &gt;</button>
-      </div>
     </div>
   )
 }

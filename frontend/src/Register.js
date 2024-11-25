@@ -31,7 +31,7 @@ function Register () {
     return (<Navigate to='/' />)
   }
 
-  if (sessionStorage.getItem('isRegistered')) {
+  if (sessionStorage.getItem('isRegistered') === 'true') {
     return (<Navigate to='/dashboard' />)
   }
 

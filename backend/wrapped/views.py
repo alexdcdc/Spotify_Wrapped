@@ -2,6 +2,7 @@ import requests
 import datetime
 import time
 from collections import Counter
+from random import choice, randint
 
 import google.generativeai as genai
 from django.conf import settings
@@ -22,8 +23,20 @@ from wrapped.models import (
 from wrapped.serializers import (
     UserSerializer,
     WrappedSerializer,
-    ContactMessageSerializer,
 )
+
+
+def get_spotify_endpoint(endpoint, params, token):
+    url = f"https://api.spotify.com/v1{endpoint}"
+    headers = {"Authorization": "Bearer " + token}
+
+    response = requests.get(url, headers=headers, params=params)
+    if response.ok:
+        return response.json()
+
+    return Exception(
+        f"ERROR: Call to endpoint {endpoint} failed with status code {response.status_code}"
+    )
 
 
 # takes in token
@@ -449,20 +462,6 @@ def get_wrapped_with_id(request, wrapped_id):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
 
-@api_view(["POST"])
-@permission_classes([AllowAny])
-def contact(request):
-    serializer = ContactMessageSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(
-            {"message": "Your message has been sent successfully!"},
-            status=status.HTTP_201_CREATED,
-        )
-    else:
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
 def generate_panel(user, parent_wrapped, order, panel_type):
     panel = Panel()
     panel.wrapped = parent_wrapped
@@ -521,7 +520,23 @@ def generate_data_danceability(user):
 
 
 def generate_data_game(user):
-    return {}
+    data = get_spotify_endpoint(
+        "/me/top/tracks",
+        {"time_range": "long_term", "limit": "50"},
+        user.auth_data.access_token,
+    )
+    tracks = data["items"]
+    random_track = choice(tracks)
+
+    clip_start = randint(0, 27)
+    clip_duration = 3
+
+    return {
+        "choices": tracks,
+        "correct": random_track,
+        "clip_start": clip_start,
+        "clip_duration": clip_duration,
+    }
 
 
 @api_view(["POST"])
