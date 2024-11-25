@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
-import './SpotifyWrapped.css'
-import './TopGenresPanel' // Import TopGenresPanel.js
+import './panelOne.css'
+import './TopGenresPanel' // Import panelTwo.js
+import SlideIndicator from './SlideIndicator' // Import the SlideIndicator component
 
-function SpotifyWrapped () {
+function PanelOne () {
   const [spotifyData, setSpotifyData] = useState(null)
   const [error, setError] = useState(null)
   const token = sessionStorage.getItem('token')
@@ -92,6 +93,17 @@ function SpotifyWrapped () {
             </div>
             )
           : null}
+
+      {/* Slide Navigation Buttons */}
+      {/* <button onClick={nextSlide}>Next &gt;</button> */}
+
+      {/* Slide Indicator on the right */}
+      <SlideIndicator currentSlide={0} totalSlides={2} />
+
+      {/* Circular button to navigate to panelTwo.js */}
+      <button className='navigate-button' onClick={() => { window.location.href = './TopGenresPanel.js' }}>
+        &gt;
+      </button>
     </div>
   )
 }
@@ -139,4 +151,4 @@ function YearlyTrackItem ({ track1, track2, startIndex }) {
   )
 }
 
-export default SpotifyWrapped
+export default PanelOne

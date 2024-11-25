@@ -1,11 +1,12 @@
+import requests
 import datetime
 import time
 from collections import Counter
 from random import choice, randint
 
 import google.generativeai as genai
-import requests
 from django.conf import settings
+from django.core.mail import send_mail
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
@@ -19,7 +20,10 @@ from wrapped.models import (
     SpotifyProfile,
     Wrapped,
 )
-from wrapped.serializers import UserSerializer, WrappedSerializer
+from wrapped.serializers import (
+    UserSerializer,
+    WrappedSerializer,
+)
 
 
 def get_spotify_endpoint(endpoint, params, token):
@@ -303,32 +307,94 @@ def llm_generate(request):
     artist_names = [artist["name"] for artist in top_artists["items"]]
 
     model = genai.GenerativeModel("gemini-1.5-flash")
-
     gemini_prompt = f"""
         Create a vibrant personality description for someone who:
         - Frequently listens to genres like: {', '.join(genres)}
         - Enjoys artists such as: {', '.join(artist_names)}
 
-        Please describe:
-        1. Their likely personality traits and thinking style
-        2. Their probable fashion choices and aesthetic preferences
-        3. Their typical behaviors and habits
+        Please describe the following with clear labels:
 
-        Keep the response natural and engaging, describe each with 3-4 words.
+        1. Personality & Thinking Style: Describe likely personality traits and thinking style in 3-4 words.
+        2. Fashion Choices: Describe probable fashion choices and aesthetic preferences in 3-4 words.
+           Make sure it's specific clothing.
+        3. Behavior: Describe typical behaviors and habits in 3-4 words.
+
+        Make sure each section starts with the label
+        (e.g., "Personality & Thinking Style:", "Fashion Choices:", "Behavior:").
+        You also don't have to add the numbers, they're just there to help you structure your response.
         """
     response = model.generate_content(gemini_prompt)
+    full_description = response.text.strip()
 
-    personality_description = response.text.strip()
+    personality_description = ""
+    fashion_choices = ""
+    behavior_description = ""
 
-    print(personality_description)
+    if "Personality & Thinking Style:" in full_description:
+        personality_description = (
+            full_description.split("Personality & Thinking Style:")[1]
+            .split("Fashion Choices:")[0]
+            .strip()
+        )
+
+    if "Fashion Choices:" in full_description:
+        fashion_choices = (
+            full_description.split("Fashion Choices:")[1].split("Behavior:")[0].strip()
+        )
+
+    if "Behavior:" in full_description:
+        behavior_description = full_description.split("Behavior:")[1].strip()
 
     return Response(
         {
             "personality_description": personality_description,
+            "fashion_choices": fashion_choices,
+            "behavior_description": behavior_description,
             "based_on": {"genres": list(genres), "artists": artist_names},
         },
         status=status.HTTP_200_OK,
     )
+
+
+@api_view(["GET"])
+def danceability_score(request):
+    access_token = request.user.auth_data.access_token
+    headers = {"Authorization": f"Bearer {access_token}"}
+
+    top_tracks_response = requests.get(
+        "https://api.spotify.com/v1/me/top/tracks?limit=10", headers=headers
+    )
+
+    if top_tracks_response.status_code != 200:
+        return Response(
+            {"error": "Failed to fetch top tracks from Spotify API."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    tracks = top_tracks_response.json().get("items", [])
+    track_ids = [track["id"] for track in tracks]
+
+    audio_features_response = requests.get(
+        f"https://api.spotify.com/v1/audio-features?ids={','.join(track_ids)}",
+        headers=headers,
+    )
+
+    if audio_features_response.status_code != 200:
+        return Response(
+            {"error": "Failed to fetch audio features from Spotify API."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    audio_features = audio_features_response.json().get("audio_features", [])
+
+    total_danceability = sum(
+        feature["danceability"] for feature in audio_features if feature
+    )
+    average_danceability = (
+        total_danceability / len(audio_features) if audio_features else 0
+    )
+
+    return Response({"average_danceability": (int)(100 * average_danceability)})
 
 
 @api_view(["GET", "POST"])
@@ -458,3 +524,34 @@ def generate_data_game(user):
     clip_duration = 3
 
     return {"choices": tracks, "correct": random_track, "clip_start": clip_start, "clip_duration": clip_duration}
+
+
+@api_view(["POST"])
+def send_email(request):
+    data = request.data
+    user_email_addr = data["email"]
+    message = data["message"]
+    user_name = data["name"]
+    subject = f"Comment from {user_email_addr}"
+    body = f"Name: {user_name}\nAddress: {user_email_addr}\n\n{message}"
+    mail_status = send_mail(
+        subject=subject,
+        message=body,
+        from_email=settings.EMAIL_HOST_USER,
+        recipient_list=[settings.EMAIL_HOST_USER],
+    )
+    if mail_status == 1:
+        send_mail(
+            subject="Spotify Wrapped comment confirmation",
+            message="Your inquiry has been successfully sent! You will hear back from us in 1-2 business days.",
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[user_email_addr],
+        )
+        return Response(
+            {"message": "Email successfully sent"}, status=status.HTTP_200_OK
+        )
+    else:
+        return Response(
+            {"message": "Could not send email"},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        )

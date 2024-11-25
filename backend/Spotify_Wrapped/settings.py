@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
 from pathlib import Path
 from dotenv import load_dotenv
 import os
@@ -25,8 +24,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-h4qhs00s&*e$(h(&o$prb@@q=bh-r_23&_0pv5s82l_qb-eg_a'
-SPOTIFY_CLIENT_ID = os.getenv('REACT_APP_CLIENT_ID')
-SPOTIFY_CLIENT_SECRET = os.getenv('REACT_APP_CLIENT_SECRET')
 GOOGLE_CLIENT_ID = os.getenv('GEMINI_GOOGLE_CLIENT_ID')
 
 
@@ -151,3 +148,11 @@ REST_FRAMEWORK = {
 }
 
 CORS_ORIGIN_WHITELIST = ["http://localhost:3000"]
+APP_EMAIL = "cs2340wrapped40@gmail.com"
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.getenv("APP_EMAIL")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASSWORD")

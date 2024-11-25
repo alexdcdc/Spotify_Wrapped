@@ -39,8 +39,8 @@ function Dashboard () {
     getUserWrapped()
   }, [])
 
-  const handleNavigateToSpotifyOverview = () => {
-    navigate('/dashboard/overview') // Navigate to the Spotify Overview page
+  const handleNavigateToPanelOne = () => {
+    navigate('/dashboard/panel-one') // Navigate to the Spotify Overview page
   }
 
   return (
@@ -51,8 +51,8 @@ function Dashboard () {
           (wrappedData) => <WrappedCard name={wrappedData.name} dateCreated={new Date(wrappedData.date_created)} key={wrappedData.id} id={wrappedData.id} />
         )}
       </div>
-      <button onClick={handleNavigateToSpotifyOverview}>
-        Go to Spotify Overview
+      <button onClick={handleNavigateToPanelOne}>
+        Go to Panel One
       </button>
     </div>
   )
