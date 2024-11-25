@@ -4,12 +4,13 @@ import { Link, useParams } from 'react-router-dom'
 import LLMPanel from './components/LLMPanel'
 import IntroPanel from './components/IntroPanel'
 import PreLLMPanel from './components/PreLLMPanel'
-import TopTracksPanel from './components/TopTracksPanel'
+import TopTracksPanel from './components/PanelOne'
 import TopGenresPanel from './components/TopGenresPanel'
 import PreGamePanel from './components/PreGamePanel'
 import DancePanel from './components/DancePanel'
 import GamePanel from './components/GamePanel'
 import SlideIndicator from './components/SlideIndicator'
+import "./WrappedPage.css"
 
 const componentMap = {
   IN: IntroPanel,

@@ -154,13 +154,13 @@ h1 {
   color: #ff4d4d; /* Light red for error messages */
   font-size: 1.2rem;
 }
-
+/*
 button {
   margin: 10px;
   padding: 10px 15px;
   font-size: 1rem;
   border: none;
-  background-color: #7d5fb2; /* Dark purple for button */
+  background-color: #7d5fb2;
   color: white;
   border-radius: 5px;
   cursor: pointer;
@@ -168,8 +168,9 @@ button {
 }
 
 button:hover {
-  background-color: #6a4ba3; /* Slightly darker shade of purple for hover effect */
+  background-color: #6a4ba3;
 }
+*/
 
 .insight-card {
   background-color: rgba(0, 0, 0, 0.6);

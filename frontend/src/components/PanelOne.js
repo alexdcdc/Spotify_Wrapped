@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import './panelOne.css'
-import './TopGenresPanel'
 
 function PanelOne () {
   const [spotifyData, setSpotifyData] = useState(null)
@@ -82,11 +81,6 @@ function PanelOne () {
             </div>
             )
           : null}
-
-      {/* Circular button to navigate to panelTwo.js */}
-      <button className='navigate-button' onClick={() => { window.location.href = './TopGenresPanel.js' }}>
-        &gt;
-      </button>
     </div>
   )
 }

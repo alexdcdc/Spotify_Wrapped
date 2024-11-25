@@ -11,7 +11,7 @@ import PanelOne from './components/PanelOne'
 import DanceabilityPanel from './components/danceabilityPanel'
 import LLMPanel from './components/LLMPanel'
 
-import SpotifyOverview from './components/TopTracksPanel'
+import SpotifyOverview from './components/PanelOne'
 import TopGenresPanel from './components/TopGenresPanel'
 import NewWrappedForm from './NewWrappedForm'
 import WrappedPage from './WrappedPage'

@@ -1,0 +1,21 @@
+.navigate-button {
+    position: fixed;
+    bottom: 1vw;
+    right: 1vw;
+    width: 2.5vw;
+    height: 2.5vw;
+    background-color: #131414;
+    color: white;
+    font-size: 1.2vw;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 30%);
+}
+
+.navigate-button:hover {
+    background-color: darkgray;
+}

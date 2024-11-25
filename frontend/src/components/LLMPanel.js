@@ -91,11 +91,6 @@ function LLMPanel () {
           : (
             <p>Loading your insights...</p>
             )}
-      <SlideIndicator currentSlide={currentSlide} totalSlides={totalSlides} />
-      <div className='navigation-buttons'>
-        <button onClick={prevSlide}>&lt; Prev</button>
-        <button onClick={nextSlide}>Next &gt;</button>
-      </div>
     </div>
   )
 }
