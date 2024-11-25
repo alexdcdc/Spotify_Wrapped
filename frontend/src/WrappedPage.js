@@ -1,14 +1,14 @@
 import { get } from './lib/requests'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import LLMPanel from './components/LLMPanel'
-import IntroPanel from './components/IntroPanel'
-import PreLLMPanel from './components/PreLLMPanel'
-import TopTracksPanel from './components/PanelOne'
-import TopGenresPanel from './components/TopGenresPanel'
-import PreGamePanel from './components/PreGamePanel'
-import DancePanel from './components/DancePanel'
-import GamePanel from './components/GamePanel'
+import LLMPanel from './components/panels/LLMPanel'
+import IntroPanel from './components/panels/IntroPanel'
+import PreLLMPanel from './components/panels/PreLLMPanel'
+import TopTracksPanel from './components/panels/TopTracksPanel'
+import TopGenresPanel from './components/panels/TopGenresPanel'
+import PreGamePanel from './components/panels/PreGamePanel'
+import DancePanel from './components/panels/DancePanel'
+import GamePanel from './components/panels/GamePanel'
 import SlideIndicator from './components/SlideIndicator'
 import './WrappedPage.css'
 
@@ -24,12 +24,20 @@ const componentMap = {
 }
 
 function WrappedPage () {
-  const [wrappedName, setWrappedName] = useState('')
   const [wrappedPanels, setWrappedPanels] = useState([])
   const [currentPanelNum, setCurrentPanelNum] = useState(0)
   const [totalPanels, setTotalPanels] = useState(0)
   const [loaded, setLoaded] = useState(false)
   const { id } = useParams()
+
+  const updateFont = () => {
+    const link = document.createElement('link')
+    link.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap'
+    link.rel = 'stylesheet'
+    document.head.appendChild(link)
+
+    document.body.style.fontFamily = "'Montserrat', sans-serif"
+  }
 
   const getWrappedData = async () => {
     const url = 'http://localhost:8000/api/wrapped/' + id
@@ -41,13 +49,13 @@ function WrappedPage () {
 
     const data = await response.json()
     const wrapped = data.wrapped
-    setWrappedName(wrapped.name)
     setWrappedPanels(wrapped.panels)
     setTotalPanels(wrapped.panels.length)
     setLoaded(true)
   }
 
   useEffect(() => {
+    updateFont()
     getWrappedData()
   }, [])
 
@@ -58,7 +66,6 @@ function WrappedPage () {
     const Component = componentMap[wrappedPanels[currentPanelNum].type]
     return (
       <div>
-        <div>Wrapped name: {wrappedName} <br /> Wrapped panels: {wrappedPanels.join(',')}</div>
         <Component data={currentPanelNum < totalPanels ? wrappedPanels[currentPanelNum].data : {}} />
         {/* Circular button to navigate to TopGenresPanel.js */}
         {currentPanelNum + 1 < totalPanels

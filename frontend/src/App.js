@@ -13,7 +13,6 @@ import LLMPanel from './components/LLMPanel'
 import TopGenresPanel from './components/TopGenresPanel'
 import NewWrappedForm from './NewWrappedForm'
 import WrappedPage from './WrappedPage'
-import SpotifyWrappedPersonality from './components/llmPanel'
 
 function App () {
   sessionStorage.setItem('isDark', !sessionStorage.getItem('isDark'))
@@ -36,7 +35,7 @@ function App () {
             </Route>
             <Route path='wrapped/:id' element={<WrappedPage />} />
             <Route path='create-wrapped' element={<NewWrappedForm />} />
-            <Route path='wrapped-llm' element={<SpotifyWrappedPersonality />} />
+            <Route path='wrapped-llm' element={<LLMPanel />} />
           </Route>
         </Route>
       </Routes>
