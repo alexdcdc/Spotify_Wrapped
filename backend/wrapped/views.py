@@ -170,6 +170,7 @@ def spotify_top_artists(request):
 
     return Response(artists, status=status.HTTP_200_OK)
 
+
 @api_view(["GET", "POST"])
 @permission_classes([IsAuthenticated])
 def wrapped(request):
@@ -262,7 +263,7 @@ def generate_panel(user, parent_wrapped, order, panel_type):
 
 
 def generate_data_intro(user):
-    return {} #static panel, no need to generate new data
+    return {}  # static panel, no need to generate new data
 
 
 def get_llm_description(genres, artist_names):
@@ -334,8 +335,10 @@ def generate_data_llm(user):
 
     return get_llm_description(genres, artist_names)
 
+
 def generate_data_pre_llm(user):
-    return {} #static panel, no need to generate new data
+    return {}  # static panel, no need to generate new data
+
 
 def generate_data_top_tracks(user):
     token = user.auth_data.access_token
@@ -348,6 +351,7 @@ def generate_data_top_tracks(user):
         return {}
     body = response.json()
     return body
+
 
 def generate_data_top_genres(user):
     token = user.auth_data.access_token
@@ -372,8 +376,10 @@ def generate_data_top_genres(user):
 
     return {"top_genres": top_genres}
 
+
 def generate_data_pre_game(user):
-    return {} #static panel, no need to generate new data
+    return {}  # static panel, no need to generate new data
+
 
 def generate_data_danceability(user):
     access_token = user.auth_data.access_token
@@ -410,6 +416,7 @@ def generate_data_danceability(user):
 
     return {"average_danceability": int(100 * average_danceability)}
 
+
 def generate_data_game(user):
     data = get_spotify_endpoint(
         "/me/top/tracks",
@@ -428,6 +435,7 @@ def generate_data_game(user):
         "clip_start": clip_start,
         "clip_duration": clip_duration,
     }
+
 
 @api_view(["POST"])
 def send_email(request):

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import PlaybackButton from './PlaybackButton'
+import PlaybackButton from '../PlaybackButton'
 
 function GamePanel ({ data }) {
   const [answer, setAnswer] = useState('')

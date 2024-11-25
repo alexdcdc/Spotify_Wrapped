@@ -1,0 +1,192 @@
+/* Base setup for the LLM panel */
+.llm-wrapper {
+    color: #333; /* Change the text color as desired */
+    min-height: 100vh;
+    padding: 1vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    max-width: 100%;
+    background: linear-gradient(135deg, black, purple);
+    overflow-y: auto;
+    width: 100vw;
+    position: fixed;
+}
+
+/* Fade-in animation remains the same */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Style for the main title */
+.llm-wrapper h1 {
+    padding-top: 0.5em;
+    text-align: center;
+    font-size: 2vw;
+    font-weight: bold;
+    color: #fff;
+    margin: 10px 0;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 0.35s;
+}
+
+/* Error message styling */
+.llm-wrapper .error {
+    color: red;
+    margin: 2vw 0;
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 0.4s;
+}
+
+/* Insight content container styling */
+.llm-wrapper .insight-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+    max-width: 90%;
+    width: 100%;
+    margin: auto;
+    margin-top: 3vw;
+    margin-bottom: 1vw;
+}
+
+/* Individual card styling */
+.llm-wrapper .insight-card {
+    background-color: rgb(255 255 255 / 10%);
+    padding: 1.5vw;
+    width: 80%;
+    text-align: center;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1vw;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 0.6s;
+}
+
+/* Specific headings and paragraph styling within insight cards */
+.llm-wrapper .insight-card h2 {
+    font-size: 1.5vw;
+    font-weight: bold;
+    color: #fff;
+}
+
+.llm-wrapper .insight-card p {
+    font-size: 1.1vw;
+    color: #e0f7fa;
+    margin: 0.1em 0;
+}
+
+/* Navigation buttons styling */
+.llm-wrapper .navigation-buttons {
+    display: flex;
+    gap: 1vw;
+    margin-top: 2vw;
+}
+
+.llm-wrapper .navigation-buttons button {
+    background-color: #7d5fb2;
+    color: white;
+    font-size: 1.2vw;
+    border: none;
+    padding: 0.8vw 1.5vw;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.llm-wrapper .navigation-buttons button:hover {
+    background-color: #7d5fb2;
+}
+
+/* Slide indicator (you may need to style this component as well if necessary) */
+.llm-wrapper .slide-indicator {
+    margin-top: 1vw;
+}
+
+
+h1 {
+  font-size: 2rem;
+  color: #fff; /* White to stand out against the gradient */
+  margin-bottom: 20px;
+}
+
+.insight-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.insight-item {
+  background: rgb(255 255 255 / 10%); /* Slightly transparent white for contrast */
+  border: 1px solid rgb(255 255 255 / 30%); /* Light border to enhance visibility */
+  padding: 20px;
+  margin: 10px;
+  width: 80%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 20%);
+  color: #e0e0e0; /* Light text color */
+}
+
+.insight-item h2 {
+  font-size: 1vw;
+  color: #e8e1ff; /* Light lavender to match the purple */
+}
+
+.insight-item p {
+  font-size: 1rem;
+  color: #d1c4e9; /* Light lavender-gray */
+}
+
+.error {
+  color: #ff4d4d; /* Light red for error messages */
+  font-size: 1.2rem;
+}
+
+.insight-card {
+  background-color: rgb(0 0 0 / 60%);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 20%);
+  transition: transform 0.2s ease-in-out;
+}
+
+.insight-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 10px rgb(0 0 0 / 20%);
+}
+
+.lottie-svg {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  z-index: 10;
+}
+
+.lottie-svg.left {
+  top: 10%;
+  left: -30px;
+}
+
+.lottie-svg.right {
+  bottom: 10%;
+  right: -30px;
+}
+
+
+
+
+

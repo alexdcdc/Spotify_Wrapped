@@ -13,7 +13,7 @@ import LLMPanel from './components/LLMPanel'
 import TopGenresPanel from './components/TopGenresPanel'
 import NewWrappedForm from './NewWrappedForm'
 import WrappedPage from './WrappedPage'
-import SpotifyWrappedPersonality from './components/llmPanel'
+import SpotifyWrappedPersonality from './components/LLMPanel'
 
 function App () {
   sessionStorage.setItem('isDark', !sessionStorage.getItem('isDark'))
