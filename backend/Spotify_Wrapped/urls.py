@@ -25,6 +25,7 @@ from wrapped.views import (
     wrapped,
     get_wrapped_with_id,
     send_email,
+    generate_data_game,
 )
 from rest_framework import routers, serializers, viewsets
 
