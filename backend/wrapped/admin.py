@@ -18,10 +18,13 @@ class CustomAuthDataAdmin(admin.ModelAdmin):
 class CustomUserProfileAdmin(admin.ModelAdmin):
     pass
 
+class PanelInline(admin.TabularInline):  # or use admin.StackedInline for a different layout
+    model = Panel
+    extra = 0  # No extra blank rows for new related objects
 
 @admin.register(Wrapped)
 class WrappedAdmin(admin.ModelAdmin):
-    pass
+    inlines = [PanelInline]
 
 
 @admin.register(Panel)
