@@ -4,16 +4,7 @@ body {
 }
 
 .danceability-wrapper {
-  padding: 20px;
-  text-align: center;
-  color: white;
   background: linear-gradient(135deg, black, orange);
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
 }
 
 

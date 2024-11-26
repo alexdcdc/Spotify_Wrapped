@@ -4,7 +4,7 @@ function LLMPanel ({ data }) {
   const llmData = data
 
   return (
-    <div className='llm-wrapper'>
+    <div className='wrapped-background llm-wrapper'>
       <h1>Your Personality Snapshot</h1>
       <div className='insight-content'>
         {llmData.personality_description && (
