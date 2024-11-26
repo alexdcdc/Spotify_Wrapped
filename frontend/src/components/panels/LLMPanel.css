@@ -109,7 +109,7 @@
 }
 
 
-h1 {
+.llm-wrapper h1 {
   font-size: 2rem;
   color: #fff; /* White to stand out against the gradient */
   margin-bottom: 20px;

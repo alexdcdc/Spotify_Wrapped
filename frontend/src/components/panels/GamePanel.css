@@ -1,0 +1,86 @@
+.game-wrapper {
+  padding: 20px;
+  text-align: center;
+  color: white;
+  background: linear-gradient(135deg, black, #004480);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-size: 18px;
+}
+
+/* Independent styling for h1 inside .spotify-wrapper */
+.game-wrapper h1 {
+    padding-top: .1em;
+    text-align: center;
+    font-size: 48px;
+    font-weight: bold;
+    color: #FFFFFF;
+    margin: 10px 0;
+}
+
+.answer-input {
+  border: none;
+  flex-grow: 2;
+  font-family: inherit;
+  padding-left: 20px;
+    font-size: inherit;
+
+}
+
+.submit-button {
+  background-color:black;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: white;
+  cursor: pointer;
+  padding: 0px 20px;
+}
+
+.input-container {
+  display:flex;
+  flex-direction:row;
+  width: 60vw;
+  height: 50px;
+  border-radius: 50px;
+  margin: 20px;
+  overflow:hidden;
+}
+
+.result-text {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.correct {
+  color: #28A745;
+}
+
+.incorrect {
+  color: #DC3545;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .danceability-wrapper {
+    padding: 10px;
+  }
+
+  .score-container {
+    width: 90%;
+  }
+
+  .navigation-buttons button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .svg-container {
+    display: none; /* Hide SVGs on smaller screens */
+  }
+}
