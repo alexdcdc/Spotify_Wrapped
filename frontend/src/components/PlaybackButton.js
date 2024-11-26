@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './PlaybackButton.css'
 
 function PlaybackButton ({ url, start, duration, maxPlays }) {
   const [isTrackPlaying, setIsTrackPlaying] = useState(false)
@@ -21,7 +22,7 @@ function PlaybackButton ({ url, start, duration, maxPlays }) {
   }
 
   if (playsRemaining > 0) {
-    return (<button onClick={startPlayback}>{isTrackPlaying ? 'Playing...' : 'Play'}</button>)
+    return (<button className='playback-button' onClick={startPlayback}>{isTrackPlaying ? 'Playing...' : 'Play'}</button>)
   }
 
   return (<p>No more plays remaining!</p>)
