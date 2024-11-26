@@ -80,7 +80,7 @@ function WrappedPage () {
             )
           : (<p>All done! <Link to='/dashboard'>Back to dashboard</Link></p>)}
 
-        <SlideIndicator currentSlide={currentPanelNum} totalSlides={totalPanels} />
+        <SlideIndicator currentSlide={currentPanelNum} totalSlides={totalPanels} setter={setCurrentPanelNum} />
       </div>
     )
   } else {
