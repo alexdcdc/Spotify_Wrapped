@@ -16,23 +16,19 @@ Including another URLconf
 """
 #hello world!
 from django.contrib import admin
-from django.urls import path, include, re_path
+from django.urls import path
 from wrapped.views import (
     register_by_access_token,
-    authentication_test,
     health,
     get_user,
     wrapped,
     get_wrapped_with_id,
     send_email,
-    generate_data_game,
 )
-from rest_framework import routers, serializers, viewsets
 
 urlpatterns = [
     path('api/authenticate', register_by_access_token),
     path('api/user', get_user),
-    path('api/authentication-test/', authentication_test),
     path('api/health', health),
     path('admin/', admin.site.urls),
     path('api/wrapped', wrapped),
