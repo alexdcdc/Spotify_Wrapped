@@ -7,7 +7,7 @@ const TopGenresPanel = ({ data }) => {
   const topGenres = Array.isArray(genres) ? genres.slice(0, 5) : []
 
   return (
-    <div className='panel-two'>
+    <div className='wrapped-background genres-wrapper'>
       <div className='box'>
         <h2 className='panel-heading'>My Top Genres</h2>
         <ul className='genre-list'>

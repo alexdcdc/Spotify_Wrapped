@@ -4,7 +4,7 @@ function TopTracksPanel ({ data }) {
   const spotifyData = data
 
   return (
-    <div className='spotify-wrapper'>
+    <div className='wrapped-background spotify-wrapper'>
       <h1>The music that defined your month.</h1>
       <div className='yearly-tracks'>
         {spotifyData.items.length > 0

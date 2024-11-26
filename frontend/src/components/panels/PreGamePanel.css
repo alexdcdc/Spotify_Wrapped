@@ -1,0 +1,18 @@
+.pre-game-wrapper {
+  color: white;
+  background: linear-gradient(135deg, black, #004480);
+  justify-content: center;
+  align-items: center;
+}
+
+/* Independent styling for h1 inside .spotify-wrapper */
+.pre-game-wrapper h1 {
+  padding-top: .1em;
+  text-align: center;
+  font-size: 56px;
+  font-weight: bold;
+  color: #FFFFFF;
+  margin: 0 2vw;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+}

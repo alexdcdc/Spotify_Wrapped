@@ -5,7 +5,7 @@ function DancePanel ({ data }) {
   const danceabilityScore = data.average_danceability
 
   return (
-    <div className='danceability-wrapper'>
+    <div className='wrapped-background danceability-wrapper'>
       <h1>Your Danceability Spectrum</h1>
       <div className='svg-container left-side'>
         <img src={DancingFigure} alt='Dance Visual Left' />
