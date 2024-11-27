@@ -1,22 +1,23 @@
-/* General Styles */
-body {
-  font-family: 'Montserrat', sans-serif;
-}
-
 .danceability-wrapper {
   background: linear-gradient(135deg, black, orange);
+  font-size: 18px;
+}
+
+.danceability-meter-container {
+  display: flex;
+  flex-direction: row;
+  width: 90vw;
+  justify-content: center;
 }
 
 
 /* Danceability Spectrum Styles */
 .score-container {
   margin: 20px auto;
-  width: 80%;
-  position: relative;
+  flex-grow: 1;
 }
 
 .spectrum {
-  position: relative;
   height: 10px;
   width: 100%;
   background: linear-gradient(to right, black, orange);
@@ -35,30 +36,14 @@ body {
   transition: left 0.3s ease;
 }
 
-
-.svg-container {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.left-side {
-  left: 0;
+.icon-wrapper {
   width: 100px;
   height: auto;
 }
 
-.right-side {
-  right: 0;
-  width: 100px;
-  height: auto;
+.icon-wrapper img {
+  width: inherit;
 }
-
-.svg-container img {
-  width: 100%;
-  height: auto;
-}
-
 
 .error {
   color: red;

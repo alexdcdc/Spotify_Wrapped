@@ -1,11 +1,10 @@
-.pre-game-wrapper {
-  color: white;
-  background: linear-gradient(135deg, black, #004480);
+.pre-llm-wrapper {
+  background: linear-gradient(135deg, black, purple);
   justify-content: center;
   align-items: center;
 }
 
-.pre-game-wrapper h1 {
+.pre-llm-wrapper h1 {
   padding-top: .1em;
   text-align: center;
   font-size: 56px;
