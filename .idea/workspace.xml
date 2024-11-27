@@ -4,18 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d34e3a6-3cdd-405b-aac6-8aad8f1d8f8d" name="Changes" comment="Front end nav bar dark mode work">
+    <list default="true" id="4d34e3a6-3cdd-405b-aac6-8aad8f1d8f8d" name="Changes" comment="reconfigured css">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/Contact.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Contact.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/NavBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/Profile.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/SpotifyButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/SpotifyButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/lib/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/lib/auth.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +114,8 @@
       <workItem from="1731963830378" duration="5923000" />
       <workItem from="1732120955654" duration="646000" />
       <workItem from="1732136480225" duration="98000" />
-      <workItem from="1732218961826" duration="278000" />
+      <workItem from="1732218961826" duration="2646000" />
+      <workItem from="1732574742641" duration="3748000" />
     </task>
     <task id="LOCAL-00001" summary="Front end nav bar dark mode work">
       <option name="closed" value="true" />
@@ -162,7 +157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731966728741</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="reconfigured css">
+      <option name="closed" value="true" />
+      <created>1732219269949</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732219269949</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,6 +173,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Front end nav bar dark mode work" />
-    <option name="LAST_COMMIT_MESSAGE" value="Front end nav bar dark mode work" />
+    <MESSAGE value="reconfigured css" />
+    <option name="LAST_COMMIT_MESSAGE" value="reconfigured css" />
   </component>
 </project>

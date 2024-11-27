@@ -1,4 +1,8 @@
 import {useState, useEffect} from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
+
 function Dashboard() {
     const [firstName, setFirstName] = useState("");
 
@@ -24,9 +28,29 @@ function Dashboard() {
 
     return (
 
-        <div className="title">
-            <p>Welcome to the dashboard, {firstName}.</p>
-        </div>
+        <div className="dashboard">
+            <h1 className="title pb-3">{firstName}'s Dashboard</h1>
+            <div className="grid-container">
+
+                <button className="card create-new" onClick="location.href='create-new.html'">
+                    <div className="plus-icon">+</div>
+                    <p className="title">Create New</p>
+                </button>
+
+
+                <button className="card" onClick="location.href='my-fav-wrap.html'">
+                    <div className="image-placeholder"></div>
+                    <p>My Fav Wrap</p>
+                </button>
+
+
+                <button className="card" onClick="location.href='wrap-2.html'">
+                    <div className="image-placeholder"></div>
+                    <p>Wrap 2</p>
+                </button>
+            </div>
+      </div>
+
     )
 }
 

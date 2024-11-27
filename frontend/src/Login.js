@@ -1,8 +1,15 @@
 import SpotifyButton from "./SpotifyButton"
+import React from "react";
 function Login() {
     return (
-        <h1> WELCOME TO YOUR WRAPPED SPACE </h1>
-    );
-}
+        <div className="profile-wrapper">
+            <div className="login-container">
+                <h1> Vibe Dive </h1>
+                <p> The premier app for analyzing your music tastes. </p>
+                <SpotifyButton/>
+            </div>
+        </div>
+            );
+            }
 
-export default Login;
+            export default Login;
