@@ -1,5 +1,18 @@
-function IntroPanel () {
-  return (<p>Intro TBA</p>)
+import React from 'react';
+import './IntroPanel.css'; // Ensure this matches the name of your CSS file.
+
+function IntroPanel() {
+  return (
+    <div className="intro-panel">
+      <h1 className="intro-title">Welcome to Your Spotify Wrapped</h1>
+      <p className="intro-description">
+        Discover your top tracks, genres, and artists of the year in an immersive, personalized experience.
+      </p>
+      <button className="start-button" onClick={() => alert("Let's Start!")}>
+        Let's Start
+      </button>
+    </div>
+  );
 }
 
-export default IntroPanel
+export default IntroPanel;
