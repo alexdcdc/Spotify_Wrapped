@@ -1,30 +1,53 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom' // Import useNavigate for navigation
+import { get } from './lib/requests'
+import './Dashboard.css'
+import WrappedCard from './WrappedCard'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
+function Dashboard () {
+  const [firstName, setFirstName] = useState('')
+  const [wrappedList, setWrappedList] = useState([])
+  const navigate = useNavigate() // Initialize useNavigate
 
 
 function Dashboard() {
     const [firstName, setFirstName] = useState("");
 
-    const getUserData = async () => {
-        const url = "http://localhost:8000/api/user";
-        const payload = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Token ' + localStorage.getItem('token'),
-            }
-        }
-        const response = await fetch(url, payload);
-        if (!response.ok) {
-            return Promise.reject("Unable to get user data");
-        }
+  const getUserData = async () => {
+    const url = 'http://localhost:8000/api/user'
 
-        const user = await response.json();
-        setFirstName(user.first_name);
+    const response = await get(url, {}, true)
+
+    if (!response.ok) {
+      return Promise.reject(new Error('Unable to get user data'))
     }
 
-    useEffect(() => {getUserData()}, [])
+    const user = await response.json()
+    setFirstName(user.first_name)
+  }
+
+  const getUserWrapped = async () => {
+    const url = 'http://localhost:8000/api/wrapped'
+    const response = await get(url, {}, true)
+
+    if (!response.ok) {
+      return Promise.reject(new Error('Unable to get user wrapped'))
+    }
+
+    const data = await response.json()
+    setWrappedList(data.wrapped_list)
+  }
+
+  useEffect(() => {
+    getUserData()
+    getUserWrapped()
+  }, [])
+
+  const handleNavigateToPanelOne = () => {
+    navigate('/dashboard/panel-one') // Navigate to the Spotify Overview page
+  }
 
     return (
 
@@ -54,4 +77,4 @@ function Dashboard() {
     )
 }
 
-export default Dashboard;
+export default Dashboard

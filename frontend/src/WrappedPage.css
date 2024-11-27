@@ -1,0 +1,40 @@
+.navigate-button {
+    position: fixed;
+    bottom: 1vw;
+    right: 1vw;
+    width: 2.5vw;
+    height: 2.5vw;
+    background-color: #131414;
+    color: white;
+    font-size: 1.2vw;
+    border: none;
+    border-radius: 1.25vw;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 30%);
+    transition: background-color 0.3s ease;
+}
+
+.navigate-button:hover {
+    background-color: darkgray;
+}
+
+.to-dashboard-button {
+    width: 15vw;
+}
+
+.wrapped-background {
+    color: #ffffff;
+    min-height: 100vh;
+    padding: 1vw;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    width: 100vw;
+    position: fixed;
+    background-color: black;
+}

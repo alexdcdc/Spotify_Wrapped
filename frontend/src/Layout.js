@@ -3,14 +3,13 @@ import NavBar from "./NavBar"
 import {useState} from "react";
 
 function Layout() {
-    return (
-            <div>
-                <NavBar/>
+  return (
+    <div>
+      <NavBar/>
 
-                {<Outlet/>}
-            </div>
+      {<Outlet/>}
+    </div>
 
-            )
-            }
-
-            export default Layout
+  )
+}
+export default Layout

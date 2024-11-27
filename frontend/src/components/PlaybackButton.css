@@ -1,0 +1,22 @@
+.playback-button {
+  width: 200px;
+  height: 50px;
+  border-radius: 50px;
+  border: none;
+  font-size: 24px;
+  margin: 20px;
+  background-color: #0078D4;
+  color: white;
+  font-family: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.playback-button:hover {
+  background-color: #005EA6; /* Slightly darker shade for hover */
+}
+
+.playback-button:active {
+  background-color: #003E73; /* Even darker shade for active */
+}
