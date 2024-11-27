@@ -2,15 +2,15 @@ import './DancePanel.css'
 import DancingFigure from '../../images/dancing-person.png'
 import SittingFigure from '../../images/sitting-person.png'
 
-function DancePanel({data}) {
+function DancePanel ({ data }) {
   const danceabilityScore = data.average_danceability
 
   return (
     <div className='wrapped-background danceability-wrapper'>
       <h1>Your Danceability Spectrum</h1>
-      <div className="danceability-meter-container">
+      <div className='danceability-meter-container'>
         <div className='icon-wrapper'>
-          <img src={SittingFigure} alt='Dance Visual Left'/>
+          <img src={SittingFigure} alt='Dance Visual Left' />
         </div>
 
         <div className='score-container'>
@@ -25,7 +25,7 @@ function DancePanel({data}) {
           <p>Your danceability score: {danceabilityScore}</p>
         </div>
         <div className='icon-wrapper'>
-          <img src={DancingFigure} alt='Dance Visual Right'/>
+          <img src={DancingFigure} alt='Dance Visual Right' />
         </div>
       </div>
     </div>

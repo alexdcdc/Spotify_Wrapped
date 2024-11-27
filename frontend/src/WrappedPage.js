@@ -79,7 +79,7 @@ function WrappedPage () {
               &gt;
             </button>
             )
-          : (<button className='navigate-button to-dashboard-button' onClick={() => {navigate('/dashboard')}}>Back to dashboard &#8594;</button>)}
+          : (<button className='navigate-button to-dashboard-button' onClick={() => { navigate('/dashboard') }}>Back to dashboard &#8594;</button>)}
 
         <SlideIndicator currentSlide={currentPanelNum} totalSlides={totalPanels} setter={setCurrentPanelNum} />
       </div>
