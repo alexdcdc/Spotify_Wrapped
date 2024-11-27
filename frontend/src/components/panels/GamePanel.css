@@ -39,6 +39,15 @@
   color: white;
   cursor: pointer;
   padding: 0px 20px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #333333; /* Slightly lighter black for hover */
+}
+
+.submit-button:active {
+  background-color: #555555; /* Even lighter black for active */
 }
 
 .input-container {

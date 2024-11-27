@@ -1,6 +1,6 @@
 import { get } from './lib/requests'
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import LLMPanel from './components/panels/LLMPanel'
 import IntroPanel from './components/panels/IntroPanel'
 import PreLLMPanel from './components/panels/PreLLMPanel'
@@ -29,6 +29,7 @@ function WrappedPage () {
   const [totalPanels, setTotalPanels] = useState(0)
   const [loaded, setLoaded] = useState(false)
   const { id } = useParams()
+  const navigate = useNavigate()
 
   const updateFont = () => {
     const link = document.createElement('link')
@@ -78,7 +79,7 @@ function WrappedPage () {
               &gt;
             </button>
             )
-          : (<p>All done! <Link to='/dashboard'>Back to dashboard</Link></p>)}
+          : (<button className='navigate-button to-dashboard-button' onClick={() => { navigate('/dashboard') }}>Back to dashboard &#8594;</button>)}
 
         <SlideIndicator currentSlide={currentPanelNum} totalSlides={totalPanels} setter={setCurrentPanelNum} />
       </div>

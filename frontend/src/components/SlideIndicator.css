@@ -19,6 +19,10 @@
     cursor: pointer;
 }
 
+.dot:hover {
+    background-color: gray;
+}
+
 .dot.active {
     background-color: black;
     opacity: 1;
