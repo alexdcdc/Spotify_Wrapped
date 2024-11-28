@@ -34,7 +34,7 @@ class WrappedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Wrapped
-        fields = ["id", "name", "date_created", "panels"]
+        fields = ["id", "name", "date_created", "panels", "color"]
 
 
 class ContactMessageSerializer(serializers.ModelSerializer):

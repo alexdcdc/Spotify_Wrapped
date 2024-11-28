@@ -180,12 +180,14 @@ def wrapped(request):
         )
 
     elif request.method == "GET":
-        serializer = WrappedSerializer(Wrapped.objects.filter(user=user), many=True)
+        serializer = WrappedSerializer(Wrapped.objects.filter(user=user).order_by("-date_created"), many=True)
         return Response({"wrapped_list": serializer.data}, status=status.HTTP_200_OK)
 
     else:
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
+def get_random_color():
+    return "".join([choice("0123456789ABCDEF") for _ in range(6)])
 
 def generate_wrapped(user, name):
     PANEL_ORDER = [
@@ -201,6 +203,7 @@ def generate_wrapped(user, name):
     new_wrapped = Wrapped()
     new_wrapped.user = user
     new_wrapped.name = name
+    new_wrapped.color = get_random_color()
     new_wrapped.save()
 
     order = 1
@@ -313,10 +316,8 @@ def generate_data_llm(user):
     )
 
     if top_artists_response.status_code != 200:
-        return Response(
-            {"error": "Failed to fetch top artists from Spotify API."},
-            status=status.HTTP_400_BAD_REQUEST,
-        )
+        print("ERROR: failed to fetch top artists from Spotify API")
+        return {}
 
     top_artists = top_artists_response.json()
     genres = {genre for artist in top_artists["items"] for genre in artist["genres"]}
@@ -385,7 +386,8 @@ def generate_data_danceability(user):
     )
 
     if top_tracks_response.status_code != 200:
-        print("Failed to fetch top tracks from Spotify API.")
+        print(top_tracks_response.status_code)
+        print("ERROR: Failed to fetch top tracks from Spotify API.")
         return {}
 
     tracks = top_tracks_response.json().get("items", [])
