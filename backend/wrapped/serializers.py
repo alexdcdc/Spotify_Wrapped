@@ -18,6 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
             "last_name",
             "spotify_profile",
             "is_registered",
+            "account_created"
         ]
         depth = 2
 

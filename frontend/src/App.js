@@ -13,6 +13,7 @@ import LLMPanel from './components/LLMPanel'
 import TopGenresPanel from './components/TopGenresPanel'
 import NewWrappedForm from './NewWrappedForm'
 import WrappedPage from './WrappedPage'
+import Profile from "./Profile";
 
 function App () {
   sessionStorage.setItem('isDark', !sessionStorage.getItem('isDark'))
@@ -26,6 +27,7 @@ function App () {
           <Route path='callback' element={<Callback />} />
           <Route path='register' element={<Register />} />
           <Route element={<PrivateRoutes />}>
+            <Route path='profile' element={<Profile/>}/>
             <Route path='dashboard/panel-one' element={<PanelOne />} /> {/* New route for SpotifyOverview */}
             <Route path='dashboard/llm-panel' element={<LLMPanel />} />
             <Route path='dashboard/danceability-panel' element={<DanceabilityPanel />} />

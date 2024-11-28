@@ -11,10 +11,6 @@ function Dashboard () {
   const [wrappedList, setWrappedList] = useState([])
   const navigate = useNavigate() // Initialize useNavigate
 
-
-function Dashboard() {
-    const [firstName, setFirstName] = useState("");
-
   const getUserData = async () => {
     const url = 'http://localhost:8000/api/user'
 
@@ -44,10 +40,6 @@ function Dashboard() {
     getUserData()
     getUserWrapped()
   }, [])
-
-  const handleNavigateToPanelOne = () => {
-    navigate('/dashboard/panel-one') // Navigate to the Spotify Overview page
-  }
 
     return (
 

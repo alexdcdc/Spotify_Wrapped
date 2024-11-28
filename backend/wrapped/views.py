@@ -129,6 +129,30 @@ def get_user(request):
     else:
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_profile_image(request):
+    user = request.user
+    access_token = user.auth_data.access_token
+    headers = {"Authorization": f"Bearer {access_token}"}
+
+    response = requests.get(
+        "https://api.spotify.com/v1/me", headers=headers
+    )
+
+    if response.status_code != 200:
+        return Response(
+            {"error": "Failed to fetch profile image from Spotify API."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    data = response.json()
+    images = data["images"]
+    found = len(images) != 0
+
+    return Response({"found": found, "images": images}, status=status.HTTP_200_OK)
+
+
 
 @api_view(["GET"])
 @permission_classes([AllowAny])
