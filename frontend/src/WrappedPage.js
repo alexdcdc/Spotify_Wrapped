@@ -10,6 +10,7 @@ import PreGamePanel from './components/panels/PreGamePanel'
 import DancePanel from './components/panels/DancePanel'
 import GamePanel from './components/panels/GamePanel'
 import SlideIndicator from './components/SlideIndicator'
+import TopTracksPlayer from './components/TopTracksPlayer'
 import './WrappedPage.css'
 
 const componentMap = {
@@ -82,6 +83,7 @@ function WrappedPage () {
           : (<button className='navigate-button to-dashboard-button' onClick={() => { navigate('/dashboard') }}>Back to dashboard &#8594;</button>)}
 
         <SlideIndicator currentSlide={currentPanelNum} totalSlides={totalPanels} setter={setCurrentPanelNum} />
+        <TopTracksPlayer topTracks={wrappedPanels.filter(panel => panel.type === 'TT')[0].data} />
       </div>
     )
   } else {
