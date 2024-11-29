@@ -275,7 +275,8 @@ def get_llm_description(genres, artist_names):
 
             Make sure each section starts with the label
             (e.g., "Personality & Thinking Style:", "Fashion Choices:", "Behavior:").
-            You also don't have to add the numbers, they're just there to help you structure your response.
+            You also don't have to add the numbers, they're just there to help you structure your response. 
+            Do not bold or italicize any text.
             """
     response = model.generate_content(gemini_prompt)
     full_description = response.text.strip()
