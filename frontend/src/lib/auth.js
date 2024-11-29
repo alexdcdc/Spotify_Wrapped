@@ -1,10 +1,10 @@
 
 function isAuthenticated() {
-  return !!localStorage.getItem("token");
+  return !!sessionStorage.getItem("token");
 }
 
 function logout() {
-  localStorage.removeItem('token')
+  sessionStorage.removeItem('token')
   window.location.href="http://localhost:3000"
 }
 

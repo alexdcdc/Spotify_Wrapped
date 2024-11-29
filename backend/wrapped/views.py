@@ -442,6 +442,7 @@ def send_email(request):
     user_name = data["name"]
     subject = f"Comment from {user_email_addr}"
     body = f"Name: {user_name}\nAddress: {user_email_addr}\n\n{message}"
+    print(user_email_addr, message, user_name)
     mail_status = send_mail(
         subject=subject,
         message=body,
