@@ -463,3 +463,10 @@ def send_email(request):
             {"message": "Could not send email"},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR,
         )
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def delete_user(request):
+    user = request.user
+    user.delete()
+    return Response({"message": "User successfully deleted"}, status=status.HTTP_200_OK)

@@ -25,12 +25,13 @@ from wrapped.views import (
     get_wrapped_with_id,
     send_email,
     is_authenticated,
-    get_profile_image,
+    get_profile_image, delete_user,
 )
 
 urlpatterns = [
     path('api/authenticate', register_by_access_token),
     path('api/user', get_user),
+    path('api/user/delete', delete_user),
     path('api/health', health),
     path('admin/', admin.site.urls),
     path('api/wrapped', wrapped),
