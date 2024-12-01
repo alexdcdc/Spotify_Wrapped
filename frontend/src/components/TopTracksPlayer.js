@@ -6,6 +6,7 @@ function TopTracksPlayer({topTracks}) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [token, setToken] = useState("")
   const [player, setPlayer] = useState(undefined)
+  const [playerId, setPlayerId] = useState("")
 
   const getAccessToken = async () => {
     const url = "http://localhost:8000/api/token"
@@ -35,6 +36,7 @@ function TopTracksPlayer({topTracks}) {
 
       player.addListener('ready', ({device_id}) => {
         console.log('Ready with Device ID', device_id);
+        setPlayerId(device_id)
       });
 
       player.addListener('not_ready', ({device_id}) => {
@@ -66,7 +68,7 @@ function TopTracksPlayer({topTracks}) {
   };
 
   const startPlayback = async () => {
-    const url = "https://api.spotify.com/v1/me/player/play"
+    const url = "https://api.spotify.com/v1/me/player/play?device_id=" + playerId
     const headers = {
       "Authorization": "Bearer " + token,
       "Content-Type": "application/json",
