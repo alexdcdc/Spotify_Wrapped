@@ -53,14 +53,26 @@ function WrappedPage() {
     const data = await response.json();
     const wrapped = data.wrapped;
     setWrappedPanels(wrapped.panels);
-    setTopTracks(wrapped.topTracks)
     setTotalPanels(wrapped.panels.length);
-    setLoaded(true);
+
   };
+
+  const getTopTracks = async () => {
+    wrappedPanels.forEach((panel, index) => {
+      console.log("hello")
+      if (panel.type == "TT") {
+        console.log("Panel data = " + panel)
+        setTopTracks(panel.data.items)
+        console.log(topTracks)
+      }
+    })
+  }
 
   useEffect(() => {
     updateFont();
     getWrappedData();
+    getTopTracks();
+    setLoaded(true);
   }, []);
 
   if (loaded) {
