@@ -28,7 +28,7 @@ function App () {
             <Route path='profile' element={<Profile/>}/>
             <Route path='dashboard' element={<Dashboard />}/>
             <Route path='wrapped/:id' element={<WrappedPage />} />
-            <Route path='create-wrapped' element={<NewWrappedForm />} />
+            <Route path='create-wrapped' element={<NewWrappedForm enabled={true} />} />
           </Route>
         </Route>
       </Routes>
