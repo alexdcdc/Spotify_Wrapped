@@ -5,10 +5,12 @@ import './Dashboard.css'
 import WrappedCard from './WrappedCard'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import NewWrappedForm from "./NewWrappedForm";
 
 function Dashboard() {
   const [firstName, setFirstName] = useState('')
   const [wrappedList, setWrappedList] = useState([])
+  const [wrappedFormEnabled, setWrappedFormEnabled] = useState(false)
 
   const getUserData = async () => {
     const url = 'http://localhost:8000/api/user'
@@ -35,6 +37,10 @@ function Dashboard() {
     setWrappedList(data.wrapped_list)
   }
 
+  const displayWrappedForm = () => {
+    setWrappedFormEnabled(true)
+  }
+
   useEffect(() => {
     getUserData()
     getUserWrapped()
@@ -43,10 +49,11 @@ function Dashboard() {
   return (
 
     <div className="dashboard">
+      <NewWrappedForm enabled={wrappedFormEnabled}/>
       <h1 className="title pb-3">{firstName}'s Dashboard</h1>
       <div className="grid-container">
 
-        <button className="card create-new" onClick="location.href='create-new.html'">
+        <button className="card create-new" onClick={displayWrappedForm}>
           <div className="plus-icon">+</div>
           <p className="title">Create New</p>
         </button>
