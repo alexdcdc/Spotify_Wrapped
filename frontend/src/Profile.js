@@ -1,5 +1,5 @@
 import './App.css';
-import { isAuthenticated, logout, deleteAcct } from "./lib/auth"
+import { deleteAcct } from "./lib/auth"
 import {useEffect, useState} from 'react';
 import {get} from './lib/requests'
 
@@ -37,7 +37,6 @@ function Profile() {
         }
 
         const data = await response.json()
-        console.log(data)
 
         const full_date = new Date(data.account_created)
 

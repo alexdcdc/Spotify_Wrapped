@@ -16,7 +16,7 @@ function NavBar() {
         navigate(path);
     };
 
-    if (isAuthenticated()) {
+    if (isAuthenticated() && (sessionStorage.getItem('isRegistered') === "true")) {
 
         return (
             <nav className={`navbar navbar-expand-lg ${isDark ? 'navbar-dark bg-dark' : 'navbar-light bg-light'}`}>

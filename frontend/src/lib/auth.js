@@ -1,4 +1,5 @@
-
+import { get } from "./requests.js"
+import { post } from "./requests.js";
 
 function isAuthenticated() {
   return !!sessionStorage.getItem("token");
@@ -36,13 +37,23 @@ function deleteAcct() {
   popup.appendChild(confirmationBox);
   document.body.appendChild(popup);
 
-  document.getElementById('confirmLogout').addEventListener('click', function () {
+  document.getElementById('confirmLogout').addEventListener('click', async function () {
     const usernameInput = document.getElementById('usernameInput').value;
-    const username = 'yourUsername'; // Replace this with the actual username variable
+    const url = "http://localhost:8000/api/user"
+    const response = await get(url, {}, true)
+    const data = await response.json()
+    const username = data.username;
 
     if (usernameInput === username) {
-     // delete all info
-
+      const url = "http://localhost:8000/api/user/delete"
+      const response = await post(url, {}, true)
+      if (response.ok) {
+        logout()
+        alert('Account was deleted');
+      }
+      else {
+        alert('Account was unable to be deleted. Please try again.');
+      }
 
 
     } else {
@@ -52,12 +63,13 @@ function deleteAcct() {
 
   document.getElementById('cancelLogout').addEventListener('click', function () {
     document.body.removeChild(popup);
-  });
+  })
+}
 
 function logout() {
-  localStorage.removeItem('token');
-  window.location.href = "http://localhost:3000";
-
+  sessionStorage.removeItem('token')
+  window.location.href = "http://localhost:3000"
+  sessionStorage.removeItem('isRegistered')
 }
 
 

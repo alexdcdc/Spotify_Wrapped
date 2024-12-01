@@ -95,6 +95,7 @@ body {
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 20px;
+
 }
 
 .login-container h1 {
@@ -232,4 +233,72 @@ button.card {
   border: none;
   background: none;
   padding: 0;
+}
+
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: var(--background-color);
+}
+
+/* Title styling */
+.form-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--primary-text-color);
+}
+
+/* Label styling */
+.form-label {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--primary-text-color);
+  width: 100%;
+  text-align: left;
+}
+
+/* Input styling */
+.form-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* Button styling */
+.form-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007BFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.form-button:active {
+  background-color: #004494;
+  transform: translateY(0);
 }
