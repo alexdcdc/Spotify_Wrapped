@@ -1,61 +1,50 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { Play, Pause, SkipForward, SkipBack } from 'lucide-react'
+import React, { useState } from 'react';
 
-const TopTracksPlayer = ({ topTracks }) => {
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const audioRef = useRef(null)
+function TopTracksPlayer({ topTracks }) {
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  useEffect(() => {
-    if (isPlaying) {
-      audioRef.current?.play()
-    } else {
-      audioRef.current?.pause()
-    }
-  }, [isPlaying, currentTrackIndex])
-
-  const togglePlay = () => {
-    setIsPlaying(!isPlaying)
+  if (!topTracks || topTracks.length === 0) {
+    return <div>No tracks available to play.</div>;
   }
 
-  const nextTrack = () => {
-    setCurrentTrackIndex((prev) =>
-      (prev + 1) % topTracks.length
-    )
-  }
+  const playTrack = (trackUrl) => {
+    const audio = new Audio(trackUrl);
+    audio.play();
+    setIsPlaying(true);
+    audio.onended = () => {
+      setIsPlaying(false);
+    };
+  };
 
-  const prevTrack = () => {
-    setCurrentTrackIndex((prev) =>
-      (prev - 1 + topTracks.length) % topTracks.length
-    )
-  }
+  const handleNextTrack = () => {
+    setCurrentTrackIndex((prevIndex) => (prevIndex + 1) % topTracks.length);
+  };
 
-  const currentTrack = topTracks[currentTrackIndex]
+  const handlePreviousTrack = () => {
+    setCurrentTrackIndex(
+      (prevIndex) => (prevIndex - 1 + topTracks.length) % topTracks.length
+    );
+  };
 
   return (
-    <div className='fixed bottom-0 left-0 right-0 bg-black text-white p-4 flex items-center'>
-      <div className='flex-1'>
-        <p>{currentTrack.name}</p>
-        <p className='text-sm text-gray-400'>{currentTrack.artists[0].name}</p>
+    <div className="top-tracks-player">
+      <h3>Now Playing:</h3>
+      <p>{topTracks[currentTrackIndex].title} by {topTracks[currentTrackIndex].artist}</p>
+      <div className="controls">
+        <button onClick={handlePreviousTrack}>&lt; Previous</button>
+        <button
+          onClick={() =>
+            playTrack(topTracks[currentTrackIndex].preview_url)
+          }
+          disabled={isPlaying}
+        >
+          {isPlaying ? 'Playing...' : 'Play'}
+        </button>
+        <button onClick={handleNextTrack}>Next &gt;</button>
       </div>
-      <div className='flex space-x-4 items-center'>
-        <button onClick={prevTrack} className='hover:bg-gray-800 p-2 rounded'>
-          <SkipBack size={24} />
-        </button>
-        <button onClick={togglePlay} className='hover:bg-gray-800 p-2 rounded'>
-          {isPlaying ? <Pause size={24} /> : <Play size={24} />}
-        </button>
-        <button onClick={nextTrack} className='hover:bg-gray-800 p-2 rounded'>
-          <SkipForward size={24} />
-        </button>
-      </div>
-      <audio
-        ref={audioRef}
-        src={currentTrack.preview_url}
-        onEnded={nextTrack}
-      />
     </div>
-  )
+  );
 }
 
-export default TopTracksPlayer
+export default TopTracksPlayer;
