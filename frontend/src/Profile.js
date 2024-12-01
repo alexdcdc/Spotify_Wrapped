@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-
+import { isAuthenticated, logout, deleteAcct } from "./lib/auth"
 
 
 function Profile() {
@@ -18,7 +18,7 @@ function Profile() {
                         <p><strong>Account created:</strong> 01/01/1970</p>
                     </div>
                 </div>
-                <button className="delete-button">Delete account</button>
+                <button className="delete-button" onClick={ () => {deleteAcct()} }>Delete account</button>
             </div>
         </div>
 

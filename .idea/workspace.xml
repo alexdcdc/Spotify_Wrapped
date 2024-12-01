@@ -4,9 +4,100 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d34e3a6-3cdd-405b-aac6-8aad8f1d8f8d" name="Changes" comment="reconfigured css">
+    <list default="true" id="4d34e3a6-3cdd-405b-aac6-8aad8f1d8f8d" name="Changes" comment="logout funtionality">
+      <change afterPath="$PROJECT_DIR$/.github/workflows/django.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/wrapped/migrations/0002_customuser_account_created.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/wrapped/migrations/0003_wrapped_color.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/.stylelintrc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Contact.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Dashboard.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/NewWrappedForm.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/NewWrappedForm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/PrivateRoutes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/WrappedCard.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/WrappedCard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/WrappedPage.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/WrappedPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/LLMPanel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/PanelOne.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/PlaybackButton.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/PlaybackButton.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/SlideIndicator.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/SlideIndicator.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/TopGenresPanel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/danceabilityPanel.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/danceabilityPanel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/llmPanel.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/p2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/panelOne.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/panelTwo.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/panels/DancePanel.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/panels/DancePanel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/panels/GamePanel.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/panels/GamePanel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/panels/IntroPanel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/panels/LLMPanel.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/panels/LLMPanel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/panels/PreGamePanel.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/panels/PreGamePanel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/panels/PreLLMPanel.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/panels/PreLLMPanel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/panels/TopGenresPanel.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/panels/TopGenresPanel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/panels/TopTracksPanel.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/panels/TopTracksPanel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/images/dancing-person.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/images/dancingFigure.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/images/sitting-person.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/lib/requests.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/backend/test_manage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/superlinter.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/superlinter.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Spotify_Wrapped.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Spotify_Wrapped/asgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Spotify_Wrapped/asgi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Spotify_Wrapped/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Spotify_Wrapped/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Spotify_Wrapped/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Spotify_Wrapped/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Spotify_Wrapped/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Spotify_Wrapped/wsgi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/manage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/wrapped/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wrapped/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/wrapped/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wrapped/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/wrapped/managers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wrapped/managers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/wrapped/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wrapped/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/wrapped/migrations/0002_remove_spotifyprofile_display_name_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/wrapped/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wrapped/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/wrapped/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wrapped/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/wrapped/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wrapped/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/wrapped/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/wrapped/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/Callback.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Callback.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/Contact.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Contact.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/Layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/SpotifyButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/SpotifyButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/lib/SpotifyOverview.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/lib/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/lib/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/lib/oauth-crypt.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/lib/oauth-crypt.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/reportWebVitals.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/reportWebVitals.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/setupTests.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/setupTests.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +204,7 @@
       <workItem from="1732136480225" duration="98000" />
       <workItem from="1732218961826" duration="2646000" />
       <workItem from="1732574742641" duration="4309000" />
-      <workItem from="1733059556344" duration="1098000" />
+      <workItem from="1733059556344" duration="2360000" />
     </task>
     <task id="LOCAL-00001" summary="Front end nav bar dark mode work">
       <option name="closed" value="true" />
@@ -171,7 +262,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732716628354</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="logout funtionality">
+      <option name="closed" value="true" />
+      <created>1733060677907</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1733060677907</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +279,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Front end nav bar dark mode work" />
     <MESSAGE value="reconfigured css" />
-    <option name="LAST_COMMIT_MESSAGE" value="reconfigured css" />
+    <MESSAGE value="logout funtionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="logout funtionality" />
   </component>
 </project>

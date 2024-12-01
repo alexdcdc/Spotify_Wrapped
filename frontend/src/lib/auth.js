@@ -4,7 +4,7 @@ function isAuthenticated() {
   return !!localStorage.getItem("token");
 }
 
-function logout() {
+function deleteAcct() {
   const popup = document.createElement('div');
   popup.style.position = 'fixed';
   popup.style.top = '0';
@@ -41,8 +41,10 @@ function logout() {
     const username = 'yourUsername'; // Replace this with the actual username variable
 
     if (usernameInput === username) {
-      localStorage.removeItem('token');
-      window.location.href = "http://localhost:3000";
+     // delete all info
+
+
+
     } else {
       alert('Username does not match! Please try again.');
     }
@@ -51,8 +53,14 @@ function logout() {
   document.getElementById('cancelLogout').addEventListener('click', function () {
     document.body.removeChild(popup);
   });
+}
+
+
+function logout() {
+  localStorage.removeItem('token');
+  window.location.href = "http://localhost:3000";
 
 }
 
 
-export { isAuthenticated, logout}
+export { isAuthenticated, logout, deleteAcct }
