@@ -41,6 +41,10 @@ function Dashboard() {
     setWrappedFormEnabled(true)
   }
 
+  const hideWrappedForm = () => {
+    setWrappedFormEnabled(false)
+  }
+
   useEffect(() => {
     getUserData()
     getUserWrapped()
@@ -49,9 +53,10 @@ function Dashboard() {
   return (
 
     <div className="dashboard">
-      <NewWrappedForm enabled={wrappedFormEnabled}/>
+      <NewWrappedForm enabled={wrappedFormEnabled} cancelFunction={hideWrappedForm}/>
       <h1 className="title pb-3">{firstName}'s Dashboard</h1>
       <div className="grid-container">
+
 
         <button className="card create-new" onClick={displayWrappedForm}>
           <div className="plus-icon">+</div>

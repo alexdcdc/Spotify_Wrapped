@@ -3,7 +3,7 @@ import { post } from './lib/requests'
 import './NewWrappedForm.css'
 import { useNavigate } from 'react-router-dom'
 
-function NewWrappedForm ({enabled}) {
+function NewWrappedForm ({enabled, cancelFunction}) {
   const [wrappedName, setWrappedName] = useState('')
   const navigate = useNavigate()
   const createNewWrapped = async () => {
@@ -38,11 +38,16 @@ function NewWrappedForm ({enabled}) {
     <div className='pop-up-form-container'>
       <div className='pop-up-form'>
         <form onSubmit={createWrappedAndRedirect}>
-          <label className='pop-up-form-label' htmlFor='name'>Name</label>
-          <input className='pop-up-form-input' onChange={e => { setWrappedName(e.target.value) }} type='text' id='name' name='name' required />
-          <br /><br />
+          <label className='pop-up-form-label' htmlFor='name'>Input New Wrapped Name</label>
+          <input className='pop-up-form-input' onChange={e => {
+            setWrappedName(e.target.value)
+          }} type='text' id='name' name='name' required/>
+          <br/><br/>
 
+          <div className="button-align">
           <button type='submit'>Submit</button>
+          <button type='cancel' onClick={cancelFunction}>Cancel</button>
+            </div>
         </form>
       </div>
     </div>
