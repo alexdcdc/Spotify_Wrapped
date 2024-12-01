@@ -1,7 +1,7 @@
 
 
 function isAuthenticated() {
-  return !!localStorage.getItem("token");
+  return !!sessionStorage.getItem("token");
 }
 
 function deleteAcct() {
@@ -53,8 +53,6 @@ function deleteAcct() {
   document.getElementById('cancelLogout').addEventListener('click', function () {
     document.body.removeChild(popup);
   });
-}
-
 
 function logout() {
   localStorage.removeItem('token');

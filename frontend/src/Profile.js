@@ -1,21 +1,71 @@
 import './App.css';
-import React from 'react';
 import { isAuthenticated, logout, deleteAcct } from "./lib/auth"
-
+import {useEffect, useState} from 'react';
+import {get} from './lib/requests'
 
 function Profile() {
+
+    const [imageUrl, setImageUrl] = useState("")
+    const [creationDate, setCreationDate] = useState("")
+    const [spotifyId, setSpotifyId] = useState("")
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("")
+
+    const fetchProfileImage = async () => {
+        const url = "http://localhost:8000/api/profile-image"
+        const response = await get(url, {}, true)
+
+        if (!response.ok) {
+            console.log("Failed to fetch user profile image")
+        }
+
+        const data = await response.json()
+        if (data.found) {
+            setImageUrl(data.images[0].url)
+        }
+
+    }
+
+    const fetchUserInfo = async () => {
+        const url = "http://localhost:8000/api/user"
+        const response = await get(url,{},true);
+
+        if (!response.ok) {
+            console.log("Failed to fetch user data");
+        }
+
+        const data = await response.json()
+        console.log(data)
+
+        const full_date = new Date(data.account_created)
+
+        setUsername(data.username)
+        setFirstName(data.first_name)
+        setLastName(data.last_name)
+        setSpotifyId(data.spotify_profile.spotify_id)
+        setCreationDate(full_date.toDateString())
+        setEmail(data.email)
+    }
+
+    useEffect(() => {
+        fetchUserInfo()
+        fetchProfileImage()
+    }, [])
+
 
     return (
         <div className="profile-wrapper">
             <div className="profile-container">
                 <h1>Profile</h1>
                 <div className="profile-row">
-                    <div className="profile-image">alexdcdc</div>
+                    <div className="profile-image">{imageUrl ? <img src={imageUrl}/> : username}</div>
                     <div className="profile-details">
-                        <p><strong>Name:</strong> Alex Chen</p>
-                        <p><strong>Email:</strong> alexdcdc@gmail.com</p>
-                        <p><strong>Spotify ID:</strong> abcdefghijk</p>
-                        <p><strong>Account created:</strong> 01/01/1970</p>
+                        <p><strong>Name: </strong>{firstName} {lastName}</p>
+                        <p><strong>Email: </strong>{email}</p>
+                        <p><strong>Spotify ID: </strong>{spotifyId}</p>
+                        <p><strong>Account created: </strong>{creationDate}</p>
                     </div>
                 </div>
                 <button className="delete-button" onClick={ () => {deleteAcct()} }>Delete account</button>

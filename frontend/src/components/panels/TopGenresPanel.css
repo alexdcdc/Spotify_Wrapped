@@ -1,0 +1,130 @@
+/* panelTwo.css */
+
+/* General styles for the panel */
+.genres-wrapper {
+  background: linear-gradient(158deg, rgba(0, 0, 0, 1) 10%, rgba(173, 52, 113, 1) 100%, rgba(255, 77, 167, 1) 100%);
+  justify-content: center;
+  align-items: center;
+}
+
+.genres-wrapper .box {
+  width: 90%;
+  max-width: 600px;
+  padding: 100px 80px;
+  background-color: #f10086;
+  border-radius: 10px; /* Less rounded corners */
+  text-align: center;
+  color: white;
+  margin: 20px;
+  box-sizing: border-box;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  position: relative; /* Needed for positioning the pseudo-element */
+}
+
+
+/* Heading style */
+.genres-wrapper h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+/* Genre list styles */
+.genre-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Individual genre items styled as proportional bars */
+.genre-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  gap: 10px;
+  background-color: transparent;
+}
+
+/* Bar element inside each genre item */
+.genre-bar {
+  height: 70px;
+  border-radius: 50px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.genre-bar.genre-1 {
+  background-color: #a6ffcb; /* Greenish */
+  width: 80%; /* Largest bar */
+}
+.genre-bar.genre-2 {
+  background-color: #f4ff81; /* Yellowish */
+  width: 65%;
+}
+.genre-bar.genre-3 {
+  background-color:  #00008B; /* Blue */
+  width: 50%;
+}
+.genre-bar.genre-4 {
+  background-color: #000000; /* Black */
+  width: 35%;
+}
+.genre-bar.genre-5 {
+  background-color: #ffffff; /* White */
+  width: 20%;
+  border: 1px solid #ccc; /* For visibility on colored backgrounds */
+}
+
+/* Text beside each bar */
+.genre-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.genre-rank {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.genre-name {
+  font-size: 1rem;
+  font-weight: normal;
+  color: white;
+}
+
+/* Footer styling for branding and hashtag */
+.footer {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 600px) {
+  .genres-wrapper .box {
+    padding: 15px;
+  }
+
+  .genres-wrapper h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .genre-item {
+    font-size: 1rem;
+  }
+
+  .genre-bar {
+    height: 16px; /* Adjusted for smaller screens */
+  }
+}
+

@@ -1,0 +1,67 @@
+.danceability-wrapper {
+  background: linear-gradient(135deg, black, orange);
+  font-size: 18px;
+}
+
+.danceability-meter-container {
+  display: flex;
+  flex-direction: row;
+  width: 90vw;
+  justify-content: center;
+}
+
+
+/* Danceability Spectrum Styles */
+.score-container {
+  margin: 20px auto;
+  flex-grow: 1;
+}
+
+.spectrum {
+  height: 10px;
+  width: 100%;
+  background: linear-gradient(to right, black, orange);
+  border-radius: 5px;
+  margin: 20px auto;
+}
+
+.score-indicator {
+  position: absolute;
+  top: -5px;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  border: 2px solid #ff6600;
+  transition: left 0.3s ease;
+}
+
+.icon-wrapper {
+  width: 100px;
+  height: auto;
+}
+
+.icon-wrapper img {
+  width: inherit;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .danceability-wrapper {
+    padding: 10px;
+  }
+
+  .score-container {
+    width: 90%;
+  }
+
+  .svg-container {
+    display: none; /* Hide SVGs on smaller screens */
+  }
+}

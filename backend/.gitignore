@@ -19,6 +19,7 @@ media
 .idea/misc.xml
 .idea/vcs.xml
 .idea/dataSources.xml
+.idea/*.iml
 
 
 # AWS User-specific
