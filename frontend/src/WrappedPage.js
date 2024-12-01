@@ -55,10 +55,12 @@ function WrappedPage() {
     setWrappedPanels(wrapped.panels);
     setTotalPanels(wrapped.panels.length);
 
+    await getTopTracks(wrapped.panels)
+    setLoaded(true);
   };
 
-  const getTopTracks = async () => {
-    wrappedPanels.forEach((panel, index) => {
+  const getTopTracks = async (panels) => {
+    panels.forEach((panel, index) => {
       console.log("hello")
       if (panel.type == "TT") {
         console.log("Panel data = " + panel)
@@ -71,8 +73,6 @@ function WrappedPage() {
   useEffect(() => {
     updateFont();
     getWrappedData();
-    getTopTracks();
-    setLoaded(true);
   }, []);
 
   if (loaded) {

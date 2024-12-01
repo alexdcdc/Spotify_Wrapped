@@ -432,3 +432,9 @@ def send_email(request):
             {"message": "Could not send email"},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR,
         )
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_access_token(request):
+    user = request.user
+    return Response({"token": user.auth_data.access_token}, status=status.HTTP_200_OK)
