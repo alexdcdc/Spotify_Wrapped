@@ -1,4 +1,5 @@
 import { base64encode, generateRandomString, sha256 } from './lib/oauth-crypt'
+import "./SpotifyButton.css"
 
 const redirectUri = process.env.REACT_APP_REDIRECT_URI
 const clientId = process.env.REACT_APP_CLIENT_ID

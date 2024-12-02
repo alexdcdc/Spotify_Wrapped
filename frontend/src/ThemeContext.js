@@ -1,34 +1,28 @@
-import React, { createContext, useContext, useState, useEffect} from 'react';
+import React, {createContext, useContext, useState, useEffect} from 'react';
 
 const ThemeContext = createContext();
 
-export const ThemeProvider = ({ children }) => {
-    const [isDark, setIsDark] = useState(() => {
-        const savedTheme = sessionStorage.getItem('isDark');
-        return savedTheme ? JSON.parse(savedTheme) : false;
-    });
+export const ThemeProvider = ({children}) => {
+  const [theme, setTheme] = useState(() => {
+    // Load theme from sessionStorage or default to 'light'
+    return sessionStorage.getItem("theme") || "light";
+  });
 
-    const toggleTheme = () => {
-        setIsDark((prevTheme) => {
-            const newTheme = !prevTheme;
-            sessionStorage.setItem('isDark', JSON.stringify(newTheme)); // Store updated theme in sessionStorage
-            return newTheme;
-        });
-    };
+  useEffect(() => {
+    // Save the current theme in sessionStorage
+    sessionStorage.setItem("theme", theme);
+  }, [theme]);
 
-     useEffect(() => {
-        document.body.style.backgroundColor = isDark ? '#000000' : '#ffffff';
-        document.body.style.color = isDark ? '#ffffff' : '#000000';
-    }, [isDark]);
+  // Function to toggle the theme
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
 
-
-    return (
-        <ThemeContext.Provider value={{ isDark, toggleTheme }}>
-
-                {children}
-
-        </ThemeContext.Provider>
-    );
+  return (
+    <ThemeContext.Provider value={{theme, toggleTheme}}>
+      <div data-theme={theme}>{children}</div>
+    </ThemeContext.Provider>
+  );
 };
 
 export const useTheme = () => useContext(ThemeContext);

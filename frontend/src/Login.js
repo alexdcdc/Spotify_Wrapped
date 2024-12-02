@@ -1,4 +1,6 @@
 import SpotifyButton from "./SpotifyButton"
+import "./Login.css"
+import "./Profile.css"
 import React from "react";
 
 function Login() {
