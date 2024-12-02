@@ -1,6 +1,6 @@
 import { deleteAcct } from "./lib/auth"
 import {useEffect, useState} from 'react';
-import {get} from './lib/requests'
+import {generateUrl, get} from './lib/requests'
 
 function Profile() {
 
@@ -13,7 +13,7 @@ function Profile() {
     const [email, setEmail] = useState("")
 
     const fetchProfileImage = async () => {
-        const url = "http://localhost:8000/api/profile-image"
+        const url = generateUrl("api/profile-image")
         const response = await get(url, {}, true)
 
         if (!response.ok) {
@@ -28,7 +28,7 @@ function Profile() {
     }
 
     const fetchUserInfo = async () => {
-        const url = "http://localhost:8000/api/user"
+        const url = generateUrl("api/user")
         const response = await get(url,{},true);
 
         if (!response.ok) {

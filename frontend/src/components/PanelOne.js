@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './panelOne.css'
+import {generateUrl} from "../lib/requests";
 
 function PanelOne() {
   const [spotifyData, setSpotifyData] = useState(null)
@@ -41,7 +42,7 @@ function PanelOne() {
       return
     }
 
-    const url = 'http://localhost:8000/api/top-tracks'
+    const url = generateUrl('api/top-tracks')
     const payload = {
       method: 'GET',
       headers: {

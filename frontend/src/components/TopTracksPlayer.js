@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { get } from '../lib/requests';
+import {generateUrl, get} from '../lib/requests';
 import './panels/IntroPanel.css';
 import './TopTracksPlayer.css'
 
@@ -11,7 +11,7 @@ function TopTracksPlayer({ topTracks }) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const getAccessToken = async () => {
-    const url = 'http://localhost:8000/api/token';
+    const url = generateUrl('api/token');
     const response = await get(url, {}, true);
     const data = await response.json();
     setToken(data.token);

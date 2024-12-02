@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import './Contact.css'
-import {post} from './lib/requests'
+import {generateUrl, post} from './lib/requests'
 
 function Contact() {
   const [name, setName] = useState('')
@@ -33,7 +33,7 @@ function Contact() {
       }
 
       try {
-        const response = await post('http://localhost:8000/api/email', data, false)
+        const response = await post(generateUrl('api/email'), data, false)
 
         if (!response.ok) {
           throw new Error('Network response was not ok')

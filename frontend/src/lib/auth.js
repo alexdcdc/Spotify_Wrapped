@@ -1,4 +1,4 @@
-import { get } from "./requests.js"
+import {generateUrl, get} from "./requests.js"
 import { post } from "./requests.js";
 
 function isAuthenticated() {
@@ -39,13 +39,13 @@ function deleteAcct() {
 
   document.getElementById('confirmLogout').addEventListener('click', async function () {
     const usernameInput = document.getElementById('usernameInput').value;
-    const url = "http://localhost:8000/api/user"
+    const url = generateUrl("api/user")
     const response = await get(url, {}, true)
     const data = await response.json()
     const username = data.username;
 
     if (usernameInput === username) {
-      const url = "http://localhost:8000/api/user/delete"
+      const url = generateUrl("api/user/delete")
       const response = await post(url, {}, true)
       if (response.ok) {
         logout()

@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import {get, post} from './lib/requests'
+import {generateUrl, get, post} from './lib/requests'
 import './Dashboard.css'
 import './App.css'
 import WrappedCard from './WrappedCard'
@@ -11,7 +11,7 @@ function Dashboard() {
   const [wrappedFormEnabled, setWrappedFormEnabled] = useState(false)
 
   const getUserData = async () => {
-    const url = 'http://localhost:8000/api/user'
+    const url = generateUrl('api/user')
 
     const response = await get(url, {}, true)
 
@@ -24,7 +24,7 @@ function Dashboard() {
   }
 
   const getUserWrapped = async () => {
-    const url = 'http://localhost:8000/api/wrapped'
+    const url = generateUrl('api/wrapped')
     const response = await get(url, {}, true)
 
     if (!response.ok) {
@@ -36,7 +36,7 @@ function Dashboard() {
   }
 
   const handleDeleteWrapped = async (id) => {
-    const url = "http://localhost:8000/api/wrapped/delete/" + id
+    const url = generateUrl("api/wrapped/delete/" + id)
     const response = await post(url, {}, true)
     if (response.ok) {
       setWrappedList(wrappedList.filter(wrapped => wrapped.id !== id))

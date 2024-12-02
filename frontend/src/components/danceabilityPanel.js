@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './danceabilityPanel.css'
 import DancingFigure from '../images/dancingFigure.svg'
+import {generateUrl} from "../lib/requests";
 
 function DanceabilityPanel () {
   const [danceabilityScore, setDanceabilityScore] = useState(null)
@@ -25,7 +26,7 @@ function DanceabilityPanel () {
       return
     }
 
-    const url = 'http://localhost:8000/api/danceability' // Update with the correct endpoint.
+    const url = generateUrl('api/danceability') // Update with the correct endpoint.
     const payload = {
       method: 'GET',
       headers: {
