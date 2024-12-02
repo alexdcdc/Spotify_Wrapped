@@ -1,5 +1,5 @@
 .pop-up-form-container {
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    background-color: var(--background-color); /* used to be rbga(0,0,0,0.5), changes the background */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,7 +12,7 @@
 }
 
 .pop-up-form {
-    background-color: var(--background-color); /* Clean white background */
+    background-color: white; /* CHANGING THIS MAKES IT WEIRD */
     width: 40vw;
     max-width: 500px; /* Ensure it looks good on smaller screens */
     padding: 30px; /* Add padding for spacing */
