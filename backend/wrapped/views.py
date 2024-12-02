@@ -472,3 +472,14 @@ def delete_user(request):
     user = request.user
     user.delete()
     return Response({"message": "User successfully deleted"}, status=status.HTTP_200_OK)
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def delete_wrapped(request, wrapped_id):
+    user = request.user
+    try:
+        target_wrapped = Wrapped.objects.get(id=wrapped_id, user=user)
+        target_wrapped.delete()
+        return Response({"message": "Wrapped successfully deleted"}, status=status.HTTP_200_OK)
+    except Wrapped.DoesNotExist:
+        return Response({"message": "Wrapped does not exist"}, status=status.HTTP_404_NOT_FOUND)

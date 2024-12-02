@@ -25,7 +25,9 @@ from wrapped.views import (
     get_wrapped_with_id,
     send_email,
     is_authenticated,
-    get_profile_image, delete_user,
+    get_profile_image,
+    delete_user,
+    delete_wrapped,
 )
 
 urlpatterns = [
@@ -36,6 +38,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/wrapped', wrapped),
     path('api/wrapped/<str:wrapped_id>', get_wrapped_with_id),
+    path('api/wrapped/delete/<str:wrapped_id>', delete_wrapped),
     path('api/email', send_email),
     path('api/check-auth', is_authenticated),
     path('api/profile-image', get_profile_image),
