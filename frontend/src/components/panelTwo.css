@@ -20,7 +20,7 @@
   background-color: #f10086;
   border-radius: 10px; /* Less rounded corners */
   text-align: center;
-  color: white;
+  color: var(--primary-text-color);
   margin: 20px;
   box-sizing: border-box;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
@@ -33,6 +33,7 @@
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
   text-transform: uppercase;
+  color: var(--primary-text-color)
 }
 
 /* Genre list styles */
@@ -101,7 +102,7 @@
 .genre-name {
   font-size: 1rem;
   font-weight: normal;
-  color: white;
+  color: var(--primary-text-color);
 }
 
 /* Footer styling for branding and hashtag */

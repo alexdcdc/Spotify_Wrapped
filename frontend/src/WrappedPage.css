@@ -4,8 +4,8 @@
     right: 1vw;
     width: 2.5vw;
     height: 2.5vw;
-    background-color: #131414;
-    color: white;
+    background-color: var(--background-color);
+    color: var(--primary-text-color);
     font-size: 1.2vw;
     border: none;
     border-radius: 1.25vw;
@@ -26,7 +26,7 @@
 }
 
 .wrapped-background {
-    color: #ffffff;
+    color: var(--primary-text-color);
     min-height: 100vh;
     padding: 1vw;
     display: flex;
@@ -36,5 +36,5 @@
     overflow-y: auto; /* Allow scrolling if content overflows */
     width: 100vw;
     position: fixed;
-    background-color: black;
+    background-color: var(--background-color);
 }

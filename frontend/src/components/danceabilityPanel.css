@@ -6,8 +6,8 @@ body {
 .danceability-wrapper {
   padding: 20px;
   text-align: center;
-  color: white;
-  background: linear-gradient(135deg, black, orange);
+  color: var(--background-color);
+  background: linear-gradient(135deg, var(--background-color), orange);
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -28,7 +28,7 @@ body {
   position: relative;
   height: 10px;
   width: 100%;
-  background: linear-gradient(to right, black, orange);
+  background: linear-gradient(to right, var(--background-color), orange);
   border-radius: 5px;
   margin: 20px auto;
 }
@@ -38,7 +38,7 @@ body {
   top: -5px;
   width: 20px;
   height: 20px;
-  background-color: white;
+  background-color: var(--background-color);
   border-radius: 50%;
   border: 2px solid #ff6600;
   transition: left 0.3s ease;

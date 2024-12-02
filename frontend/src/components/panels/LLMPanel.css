@@ -1,9 +1,9 @@
 /* Base setup for the LLM panel */
 .llm-wrapper {
-    color: #333; /* Change the text color as desired */
+    color: var(--primary-text-color); /* Change the text color as desired */
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(135deg, black, purple);
+    background: linear-gradient(135deg, var(--background-color), purple);
 }
 
 /* Fade-in animation remains the same */
@@ -25,7 +25,7 @@
     text-align: center;
     font-size: 2vw;
     font-weight: bold;
-    color: #fff;
+    color: var(--primary-text-color);
     margin: 10px 0;
     opacity: 0;
     animation: fadeIn 1s ease forwards;
@@ -72,7 +72,7 @@
 .llm-wrapper .insight-card h2 {
     font-size: 1.5vw;
     font-weight: bold;
-    color: #fff;
+    color: var(--primary-text-color);
 }
 
 .llm-wrapper .insight-card p {
@@ -111,7 +111,7 @@
 
 .llm-wrapper h1 {
   font-size: 2rem;
-  color: #fff; /* White to stand out against the gradient */
+  color: var(--primary-text-color); /* White to stand out against the gradient */
   margin-bottom: 20px;
 }
 
