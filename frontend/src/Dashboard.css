@@ -38,6 +38,8 @@
 
 h3 {
   color: var(--primary-text-color);
+  margin-bottom: 0;
+  margin-top: 10px;
 }
 
 .card:hover {
@@ -46,8 +48,8 @@ h3 {
 }
 
 .card p {
-  margin-top: auto;
   font-size: 1rem;
+  margin-bottom: 0;
 }
 
 .card:focus {

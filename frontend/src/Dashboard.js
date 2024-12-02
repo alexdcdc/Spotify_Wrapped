@@ -35,6 +35,10 @@ function Dashboard() {
     setWrappedList(data.wrapped_list)
   }
 
+  const handleDeleteWrapped = (id) => {
+    setWrappedList(wrappedList.filter(wrapped => wrapped.id !== id))
+  }
+
   const displayWrappedForm = () => {
     setWrappedFormEnabled(true)
   }
@@ -62,7 +66,8 @@ function Dashboard() {
         </button>
         {wrappedList.map(
           (wrappedData) => <WrappedCard name={wrappedData.name} dateCreated={new Date(wrappedData.date_created)}
-                                        key={wrappedData.id} id={wrappedData.id} color={wrappedData.color}/>
+                                        key={wrappedData.id} id={wrappedData.id} color={wrappedData.color}
+                                        onDelete={handleDeleteWrapped}/>
         )}
       </div>
     </div>

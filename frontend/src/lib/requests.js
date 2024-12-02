@@ -45,4 +45,26 @@ async function get (url, params = {}, isAuthenticated) {
   return await fetch(newUrl, payload)
 }
 
-export { get, post, postUrlEncoded }
+async function del(url, params = {}, isAuthenticated = false) {
+  const token = sessionStorage.getItem('token')
+
+  // Construct query parameters if needed
+  const paramString = (new URLSearchParams(params)).toString()
+  const newUrl = paramString ? url + '?' + paramString : url
+
+  const headers = { 'Content-Type': 'application/json' }
+  if (isAuthenticated) {
+    headers.Authorization = 'Token ' + token
+  }
+
+  const payload = {
+    method: 'DELETE',
+    headers
+  }
+
+  return await fetch(newUrl, payload)
+}
+
+
+
+export { get, post, postUrlEncoded, del}
