@@ -1,16 +1,23 @@
 import './DancePanel.css'
+import { useTheme } from "../../ThemeContext";
 import DancingFigure from '../../images/dancing-person.png'
 import SittingFigure from '../../images/sitting-person.png'
+import DancingFigureDark from '../../images/dancing-person-dark.png'
+import SittingFigureDark from '../../images/sitting-person-dark.png'
 
 function DancePanel ({ data }) {
   const danceabilityScore = data.average_danceability
+  const { theme } = useTheme()
+
+  const sitting = (theme === "dark") ? SittingFigure : SittingFigureDark
+  const dancing = (theme === "dark") ? DancingFigure : DancingFigureDark
 
   return (
     <div className='wrapped-background danceability-wrapper'>
       <h1>Your Danceability Spectrum</h1>
       <div className='danceability-meter-container'>
         <div className='icon-wrapper'>
-          <img src={SittingFigure} alt='Dance Visual Left' />
+          <img src={sitting} alt='Dance Visual Left' />
         </div>
 
         <div className='score-container'>
@@ -25,7 +32,7 @@ function DancePanel ({ data }) {
           <p>Your danceability score: {danceabilityScore}</p>
         </div>
         <div className='icon-wrapper'>
-          <img src={DancingFigure} alt='Dance Visual Right' />
+          <img src={dancing} alt='Dance Visual Right' />
         </div>
       </div>
     </div>

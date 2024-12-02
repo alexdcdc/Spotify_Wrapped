@@ -11,32 +11,6 @@ body {
   color: var(--primary-text-color);
 }
 
-
-.sign-in-button {
-  padding: 10px 20px;
-  background-color: #1ED760;
-  color: var(--primary-text-color);
-  border: none;
-  border-radius: 25px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.sign-in-button2 {
-  display: block;
-  padding: 10px 20px;
-  background-color: #1ED760;
-  color: var(--primary-text-color);
-  border: none;
-  border-radius: 25px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -72,35 +46,13 @@ body {
   font-weight: bold;
 }
 
-.delete-button {
-  display: block;
-  margin-left: auto;
-  margin-top: 30px;
-  padding: 10px 20px;
-  background-color: #d9534f;
-  color: var(--primary-text-color);
-  border: none;
-  border-radius: 25px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
 .background {
   background-color: var(--background-color);
   color: var(--primary-text-color);
   position: fixed;
   width: 100vw;
   height: 100vh;
-  overflow-y: scroll;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  overflow-y: auto;
 }
 
 p {

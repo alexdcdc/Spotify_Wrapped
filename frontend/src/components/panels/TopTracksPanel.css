@@ -128,7 +128,7 @@
 .spotify-wrapper .track-label {
     font-size: 1.5vw;
     font-weight: bolder;
-    color: #ff4dce;
+    color: var(--primary-text-color);
     margin: 2px 0;
 }
 
@@ -146,7 +146,7 @@
 .spotify-wrapper .track-name {
     font-size: 1vw;
     font-weight: bold;
-    color: #1db954;
+    color: var(--primary-text-color);
     text-decoration: none;
     transition: color 0.3s;
 }

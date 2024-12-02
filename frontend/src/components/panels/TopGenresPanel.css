@@ -2,7 +2,7 @@
 
 /* General styles for the panel */
 .genres-wrapper {
-  background: linear-gradient(158deg, rgba(0, 0, 0, 1) 10%, rgba(173, 52, 113, 1) 100%, rgba(255, 77, 167, 1) 100%);
+  background: linear-gradient(158deg, var(--background-color) 10%, rgba(173, 52, 113, 1) 100%, rgba(255, 77, 167, 1) 100%);
   justify-content: center;
   align-items: center;
 }
