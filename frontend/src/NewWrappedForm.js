@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 function NewWrappedForm ({enabled, cancelFunction}) {
   const [wrappedName, setWrappedName] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
   const createNewWrapped = async () => {
     const body = { name: wrappedName }
@@ -20,11 +21,15 @@ function NewWrappedForm ({enabled, cancelFunction}) {
 
   const createWrappedAndRedirect = (e) => {
     e.preventDefault()
+    setIsLoading(true)
+    alert('Your submission is being processed, please wait...')
     createNewWrapped().then(
       (id) => {
+        setIsLoading(false)
         navigate('/wrapped/' + id)
       },
       (x) => {
+        setIsLoading(false)
         console.log(x)
       }
     )
@@ -45,7 +50,7 @@ function NewWrappedForm ({enabled, cancelFunction}) {
           <br/><br/>
 
           <div className="button-align">
-          <button type='submit'>Submit</button>
+          <button type='submit' disabled={isLoading}>Submit</button>
           <button type='cancel' onClick={cancelFunction}>Cancel</button>
             </div>
         </form>
