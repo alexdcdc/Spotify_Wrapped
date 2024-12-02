@@ -20,7 +20,7 @@
 .spectrum {
   height: 10px;
   width: 100%;
-  background: linear-gradient(to right, var(--background-color), orange);
+  background: linear-gradient(to right, var(--primary-text-color), orange);
   border-radius: 5px;
   margin: 20px auto;
 }

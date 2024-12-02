@@ -77,7 +77,7 @@
 
 .llm-wrapper .insight-card p {
     font-size: 1.1vw;
-    color: #e0f7fa;
+    color: var(--primary-text-color);
     margin: 0.1em 0;
 }
 
