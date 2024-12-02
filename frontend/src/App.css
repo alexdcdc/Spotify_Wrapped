@@ -31,6 +31,10 @@
 
 .background {
   background-color: var(--background-color);
+  color: var(--primary-text-color);
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
 }
 
 * {
