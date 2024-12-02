@@ -6,6 +6,7 @@
   --toggle-bg: #f0eb9d;
   --toggle-fg: #ffd000;
   --form-field: #ddd;
+  --blur-color: rgba(0 0 0 / 50%)
 }
 
 
@@ -17,6 +18,7 @@
   --toggle-bg: #283452;
   --toggle-fg: #00a6ff;
   --form-field: #222;
+  --blur-color: rgba(255 255 255 / 50%)
 }
 
 .custom-font {
@@ -35,6 +37,7 @@
   position: fixed;
   width: 100vw;
   height: 100vh;
+  overflow-y: scroll;
 }
 
 * {

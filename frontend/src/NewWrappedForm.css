@@ -1,5 +1,5 @@
 .pop-up-form-container {
-    background-color: var(--background-color); /* used to be rbga(0,0,0,0.5), changes the background */
+    background-color: var(--blur-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,7 +9,6 @@
     top: 0;
     left: 0;
     z-index: 1;
-    opacity: 0.5;
 }
 
 .pop-up-form {
@@ -23,7 +22,7 @@
     font-size: 18px; /* Adjust font size */
     text-align: center; /* Center-align content */
     z-index: 2;
-    opacity: 1;
+
 }
 
 .pop-up-form-label {
@@ -43,6 +42,7 @@
     border-radius: 5px; /* Rounded corners */
     font-size: 16px;
     box-sizing: border-box; /* Ensure padding doesn't affect width */
+    background-color: var(--form-field);
 }
 
 .pop-up-form-input:focus {
