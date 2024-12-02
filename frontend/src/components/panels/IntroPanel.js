@@ -8,7 +8,7 @@ function IntroPanel() {
       <p className="intro-description">
         Discover your top tracks, genres, and artists of the year in an immersive, personalized experience.
       </p>
-      <button className="start-button" onClick={() => alert("Let's Start!")}>
+      <button className="start-button" onClick={startPlayback}>
         Let's Start
       </button>
     </div>

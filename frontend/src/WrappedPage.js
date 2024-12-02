@@ -14,7 +14,7 @@ import TopTracksPlayer from './components/TopTracksPlayer';
 import './WrappedPage.css';
 
 const componentMap = {
-  IN: IntroPanel,
+  IN: TopTracksPlayer,
   TT: TopTracksPanel,
   PL: PreLLMPanel,
   LM: LLMPanel,
@@ -32,6 +32,7 @@ function WrappedPage() {
   const [loaded, setLoaded] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
+
 
   const updateFont = () => {
     const link = document.createElement('link');
@@ -69,6 +70,8 @@ function WrappedPage() {
       }
     })
   }
+
+
 
   useEffect(() => {
     updateFont();
@@ -113,8 +116,6 @@ function WrappedPage() {
           totalSlides={totalPanels}
           setter={setCurrentPanelNum}
         />
-
-        {/* TopTracksPlayer independent of panels */}
         <TopTracksPlayer topTracks={topTracks} />
       </div>
     );

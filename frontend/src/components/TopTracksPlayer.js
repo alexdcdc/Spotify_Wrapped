@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { get } from '../lib/requests';
+import './panels/IntroPanel.css';
 
 function TopTracksPlayer({ topTracks }) {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
@@ -122,28 +123,14 @@ function TopTracksPlayer({ topTracks }) {
   }
 
   return (
-    <div className="top-tracks-player">
-      <h3>Now Playing:</h3>
-      <p>
-        {topTracks[currentTrackIndex].name} by{' '}
-        {topTracks[currentTrackIndex].artists
-          .map((artist) => artist.name)
-          .join(', ')}
+    <div className="intro-panel">
+      <h1 className="intro-title">Welcome to Your Spotify Wrapped</h1>
+      <p className="intro-description">
+        Discover your top tracks, genres, and artists of the year in an immersive, personalized experience.
       </p>
-      <div className="controls">
-        <button onClick={() => switchTrack(currentTrackIndex)}>
-          Restart Current Track
-        </button>
-        <button onClick={() => switchTrack((currentTrackIndex - 1 + topTracks.length) % topTracks.length)}>
-          Previous
-        </button>
-        <button onClick={startPlayback}>
-          {isPlaying ? 'Playing...' : 'Start'}
-        </button>
-        <button onClick={() => switchTrack((currentTrackIndex + 1) % topTracks.length)}>
-          Next
-        </button>
-      </div>
+      <button className="start-button" onClick={startPlayback}>
+        Let's Start
+      </button>
     </div>
   );
 }
