@@ -213,6 +213,7 @@ def generate_panel(user, parent_wrapped, order, panel_type):
         case PanelType.DANCE:
             panel.data = generate_data_danceability(user)
         case PanelType.PRE_GAME:
+
             panel.data = generate_data_pre_game(user)
         case PanelType.TOP_GENRES:
             panel.data = generate_data_top_genres(user)
@@ -431,3 +432,9 @@ def send_email(request):
             {"message": "Could not send email"},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR,
         )
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_access_token(request):
+    user = request.user
+    return Response({"token": user.auth_data.access_token}, status=status.HTTP_200_OK)
