@@ -4,7 +4,7 @@ import "./SpotifyButton.css"
 const redirectUri = process.env.REACT_APP_REDIRECT_URI
 const clientId = process.env.REACT_APP_CLIENT_ID
 
-const scope = 'user-read-private user-read-email user-read-recently-played user-top-read'
+const scope = 'user-read-private user-read-email user-read-recently-played user-top-read user-modify-playback-state streaming'
 const authUrl = new URL('https://accounts.spotify.com/authorize')
 
 // generated in the previous step

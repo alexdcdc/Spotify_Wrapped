@@ -387,7 +387,6 @@ def generate_data_danceability(user):
     )
 
     if top_tracks_response.status_code != 200:
-        print(top_tracks_response.status_code)
         print("ERROR: Failed to fetch top tracks from Spotify API.")
         return {}
 
@@ -443,7 +442,6 @@ def send_email(request):
     user_name = data["name"]
     subject = f"Comment from {user_email_addr}"
     body = f"Name: {user_name}\nAddress: {user_email_addr}\n\n{message}"
-    print(user_email_addr, message, user_name)
     mail_status = send_mail(
         subject=subject,
         message=body,
@@ -465,6 +463,12 @@ def send_email(request):
             {"message": "Could not send email"},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR,
         )
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_access_token(request):
+    user = request.user
+    return Response({"token": user.auth_data.access_token}, status=status.HTTP_200_OK)
 
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])

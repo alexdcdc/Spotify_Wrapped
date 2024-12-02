@@ -24,6 +24,7 @@ from wrapped.views import (
     wrapped,
     get_wrapped_with_id,
     send_email,
+    get_access_token,
     is_authenticated,
     get_profile_image,
     delete_user,
@@ -42,4 +43,6 @@ urlpatterns = [
     path('api/email', send_email),
     path('api/check-auth', is_authenticated),
     path('api/profile-image', get_profile_image),
+    path('api/token', get_access_token),
+
 ]

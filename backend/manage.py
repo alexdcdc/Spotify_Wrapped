@@ -20,3 +20,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+    port = os.environ.get('PORT', '8000')
+    os.system(f'python manage.py runserver 0.0.0.0:{port}')
