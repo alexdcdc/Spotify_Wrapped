@@ -28,7 +28,7 @@ GOOGLE_CLIENT_ID = os.getenv('GEMINI_GOOGLE_CLIENT_ID')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
