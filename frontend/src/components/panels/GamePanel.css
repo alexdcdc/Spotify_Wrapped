@@ -1,8 +1,8 @@
 .game-wrapper {
   padding: 20px;
   text-align: center;
-  color: white;
-  background: linear-gradient(135deg, black, #004480);
+  color: var(--primary-text-color);
+  background: linear-gradient(135deg, var(--background-color), #004480);
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -18,7 +18,7 @@
     text-align: center;
     font-size: 48px;
     font-weight: bold;
-    color: #FFFFFF;
+    color: var(--primary-text-color);
     margin: 10px 0;
 }
 
@@ -32,11 +32,11 @@
 }
 
 .submit-button {
-  background-color:black;
+  background-color: var(--background-color);
   border: none;
   font-family: inherit;
   font-size: inherit;
-  color: white;
+  color: var(--primary-text-color);
   cursor: pointer;
   padding: 0px 20px;
   transition: background-color 0.3s ease;

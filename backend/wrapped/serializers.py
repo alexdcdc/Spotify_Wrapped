@@ -18,6 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
             "last_name",
             "spotify_profile",
             "is_registered",
+            "account_created"
         ]
         depth = 2
 
@@ -33,7 +34,7 @@ class WrappedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Wrapped
-        fields = ["id", "name", "date_created", "panels"]
+        fields = ["id", "name", "date_created", "panels", "color"]
 
 
 class ContactMessageSerializer(serializers.ModelSerializer):

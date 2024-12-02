@@ -1,18 +1,78 @@
 .pop-up-form-container {
-    background-color: rgb(0 0 0 / 50%);
+    background-color: var(--blur-color);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     position: fixed;
-    z-index: 0;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
 
 .pop-up-form {
-    background-color: rgb(255 255 255 / 100%);
-    width: 30%;
-    height: 50%;
-    z-index: 1;
-    color: #000;
+    background-color: var(--background-color); /* CHANGING THIS MAKES IT WEIRD */
+    width: 40vw;
+    max-width: 500px; /* Ensure it looks good on smaller screens */
+    padding: 30px; /* Add padding for spacing */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    color: var(--primary-text-color); /* Darker text color for readability */
+    font-size: 18px; /* Adjust font size */
+    text-align: center; /* Center-align content */
+    z-index: 2;
+
 }
+
+.pop-up-form-label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    color: var(--primary-text-color);
+    text-align: center;
+}
+
+.pop-up-form-input {
+    width: calc(100% - 20px); /* Full width minus padding for consistency */
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #cccccc; /* Subtle border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px;
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+    background-color: var(--form-field);
+}
+
+.pop-up-form-input:focus {
+    outline: none;
+    border-color: #007BFF; /* Highlighted border when focused */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+button[type='cancel'] {
+    background-color: #FF0000; /* Spotify green */
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+
+button[type="cancel"]:hover {
+    background-color: #CC0000; /* Darker blue on hover */
+}
+
+button[type="cancel"]:active {
+    background-color: #990000; /* Even darker blue when clicked */
+}
+
+.button-align {
+    display: flex;
+}
+

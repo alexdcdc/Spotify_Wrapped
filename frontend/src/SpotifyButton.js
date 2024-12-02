@@ -1,4 +1,5 @@
 import { base64encode, generateRandomString, sha256 } from './lib/oauth-crypt'
+import "./SpotifyButton.css"
 
 const redirectUri = process.env.REACT_APP_REDIRECT_URI
 const clientId = process.env.REACT_APP_CLIENT_ID
@@ -25,10 +26,10 @@ const requestAuth = async () => {
   window.location.href = authUrl.toString()
 }
 
-function SpotifyButton () {
-  return (
-    <button onClick={requestAuth}>Log in with Spotify</button>
-  )
+function SpotifyButton() {
+    return (
+        <button className="sign-in-button" onClick = { requestAuth }>Log in with Spotify</button>
+    )
 }
 
 export default SpotifyButton

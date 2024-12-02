@@ -1,14 +1,15 @@
 .navigate-button {
     position: fixed;
-    bottom: 1vw;
-    right: 1vw;
-    width: 2.5vw;
-    height: 2.5vw;
-    background-color: #131414;
-    color: white;
-    font-size: 1.2vw;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--background-color);
+    color: var(--primary-text-color);
+    font-size: 20px;
+    font-weight: bold;
     border: none;
-    border-radius: 1.25vw;
+    border-radius: 25px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -22,11 +23,11 @@
 }
 
 .to-dashboard-button {
-    width: 15vw;
+    width: 250px;
 }
 
 .wrapped-background {
-    color: #ffffff;
+    color: var(--primary-text-color);
     min-height: 100vh;
     padding: 1vw;
     display: flex;
@@ -36,5 +37,5 @@
     overflow-y: auto; /* Allow scrolling if content overflows */
     width: 100vw;
     position: fixed;
-    background-color: black;
+    background-color: var(--background-color);
 }

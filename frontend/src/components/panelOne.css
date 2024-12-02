@@ -15,7 +15,7 @@
 
 /* Apply the gradient to a specific wrapper (e.g. .spotify-wrapper) */
 .spotify-wrapper {
-    color: #ffffff;
+    color: var(--background-color);
     min-height: 100vh;
     padding: 1vw;
     display: flex;
@@ -147,7 +147,7 @@
 .spotify-wrapper .artist-name {
     font-size: 1vw;
     font-weight: normal;
-    color: #ffffff;
+    color: var(--primary-text-color);
     text-decoration: none;
     transition: color 0.3s;
     display: block;
