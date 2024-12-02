@@ -16,6 +16,7 @@
 /* Apply the gradient to a specific wrapper (e.g. .spotify-wrapper) */
 .spotify-wrapper {
     background: linear-gradient(158deg, var(--background-color), rgba(255, 77, 167, 1) 100%);
+    position: relative;
 }
 
 /* Fade-in animation */
