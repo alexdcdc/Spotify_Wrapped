@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
-import { post } from './lib/requests'
+import {generateUrl, post} from './lib/requests'
 
 function Register () {
   const [firstName, setFirstName] = useState('')
@@ -10,7 +10,7 @@ function Register () {
 
   const postUserInfo = async (e) => {
     e.preventDefault()
-    const url = 'http://localhost:8000/api/user'
+    const url = generateUrl('api/user')
     const requestBody = {
       first_name: firstName,
       last_name: lastName,

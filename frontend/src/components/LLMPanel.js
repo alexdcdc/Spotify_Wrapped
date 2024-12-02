@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './llmPanel.css'
+import {generateUrl} from "../lib/requests";
 
 function LLMPanel () {
   const [llmData, setLlmData] = useState(null)
@@ -21,7 +22,7 @@ function LLMPanel () {
       return
     }
 
-    const url = 'http://localhost:8000/api/wrapped-llm'
+    const url = generateUrl('api/wrapped-llm')
     const payload = {
       method: 'GET',
       headers: {

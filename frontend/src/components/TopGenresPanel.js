@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import './panelTwo.css'
+import {generateUrl, get} from "../lib/requests";
 
 const PanelTwo = () => {
   const [genres, setGenres] = useState([])
@@ -9,12 +10,9 @@ const PanelTwo = () => {
   useEffect(() => {
     const fetchTopGenres = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/spotify_top_genres', {
-          headers: {
-            Authorization: `Token ${sessionStorage.getItem('token')}`
-          }
-        })
-        setGenres(response.data.top_genres)
+        const response = await get(generateUrl('api/spotify_top_genres'), {}, true)
+        const data = await response.json()
+        setGenres(data.top_genres)
       } catch (err) {
         setError('Failed to load top genres')
         console.error('Error fetching top genres:', err)

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { post, get, postUrlEncoded } from './lib/requests'
+import {post, get, postUrlEncoded, generateUrl} from './lib/requests'
 
 const redirectUri = process.env.REACT_APP_REDIRECT_URI
 const clientId = process.env.REACT_APP_CLIENT_ID
 
 async function setAuthToken (accessToken, refreshToken, expiresIn) {
-  const url = 'http://localhost:8000/api/authenticate'
+  const url = generateUrl('api/authenticate')
   const requestBody = {
     access_token: accessToken,
     refresh_token: refreshToken,
@@ -54,7 +54,7 @@ const authenticate = async (code) => {
 }
 
 const getRegisteredStatus = async () => {
-  const url = 'http://localhost:8000/api/user'
+  const url = generateUrl('api/user')
   const response = await get(url, {}, true)
 
   if (!response.ok) {

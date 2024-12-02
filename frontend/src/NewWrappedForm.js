@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { post } from './lib/requests'
+import {generateUrl, post} from './lib/requests'
 import './NewWrappedForm.css'
 import { useNavigate } from 'react-router-dom'
 
@@ -9,7 +9,7 @@ function NewWrappedForm ({enabled, cancelFunction}) {
   const navigate = useNavigate()
   const createNewWrapped = async () => {
     const body = { name: wrappedName }
-    const url = 'http://localhost:8000/api/wrapped'
+    const url = generateUrl('api/wrapped')
     const response = await post(url, body, true)
     if (!response.ok) {
       return Promise.reject(new Error('Unable to create new Wrapped'))

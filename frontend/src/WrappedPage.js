@@ -1,4 +1,4 @@
-import { get } from './lib/requests';
+import {generateUrl, get} from './lib/requests';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import LLMPanel from './components/panels/LLMPanel';
@@ -44,7 +44,7 @@ function WrappedPage() {
   };
 
   const getWrappedData = async () => {
-    const url = 'http://localhost:8000/api/wrapped/' + id;
+    const url = generateUrl('api/wrapped/' + id);
     const response = await get(url, {}, true);
 
     if (!response.ok) {

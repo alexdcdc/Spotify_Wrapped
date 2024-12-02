@@ -1,3 +1,7 @@
+function generateUrl(endpoint) {
+  return process.env.REACT_APP_BACKEND_URL + endpoint;
+}
+
 async function post (url, body, isAuthenticated) {
   const token = sessionStorage.getItem('token')
 
@@ -67,4 +71,4 @@ async function del(url, params = {}, isAuthenticated = false) {
 
 
 
-export { get, post, postUrlEncoded, del}
+export { get, post, postUrlEncoded, del, generateUrl }
