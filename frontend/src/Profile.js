@@ -1,4 +1,3 @@
-import './App.css';
 import { deleteAcct } from "./lib/auth"
 import {useEffect, useState} from 'react';
 import {get} from './lib/requests'

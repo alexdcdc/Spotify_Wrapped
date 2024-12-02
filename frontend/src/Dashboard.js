@@ -1,10 +1,8 @@
 import {useState, useEffect} from 'react'
-import {useNavigate} from 'react-router-dom' // Import useNavigate for navigation
 import {get} from './lib/requests'
 import './Dashboard.css'
+import './App.css'
 import WrappedCard from './WrappedCard'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import NewWrappedForm from "./NewWrappedForm";
 
 function Dashboard() {
@@ -62,8 +60,6 @@ function Dashboard() {
           <div className="plus-icon">+</div>
           <p className="title">Create New</p>
         </button>
-
-
         {wrappedList.map(
           (wrappedData) => <WrappedCard name={wrappedData.name} dateCreated={new Date(wrappedData.date_created)}
                                         key={wrappedData.id} id={wrappedData.id} color={wrappedData.color}/>

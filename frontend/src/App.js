@@ -17,7 +17,7 @@ import Profile from "./Profile";
 
 function App () {
   return (
-    <div>
+    <div className="background">
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<Login />} />
