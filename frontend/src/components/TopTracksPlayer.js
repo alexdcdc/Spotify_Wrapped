@@ -1,100 +1,121 @@
-import React, {useEffect, useState} from 'react';
-import {get} from '../lib/requests'
+import React, { useEffect, useState } from 'react';
+import { get } from '../lib/requests';
 
-function TopTracksPlayer({topTracks}) {
+function TopTracksPlayer({ topTracks }) {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+  const [token, setToken] = useState('');
+  const [player, setPlayer] = useState(undefined);
+  const [playerId, setPlayerId] = useState('');
   const [isPlaying, setIsPlaying] = useState(false);
-  const [token, setToken] = useState("")
-  const [player, setPlayer] = useState(undefined)
-  const [playerId, setPlayerId] = useState("")
 
   const getAccessToken = async () => {
-    const url = "http://localhost:8000/api/token"
-    const response = await get(url, {}, true)
-    const data = await response.json()
-    setToken(data.token)
-    await createPlayer(data.token)
-  }
+    const url = 'http://localhost:8000/api/token';
+    const response = await get(url, {}, true);
+    const data = await response.json();
+    setToken(data.token);
+    createPlayer(data.token);
+  };
 
   const createPlayer = (token) => {
-    const script = document.createElement("script");
-    script.src = "https://sdk.scdn.co/spotify-player.js";
+    const script = document.createElement('script');
+    script.src = 'https://sdk.scdn.co/spotify-player.js';
     script.async = true;
 
     document.body.appendChild(script);
 
     window.onSpotifyWebPlaybackSDKReady = () => {
-      const player = new window.Spotify.Player({
-        name: 'Web Playback SDK',
-        getOAuthToken: cb => {
-          cb(token);
-        },
-        volume: 0.5
+      const spotifyPlayer = new window.Spotify.Player({
+        name: 'Spotify Wrapped Player',
+        getOAuthToken: (cb) => cb(token),
+        volume: 0.5,
       });
 
-      setPlayer(player);
+      setPlayer(spotifyPlayer);
 
-      player.addListener('ready', ({device_id}) => {
-        console.log('Ready with Device ID', device_id);
-        setPlayerId(device_id)
+      spotifyPlayer.addListener('ready', ({ device_id }) => {
+        console.log('Player Ready with Device ID:', device_id);
+        setPlayerId(device_id);
       });
 
-      player.addListener('not_ready', ({device_id}) => {
-        console.log('Device ID has gone offline', device_id);
+      spotifyPlayer.addListener('not_ready', ({ device_id }) => {
+        console.log('Device ID has gone offline:', device_id);
       });
 
-
-      player.connect();
-    }
-  }
-
-  const playTrack = (trackUrl) => {
-    const audio = new Audio(trackUrl);
-    audio.play();
-    setIsPlaying(true);
-    audio.onended = () => {
-      setIsPlaying(false);
+      spotifyPlayer.connect();
     };
   };
 
-  const handleNextTrack = () => {
-    setCurrentTrackIndex((prevIndex) => (prevIndex + 1) % topTracks.length);
-  };
-
-  const handlePreviousTrack = () => {
-    setCurrentTrackIndex(
-      (prevIndex) => (prevIndex - 1 + topTracks.length) % topTracks.length
-    );
-  };
-
   const startPlayback = async () => {
-    const url = "https://api.spotify.com/v1/me/player/play?device_id=" + playerId
+    if (!playerId || topTracks.length === 0) return;
+
+    const url = `https://api.spotify.com/v1/me/player/play?device_id=${playerId}`;
     const headers = {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json",
-    }
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    };
+    const uris = topTracks.map((track) => track.uri); // Extract track URIs
+
     const data = {
-      "context_uri": "spotify:album:5ht7ItJgpBH7W6vJ5BqpPr",
-      "offset": {
-        "position": 5
-      },
-      "position_ms": 0
-    }
+      uris,
+      offset: { position: currentTrackIndex },
+      position_ms: 0,
+    };
 
-    const payload = {
-      method: "PUT",
+    const response = await fetch(url, {
+      method: 'PUT',
       headers,
-      body: JSON.stringify(data)
-    }
+      body: JSON.stringify(data),
+    });
 
-    const response = await fetch(url, payload)
-    console.log(response)
-  }
+    if (response.ok) {
+      console.log('Playback started');
+      setIsPlaying(true);
+    } else {
+      console.error('Error starting playback:', response);
+    }
+  };
+
+  const switchTrack = async (index) => {
+    setCurrentTrackIndex(index);
+
+    if (playerId && topTracks.length > 0) {
+      const url = `https://api.spotify.com/v1/me/player/play?device_id=${playerId}`;
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      };
+      const uris = topTracks.map((track) => track.uri);
+
+      const data = {
+        uris,
+        offset: { position: index },
+        position_ms: 0,
+      };
+
+      await fetch(url, {
+        method: 'PUT',
+        headers,
+        body: JSON.stringify(data),
+      });
+    }
+  };
 
 
   useEffect(() => {
-    getAccessToken()
-  }, [])
+    const interval = setInterval(() => {
+      setCurrentTrackIndex((prevIndex) => {
+        const nextIndex = (prevIndex + 1) % topTracks.length;
+        switchTrack(nextIndex);
+        return nextIndex;
+      });
+    }, 20000);
+
+    return () => clearInterval(interval);
+  }, [playerId, topTracks]);
+
+  useEffect(() => {
+    getAccessToken();
+  }, []);
 
   if (!topTracks || topTracks.length === 0) {
     return <div>No tracks available to play.</div>;
@@ -103,22 +124,28 @@ function TopTracksPlayer({topTracks}) {
   return (
     <div className="top-tracks-player">
       <h3>Now Playing:</h3>
-      <p>{topTracks[currentTrackIndex].title} by {topTracks[currentTrackIndex].artist}</p>
+      <p>
+        {topTracks[currentTrackIndex].name} by{' '}
+        {topTracks[currentTrackIndex].artists
+          .map((artist) => artist.name)
+          .join(', ')}
+      </p>
       <div className="controls">
-        <button onClick={startPlayback}>Start</button>
-        <button onClick={handlePreviousTrack}>&lt; Previous</button>
-        <button
-          onClick={() =>
-            playTrack(topTracks[currentTrackIndex].preview_url)
-          }
-          disabled={isPlaying}
-        >
-          {isPlaying ? 'Playing...' : 'Play'}
+        <button onClick={() => switchTrack(currentTrackIndex)}>
+          Restart Current Track
         </button>
-        <button onClick={handleNextTrack}>Next &gt;</button>
+        <button onClick={() => switchTrack((currentTrackIndex - 1 + topTracks.length) % topTracks.length)}>
+          Previous
+        </button>
+        <button onClick={startPlayback}>
+          {isPlaying ? 'Playing...' : 'Start'}
+        </button>
+        <button onClick={() => switchTrack((currentTrackIndex + 1) % topTracks.length)}>
+          Next
+        </button>
       </div>
     </div>
   );
 }
 
-export default TopTracksPlayer
+export default TopTracksPlayer;
