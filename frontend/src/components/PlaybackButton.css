@@ -6,7 +6,7 @@
   font-size: 24px;
   margin: 20px;
   background-color: #0078D4;
-  color: white;
+  color: var(--primary-text-color);
   font-family: inherit;
   font-weight: bold;
   cursor: pointer;

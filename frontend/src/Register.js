@@ -35,21 +35,41 @@ function Register () {
     return (<Navigate to='/dashboard' />)
   }
 
-  return (
-    <form onSubmit={postUserInfo}>
-      <label htmlFor='first_name'>First Name:</label>
-      <input onChange={e => { setFirstName(e.target.value) }} type='text' id='fname' name='fname' required />
-      <br /><br />
+    return (
+    <form onSubmit={postUserInfo} className="form-container">
+      <h2 className="form-title">User Information</h2>
 
-      <label htmlFor='last_name'>Last Name:</label>
-      <input onChange={e => { setLastName(e.target.value) }} type='text' id='lname' name='lname' required />
-      <br /><br />
+      <label htmlFor="first_name" className="form-label">First Name:</label>
+      <input
+        onChange={e => setFirstName(e.target.value)}
+        type="text"
+        id="fname"
+        name="fname"
+        required
+        className="form-input"
+      />
 
-      <label htmlFor='username'>Username:</label>
-      <input onChange={e => { setUsername(e.target.value) }} type='text' id='username' name='username' required />
-      <br /><br />
+      <label htmlFor="last_name" className="form-label">Last Name:</label>
+      <input
+        onChange={e => setLastName(e.target.value)}
+        type="text"
+        id="lname"
+        name="lname"
+        required
+        className="form-input"
+      />
 
-      <button type='submit'>Submit</button>
+      <label htmlFor="username" className="form-label">Username:</label>
+      <input
+        onChange={e => setUsername(e.target.value)}
+        type="text"
+        id="username"
+        name="username"
+        required
+        className="form-input"
+      />
+
+      <button type="submit" className="form-button">Submit</button>
     </form>
   )
 }

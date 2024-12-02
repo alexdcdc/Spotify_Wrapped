@@ -1,3 +1,131 @@
-body {
-    background-color: #FFF;
+.custom-font {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-weight: bold;
 }
+
+body {
+  background-color: var(--background-color);
+}
+
+.title {
+  color: var(--primary-text-color);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+[data-theme="light"] {
+  --background-color: #fff;
+  --foreground-color: #003cff;
+  --primary-text-color: #000;
+  --secondary-text-color: #fff;
+  --toggle-bg: #f0eb9d;
+  --toggle-fg: #ffd000;
+  --form-field: #ddd;
+  --blur-color: rgba(0 0 0 / 50%)
+}
+
+
+[data-theme="dark"] {
+  --background-color: #000;
+  --foreground-color: #567aff;
+  --primary-text-color: #fff;
+  --secondary-text-color: #000;
+  --toggle-bg: #283452;
+  --toggle-fg: #00a6ff;
+  --form-field: #222;
+  --blur-color: rgba(255 255 255 / 50%)
+}
+
+.custom-font {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-weight: bold;
+}
+
+.background {
+  background-color: var(--background-color);
+  color: var(--primary-text-color);
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.25em;
+  font-weight: lighter;
+  color: var(--primary-text-color);
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
+  background-color: var(--background-color);
+}
+
+/* Title styling */
+.form-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--primary-text-color);
+}
+
+/* Label styling */
+.form-label {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--primary-text-color);
+  width: 100%;
+  text-align: left;
+}
+
+/* Input styling */
+.form-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* Button styling */
+.form-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007BFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.form-button:active {
+  background-color: #004494;
+  transform: translateY(0);
+}
+

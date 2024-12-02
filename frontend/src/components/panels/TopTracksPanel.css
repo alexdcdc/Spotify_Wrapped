@@ -15,7 +15,7 @@
 
 /* Apply the gradient to a specific wrapper (e.g. .spotify-wrapper) */
 .spotify-wrapper {
-    background: linear-gradient(158deg, rgba(0, 0, 0, 1) 10%, rgba(173, 52, 113, 1) 100%, rgba(255, 77, 167, 1) 100%);
+    background: linear-gradient(158deg, var(--background-color), rgba(255, 77, 167, 1) 100%);
 }
 
 /* Fade-in animation */
@@ -128,7 +128,7 @@
 .spotify-wrapper .track-label {
     font-size: 1.5vw;
     font-weight: bolder;
-    color: #ff4dce;
+    color: var(--primary-text-color);
     margin: 2px 0;
 }
 
@@ -136,7 +136,7 @@
 .spotify-wrapper .artist-name {
     font-size: 1vw;
     font-weight: normal;
-    color: #ffffff;
+    color: var(--primary-text-color);
     text-decoration: none;
     transition: color 0.3s;
     display: block;
@@ -146,7 +146,7 @@
 .spotify-wrapper .track-name {
     font-size: 1vw;
     font-weight: bold;
-    color: #1db954;
+    color: var(--primary-text-color);
     text-decoration: none;
     transition: color 0.3s;
 }

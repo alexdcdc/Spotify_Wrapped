@@ -1,0 +1,11 @@
+.login-container {
+  text-align: center;
+  padding: 3em;
+  width: 80vw;
+}
+
+.login-container h1 {
+  font-size: 4rem;
+  font-weight: bolder;
+  margin-bottom: 20px;
+}

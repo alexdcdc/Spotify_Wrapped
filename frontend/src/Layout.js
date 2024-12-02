@@ -1,11 +1,15 @@
-import { Outlet } from 'react-router-dom'
+import {Outlet} from "react-router-dom"
+import NavBar from "./NavBar"
+import {useState} from "react";
 
-function Layout () {
+function Layout() {
   return (
     <div>
-      <Outlet />
+      <NavBar/>
+
+      {<Outlet/>}
     </div>
+
   )
 }
-
 export default Layout

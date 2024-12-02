@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/.env python
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
@@ -20,5 +20,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    port = os.environ.get('PORT', '8000')
-    os.system(f'python manage.py runserver 0.0.0.0:{port}')

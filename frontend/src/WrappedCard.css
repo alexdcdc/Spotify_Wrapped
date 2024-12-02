@@ -2,6 +2,59 @@
     width: 200px;
     height: 200px;
     margin: 40px;
-    background-color: black;
-    color: white;
+    background-color: var(--background-color);
+}
+
+/* Style for the delete button */
+.delete-button {
+  background-color: #e74c3c; /* Red background */
+  color: var(--primary-text-color); /* White text color */
+  border: none; /* Remove border */
+  padding: 10px 15px; /* Add padding for size */
+  font-size: 14px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 5px; /* Rounded corners */
+  margin-top: 10px; /* Add some space between buttons */
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+/* Style for delete button on hover */
+.delete-button:hover {
+  background-color: #c0392b; /* Darker red on hover */
+}
+
+/* Optional: Style the button on focus */
+.delete-button:focus {
+  outline: none; /* Remove the focus outline */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow on focus */
+}
+
+/* Style for the view details button */
+.view-details-button {
+  background-color: #3498db; /* Blue background */
+  color: var(--primary-text-color); /* White text */
+  border: none; /* Remove border */
+  padding: 10px 15px; /* Add padding for size */
+  font-size: 14px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 5px; /* Rounded corners */
+  margin-top: 10px; /* Add some space between buttons */
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+/* Style for view details button on hover */
+.view-details-button:hover {
+  background-color: #2980b9; /* Darker blue on hover */
+}
+
+/* Optional: Style the button on focus */
+.view-details-button:focus {
+  outline: none; /* Remove the focus outline */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow on focus */
+}
+
+.button-container {
+  display: flex; /* Use flexbox */
+  justify-content: space-between; /* Add space between buttons */
+  gap: 10px; /* Optional: Add space between buttons */
 }

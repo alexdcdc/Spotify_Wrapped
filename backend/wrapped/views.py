@@ -129,6 +129,30 @@ def get_user(request):
     else:
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_profile_image(request):
+    user = request.user
+    access_token = user.auth_data.access_token
+    headers = {"Authorization": f"Bearer {access_token}"}
+
+    response = requests.get(
+        "https://api.spotify.com/v1/me", headers=headers
+    )
+
+    if response.status_code != 200:
+        return Response(
+            {"error": "Failed to fetch profile image from Spotify API."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    data = response.json()
+    images = data["images"]
+    found = len(images) != 0
+
+    return Response({"found": found, "images": images}, status=status.HTTP_200_OK)
+
+
 
 @api_view(["GET"])
 @permission_classes([AllowAny])
@@ -156,12 +180,14 @@ def wrapped(request):
         )
 
     elif request.method == "GET":
-        serializer = WrappedSerializer(Wrapped.objects.filter(user=user), many=True)
+        serializer = WrappedSerializer(Wrapped.objects.filter(user=user).order_by("-date_created"), many=True)
         return Response({"wrapped_list": serializer.data}, status=status.HTTP_200_OK)
 
     else:
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
+def get_random_color():
+    return "".join([choice("0123456789ABCDEF") for _ in range(6)])
 
 def generate_wrapped(user, name):
     PANEL_ORDER = [
@@ -177,6 +203,7 @@ def generate_wrapped(user, name):
     new_wrapped = Wrapped()
     new_wrapped.user = user
     new_wrapped.name = name
+    new_wrapped.color = get_random_color()
     new_wrapped.save()
 
     order = 1
@@ -213,7 +240,6 @@ def generate_panel(user, parent_wrapped, order, panel_type):
         case PanelType.DANCE:
             panel.data = generate_data_danceability(user)
         case PanelType.PRE_GAME:
-
             panel.data = generate_data_pre_game(user)
         case PanelType.TOP_GENRES:
             panel.data = generate_data_top_genres(user)
@@ -249,7 +275,8 @@ def get_llm_description(genres, artist_names):
 
             Make sure each section starts with the label
             (e.g., "Personality & Thinking Style:", "Fashion Choices:", "Behavior:").
-            You also don't have to add the numbers, they're just there to help you structure your response.
+            You also don't have to add the numbers, they're just there to help you structure your response. 
+            Do not bold or italicize any text.
             """
     response = model.generate_content(gemini_prompt)
     full_description = response.text.strip()
@@ -290,16 +317,20 @@ def generate_data_llm(user):
     )
 
     if top_artists_response.status_code != 200:
-        return Response(
-            {"error": "Failed to fetch top artists from Spotify API."},
-            status=status.HTTP_400_BAD_REQUEST,
-        )
+        print("ERROR: failed to fetch top artists from Spotify API")
+        return {}
 
     top_artists = top_artists_response.json()
     genres = {genre for artist in top_artists["items"] for genre in artist["genres"]}
     artist_names = [artist["name"] for artist in top_artists["items"]]
 
     return get_llm_description(genres, artist_names)
+
+@api_view(['GET'])
+def is_authenticated(request):
+    if request.user and request.user.is_authenticated:
+        return Response({"logged_in": True}, status=status.HTTP_200_OK)
+    return Response({"logged_in": False}, status=status.HTTP_200_OK)
 
 
 def generate_data_pre_llm(user):
@@ -356,7 +387,7 @@ def generate_data_danceability(user):
     )
 
     if top_tracks_response.status_code != 200:
-        print("Failed to fetch top tracks from Spotify API.")
+        print("ERROR: Failed to fetch top tracks from Spotify API.")
         return {}
 
     tracks = top_tracks_response.json().get("items", [])
@@ -438,3 +469,21 @@ def send_email(request):
 def get_access_token(request):
     user = request.user
     return Response({"token": user.auth_data.access_token}, status=status.HTTP_200_OK)
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def delete_user(request):
+    user = request.user
+    user.delete()
+    return Response({"message": "User successfully deleted"}, status=status.HTTP_200_OK)
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def delete_wrapped(request, wrapped_id):
+    user = request.user
+    try:
+        target_wrapped = Wrapped.objects.get(id=wrapped_id, user=user)
+        target_wrapped.delete()
+        return Response({"message": "Wrapped successfully deleted"}, status=status.HTTP_200_OK)
+    except Wrapped.DoesNotExist:
+        return Response({"message": "Wrapped does not exist"}, status=status.HTTP_404_NOT_FOUND)
