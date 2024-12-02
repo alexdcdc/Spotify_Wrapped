@@ -11,6 +11,7 @@
     min-height: 100vh;
     background: transparent;
     font-family: 'Montserrat', sans-serif;
+    overflow-y: auto; /* Allow scrolling on body */
 }
 
 /* Apply the gradient to a specific wrapper (e.g. .spotify-wrapper) */
@@ -26,7 +27,7 @@
     background: linear-gradient(158deg, rgba(0, 0, 0, 1) 10%, rgba(173, 52, 113, 1) 100%, rgba(255, 77, 167, 1) 100%);
     overflow-y: auto; /* Allow scrolling if content overflows */
     width: 100vw;
-    position: fixed;
+    position: relative; /* Ensure it's scrollable */
 }
 
 /* Fade-in animation */
@@ -87,7 +88,6 @@
     animation: fadeIn 1s ease forwards;
     gap: 1vw;
     opacity: 0; /* Initially hidden */
-    animation: fadeIn 1s ease forwards;
     animation-delay: 0.6s;
 }
 
