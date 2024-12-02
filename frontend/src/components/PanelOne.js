@@ -1,18 +1,38 @@
 import { useState, useEffect } from 'react'
 import './panelOne.css'
 
-function PanelOne () {
+function PanelOne() {
   const [spotifyData, setSpotifyData] = useState(null)
   const [error, setError] = useState(null)
   const token = sessionStorage.getItem('token')
 
   useEffect(() => {
+    // Dynamically add Google Fonts
     const link = document.createElement('link')
     link.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap'
     link.rel = 'stylesheet'
     document.head.appendChild(link)
 
     document.body.style.fontFamily = "'Montserrat', sans-serif"
+
+    // Handle resizing events to manage scroll behavior
+    const handleResize = () => {
+      const spotifyWrapper = document.querySelector('.spotify-wrapper')
+      if (window.innerWidth <= 1050) {
+        spotifyWrapper.style.overflowY = 'auto' // Force scroll for smaller screens
+      } else {
+        spotifyWrapper.style.overflowY = 'auto' // Reset for larger screens if needed
+      }
+    }
+
+    // Add event listener for resize
+    window.addEventListener('resize', handleResize)
+
+    // Initial check on mount
+    handleResize()
+
+    // Clean up event listener on component unmount
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   const getSpotifyData = async () => {
@@ -85,7 +105,7 @@ function PanelOne () {
   )
 }
 
-function YearlyTrackItem ({ track1, track2, startIndex }) {
+function YearlyTrackItem({ track1, track2, startIndex }) {
   if (!track1 || !track2) return null
 
   const track1Name = track1.name

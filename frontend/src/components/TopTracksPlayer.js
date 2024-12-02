@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { get } from '../lib/requests';
+import './panels/IntroPanel.css';
+import './TopTracksPlayer.css'
 
 function TopTracksPlayer({ topTracks }) {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
@@ -73,6 +75,7 @@ function TopTracksPlayer({ topTracks }) {
     } else {
       console.error('Error starting playback:', response);
     }
+    setIsPlaying(true)
   };
 
   const switchTrack = async (index) => {
@@ -105,10 +108,12 @@ function TopTracksPlayer({ topTracks }) {
     const interval = setInterval(() => {
       setCurrentTrackIndex((prevIndex) => {
         const nextIndex = (prevIndex + 1) % topTracks.length;
-        switchTrack(nextIndex);
+        if (isPlaying) {
+          console.log("hi")
+          switchTrack(nextIndex);
+        }
         return nextIndex;
-      });
-    }, 20000);
+      })}, 20000);
 
     return () => clearInterval(interval);
   }, [playerId, topTracks]);
@@ -122,29 +127,9 @@ function TopTracksPlayer({ topTracks }) {
   }
 
   return (
-    <div className="top-tracks-player">
-      <h3>Now Playing:</h3>
-      <p>
-        {topTracks[currentTrackIndex].name} by{' '}
-        {topTracks[currentTrackIndex].artists
-          .map((artist) => artist.name)
-          .join(', ')}
-      </p>
-      <div className="controls">
-        <button onClick={() => switchTrack(currentTrackIndex)}>
-          Restart Current Track
-        </button>
-        <button onClick={() => switchTrack((currentTrackIndex - 1 + topTracks.length) % topTracks.length)}>
-          Previous
-        </button>
-        <button onClick={startPlayback}>
-          {isPlaying ? 'Playing...' : 'Start'}
-        </button>
-        <button onClick={() => switchTrack((currentTrackIndex + 1) % topTracks.length)}>
-          Next
-        </button>
-      </div>
-    </div>
+      <button className="play-button" onClick={startPlayback}>
+        Play some music!
+      </button>
   );
 }
 

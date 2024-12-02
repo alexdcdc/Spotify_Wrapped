@@ -33,6 +33,7 @@ function WrappedPage() {
   const { id } = useParams();
   const navigate = useNavigate();
 
+
   const updateFont = () => {
     const link = document.createElement('link');
     link.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap';
@@ -69,6 +70,8 @@ function WrappedPage() {
       }
     })
   }
+
+
 
   useEffect(() => {
     updateFont();
@@ -113,8 +116,6 @@ function WrappedPage() {
           totalSlides={totalPanels}
           setter={setCurrentPanelNum}
         />
-
-        {/* TopTracksPlayer independent of panels */}
         <TopTracksPlayer topTracks={topTracks} />
       </div>
     );
