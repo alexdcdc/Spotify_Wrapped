@@ -148,7 +148,7 @@ REST_FRAMEWORK = {
     ],
 }
 
-CORS_ORIGIN_WHITELIST = ["http://localhost:3000"]
+CORS_ORIGIN_WHITELIST = [os.getenv("FRONTEND_URL")]
 APP_EMAIL = "cs2340wrapped40@gmail.com"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

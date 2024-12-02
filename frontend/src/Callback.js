@@ -49,7 +49,6 @@ const authenticate = async (code) => {
   const accessToken = response.access_token
   const refreshToken = response.refresh_token
   const expiresIn = response.expires_in
-
   await setAuthToken(accessToken, refreshToken, expiresIn)
 }
 
