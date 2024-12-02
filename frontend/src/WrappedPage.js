@@ -14,7 +14,7 @@ import TopTracksPlayer from './components/TopTracksPlayer';
 import './WrappedPage.css';
 
 const componentMap = {
-  IN: TopTracksPlayer,
+  IN: IntroPanel,
   TT: TopTracksPanel,
   PL: PreLLMPanel,
   LM: LLMPanel,
