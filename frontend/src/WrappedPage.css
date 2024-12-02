@@ -36,6 +36,5 @@
     max-width: 100%;
     overflow-y: auto; /* Allow scrolling if content overflows */
     width: 100vw;
-    position: fixed;
     background-color: var(--background-color);
 }
