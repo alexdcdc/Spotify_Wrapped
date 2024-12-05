@@ -2,7 +2,7 @@ import requests
 from collections import Counter
 from random import choice, randint
 
-import google.generativeai as genai
+
 from django.conf import settings
 from django.core.mail import send_mail
 from rest_framework import status
@@ -10,31 +10,12 @@ from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from wrapped.models import (
-    CustomUser,
-    Panel,
-    PanelType,
-    SpotifyAuthData,
-    SpotifyProfile,
-    Wrapped,
-)
+from wrapped.models import *
 from wrapped.serializers import (
     UserSerializer,
     WrappedSerializer,
 )
-
-
-def get_spotify_endpoint(endpoint, params, token):
-    url = f"https://api.spotify.com/v1{endpoint}"
-    headers = {"Authorization": "Bearer " + token}
-
-    response = requests.get(url, headers=headers, params=params)
-    if response.ok:
-        return response.json()
-
-    return Exception(
-        f"ERROR: Call to endpoint {endpoint} failed with status code {response.status_code}"
-    )
+from wrapped.utils import get_spotify_endpoint_data
 
 
 # takes in token
@@ -43,39 +24,32 @@ def get_spotify_endpoint(endpoint, params, token):
 # creates + populates new user if no matching user
 # returns existing user if matching user
 def spotify_authenticate(token, refresh_token, expires_in):
-    request_url = "https://api.spotify.com/v1/me"
-    headers = {"Authorization": "Bearer " + token}
+    data = get_spotify_endpoint_data("me", token)
+    user_email = data["email"]
+    user_id = data["id"]
+    user_display_name = data["display_name"]
+    user, created = CustomUser.objects.get_or_create(email=user_email)
 
-    response = requests.get(request_url, headers=headers)
+    if created:
+        user.auth_data = SpotifyAuthData(
+            access_token=token, refresh_token=refresh_token, expires_in=expires_in
+        )
+        user.spotify_profile = SpotifyProfile(spotify_id=user_id)
 
-    if response.status_code == 200:
-        data = response.json()
-        user_email = data["email"]
-        user_id = data["id"]
-        user_display_name = data["display_name"]
-        user, created = CustomUser.objects.get_or_create(email=user_email)
+    else:
+        user.auth_data.access_token = token
+        user.auth_data.refresh_token = refresh_token
+        user.auth_data.expires_in = expires_in
 
-        if created:
-            user.auth_data = SpotifyAuthData(
-                access_token=token, refresh_token=refresh_token, expires_in=expires_in
-            )
-            user.spotify_profile = SpotifyProfile(spotify_id=user_id)
+        user.spotify_profile.spotify_id = user_id
+        user.spotify_profile.display_name = user_display_name
 
-        else:
-            user.auth_data.access_token = token
-            user.auth_data.refresh_token = refresh_token
-            user.auth_data.expires_in = expires_in
+    user.auth_data.save()
+    user.spotify_profile.save()
 
-            user.spotify_profile.spotify_id = user_id
-            user.spotify_profile.display_name = user_display_name
+    user.save()
+    return user
 
-        user.auth_data.save()
-        user.spotify_profile.save()
-
-        user.save()
-        return user
-
-    return None
 
 
 @api_view(["POST"])
@@ -132,21 +106,7 @@ def get_user(request):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def get_profile_image(request):
-    user = request.user
-    access_token = user.auth_data.access_token
-    headers = {"Authorization": f"Bearer {access_token}"}
-
-    response = requests.get(
-        "https://api.spotify.com/v1/me", headers=headers
-    )
-
-    if response.status_code != 200:
-        return Response(
-            {"error": "Failed to fetch profile image from Spotify API."},
-            status=status.HTTP_400_BAD_REQUEST,
-        )
-
-    data = response.json()
+    data = get_spotify_endpoint_data("me", request.user.auth_data.access_token)
     images = data["images"]
     found = len(images) != 0
 
@@ -191,14 +151,14 @@ def get_random_color():
 
 def generate_wrapped(user, name):
     PANEL_ORDER = [
-        PanelType.INTRO,
-        PanelType.TOP_TRACKS,
-        PanelType.DANCE,
-        PanelType.TOP_GENRES,
-        PanelType.PRE_LLM,
-        PanelType.LLM,
-        PanelType.PRE_GAME,
-        PanelType.GAME,
+        IntroPanel,
+        TopTracksPanel,
+        DancePanel,
+        TopGenresPanel,
+        PreLLMPanel,
+        LLMPanel,
+        PreGamePanel,
+        GamePanel,
     ]
     new_wrapped = Wrapped()
     new_wrapped.user = user
@@ -207,8 +167,8 @@ def generate_wrapped(user, name):
     new_wrapped.save()
 
     order = 1
-    for panel_type in PANEL_ORDER:
-        generate_panel(user, new_wrapped, order, panel_type)
+    for Panel in PANEL_ORDER:
+        generate_panel(user, new_wrapped, order, Panel)
         order += 1
 
     return new_wrapped
@@ -225,106 +185,14 @@ def get_wrapped_with_id(request, wrapped_id):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
 
-def generate_panel(user, parent_wrapped, order, panel_type):
+def generate_panel(user, parent_wrapped, order, Panel):
     panel = Panel()
     panel.wrapped = parent_wrapped
     panel.order = order
-    panel.type = panel_type
-    match panel_type:
-        case PanelType.INTRO:
-            panel.data = generate_data_intro(user)
-        case PanelType.LLM:
-            panel.data = generate_data_llm(user)
-        case PanelType.PRE_LLM:
-            panel.data = generate_data_pre_llm(user)
-        case PanelType.DANCE:
-            panel.data = generate_data_danceability(user)
-        case PanelType.PRE_GAME:
-            panel.data = generate_data_pre_game(user)
-        case PanelType.TOP_GENRES:
-            panel.data = generate_data_top_genres(user)
-        case PanelType.TOP_TRACKS:
-            panel.data = generate_data_top_tracks(user)
-        case PanelType.GAME:
-            panel.data = generate_data_game(user)
-        case default:
-            return Exception(f"Invalid panel type specified {default}")
-
+    panel.generate_data()
+    panel.set_type()
     panel.save()
     return panel
-
-
-def generate_data_intro(user):
-    return {}  # static panel, no need to generate new data
-
-
-def get_llm_description(genres, artist_names):
-    genai.configure(api_key=settings.GOOGLE_CLIENT_ID)
-    model = genai.GenerativeModel("gemini-1.5-flash")
-    gemini_prompt = f"""
-            Create a vibrant personality description for someone who:
-            - Frequently listens to genres like: {', '.join(genres)}
-            - Enjoys artists such as: {', '.join(artist_names)}
-
-            Please describe the following with clear labels:
-
-            1. Personality & Thinking Style: Describe likely personality traits and thinking style in 3-4 words.
-            2. Fashion Choices: Describe probable fashion choices and aesthetic preferences in 3-4 words.
-               Make sure it's specific clothing.
-            3. Behavior: Describe typical behaviors and habits in 3-4 words.
-
-            Make sure each section starts with the label
-            (e.g., "Personality & Thinking Style:", "Fashion Choices:", "Behavior:").
-            You also don't have to add the numbers, they're just there to help you structure your response. 
-            Do not bold or italicize any text.
-            """
-    response = model.generate_content(gemini_prompt)
-    full_description = response.text.strip()
-
-    personality_description = ""
-    fashion_choices = ""
-    behavior_description = ""
-
-    if "Personality & Thinking Style:" in full_description:
-        personality_description = (
-            full_description.split("Personality & Thinking Style:")[1]
-            .split("Fashion Choices:")[0]
-            .strip()
-        )
-
-    if "Fashion Choices:" in full_description:
-        fashion_choices = (
-            full_description.split("Fashion Choices:")[1].split("Behavior:")[0].strip()
-        )
-
-    if "Behavior:" in full_description:
-        behavior_description = full_description.split("Behavior:")[1].strip()
-
-    return {
-        "personality_description": personality_description,
-        "fashion_choices": fashion_choices,
-        "behavior_description": behavior_description,
-        "based_on": {"genres": list(genres), "artists": artist_names},
-    }
-
-
-def generate_data_llm(user):
-    access_token = user.auth_data.access_token
-    headers = {"Authorization": f"Bearer {access_token}"}
-
-    top_artists_response = requests.get(
-        "https://api.spotify.com/v1/me/top/artists?limit=5", headers=headers
-    )
-
-    if top_artists_response.status_code != 200:
-        print("ERROR: failed to fetch top artists from Spotify API")
-        return {}
-
-    top_artists = top_artists_response.json()
-    genres = {genre for artist in top_artists["items"] for genre in artist["genres"]}
-    artist_names = [artist["name"] for artist in top_artists["items"]]
-
-    return get_llm_description(genres, artist_names)
 
 @api_view(['GET'])
 def is_authenticated(request):
@@ -332,77 +200,18 @@ def is_authenticated(request):
         return Response({"logged_in": True}, status=status.HTTP_200_OK)
     return Response({"logged_in": False}, status=status.HTTP_200_OK)
 
-
-def generate_data_pre_llm(user):
-    return {}  # static panel, no need to generate new data
-
-
-def generate_data_top_tracks(user):
-    token = user.auth_data.access_token
-    url = "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=10"
-    headers = {"Authorization": "Bearer " + token}
-
-    response = requests.get(url, headers=headers)
-    if response.status_code != 200:
-        print("ERROR: Failed to get top tracks from Spotify API")
-        return {}
-    body = response.json()
-    return body
-
-
-def generate_data_top_genres(user):
-    token = user.auth_data.access_token
-    url = "https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=20"
-    headers = {"Authorization": "Bearer " + token}
-
-    response = requests.get(url, headers=headers)
-    if response.status_code != 200:
-        print("ERROR: Failed to fetch top artists from Spotify API")
-        return {}
-
-    body = response.json()
-    genres = []
-
-    # Collect genres from each artist
-    for artist in body.get("items", []):
-        genres.extend(artist.get("genres", []))
-
-    # Count and sort genres
-    genre_counts = Counter(genres)
-    top_genres = genre_counts.most_common(10)  # Adjust the number as needed
-
-    return {"top_genres": top_genres}
-
-
-def generate_data_pre_game(user):
-    return {}  # static panel, no need to generate new data
-
-
 def generate_data_danceability(user):
-    access_token = user.auth_data.access_token
-    headers = {"Authorization": f"Bearer {access_token}"}
+    '''
+    params = {"limit": 10}
+    data = get_spotify_endpoint_data("me/top/tracks", user.auth_data.access_token, params)
 
-    top_tracks_response = requests.get(
-        "https://api.spotify.com/v1/me/top/tracks?limit=10", headers=headers
-    )
-
-    if top_tracks_response.status_code != 200:
-        print("ERROR: Failed to fetch top tracks from Spotify API.")
-        return {}
-
-    tracks = top_tracks_response.json().get("items", [])
+    tracks = data.get("items", [])
     track_ids = [track["id"] for track in tracks]
 
-    audio_features_response = requests.get(
-        f"https://api.spotify.com/v1/audio-features?ids={','.join(track_ids)}",
-        headers=headers,
-    )
+    params = {"ids": {','.join(track_ids)}}
+    data = get_spotify_endpoint_data("audio-features", user.auth_data.access_token, params)
 
-    if audio_features_response.status_code != 200:
-        print("Failed to fetch audio features from Spotify API.")
-        return {}
-
-    audio_features = audio_features_response.json().get("audio_features", [])
+    audio_features = data.get("audio_features", [])
 
     total_danceability = sum(
         feature["danceability"] for feature in audio_features if feature
@@ -410,28 +219,10 @@ def generate_data_danceability(user):
     average_danceability = (
         total_danceability / len(audio_features) if audio_features else 0
     )
+    '''
 
-    return {"average_danceability": int(100 * average_danceability)}
+    return
 
-
-def generate_data_game(user):
-    data = get_spotify_endpoint(
-        "/me/top/tracks",
-        {"time_range": "long_term", "limit": "50"},
-        user.auth_data.access_token,
-    )
-    tracks = data["items"]
-    random_track = choice(tracks)
-
-    clip_start = randint(0, 27)
-    clip_duration = 3
-
-    return {
-        "choices": tracks,
-        "correct": random_track,
-        "clip_start": clip_start,
-        "clip_duration": clip_duration,
-    }
 
 
 @api_view(["POST"])
